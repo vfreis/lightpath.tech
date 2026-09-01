@@ -34,8 +34,7 @@ Site estático, sem build e sem framework:
 - `styles.css` — design system, responsividade e animações CSS;
 - `script.js` — motion, interações, canvas e formulário;
 - `assets/social-card.svg` — social preview;
-- `scripts/validate_site.py` — validação estrutural de CI;
-- `.github/workflows/pages.yml` — CI + deploy automático no GitHub Pages;
+- `scripts/validate_site.py` — validação estrutural disponível no repositório;
 - `.nojekyll` — publicação estática direta.
 
 ## Formulário durante a fase GitHub Pages
@@ -46,12 +45,10 @@ Quando o domínio próprio e a infraestrutura final forem conectados, essa camad
 
 ## Deploy
 
-Todo push em `main` executa validações e publica o site no GitHub Pages.
+A publicação inicial utiliza o **GitHub Pages nativo**, servindo a branch `main` como site estático. Isso mantém o fluxo simples, equivalente ao objetivo do portfólio público, sem etapa de build.
 
 URL esperada:
 
 ```text
 https://vfreis.github.io/lightpath.tech/
 ```
-
-Não há etapa de build.
