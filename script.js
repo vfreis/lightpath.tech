@@ -2,21 +2,27 @@
   'use strict';
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.matchMedia('(max-width: 760px)').matches;
+  const finePointer = window.matchMedia('(pointer:fine)').matches;
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 
-  $('#year').textContent = new Date().getFullYear();
+  const year = $('#year');
+  if (year) year.textContent = new Date().getFullYear();
 
   const loader = $('.loader');
   const loaderLine = $('.loader-line span');
   const loaderCount = $('.loader-count');
   let loadValue = 0;
+  let loaderDone = false;
+
   const finishLoader = () => {
-    if (!loader) return;
+    if (!loader || loaderDone) return;
+    loaderDone = true;
     if (window.gsap && !prefersReduced) {
-      gsap.to(loaderLine, { width: '100%', duration: .22, ease: 'power2.out' });
-      gsap.to(loaderCount, { innerText: 100, snap: { innerText: 1 }, duration: .22 });
-      gsap.to(loader, { yPercent: -100, duration: .78, delay: .25, ease: 'power4.inOut', onComplete: () => loader.remove() });
+      gsap.to(loaderLine, { width: '100%', duration: .2, ease: 'power2.out' });
+      gsap.to(loaderCount, { innerText: 100, snap: { innerText: 1 }, duration: .2 });
+      gsap.to(loader, { yPercent: -100, duration: .82, delay: .22, ease: 'power4.inOut', onComplete: () => loader.remove() });
     } else {
       loader.remove();
     }
@@ -24,7 +30,7 @@
 
   if (!prefersReduced && loader) {
     const timer = setInterval(() => {
-      loadValue = Math.min(92, loadValue + Math.ceil(Math.random() * 11));
+      loadValue = Math.min(93, loadValue + Math.ceil(Math.random() * 10));
       if (loaderLine) loaderLine.style.width = `${loadValue}%`;
       if (loaderCount) loaderCount.textContent = String(loadValue).padStart(2, '0');
     }, 70);
@@ -36,8 +42,14 @@
 
   const header = $('.site-header');
   const progress = $('.scroll-progress span');
+  let lastScrollY = window.scrollY || 0;
+  let scrollVelocity = 0;
+
   const updateScrollUI = () => {
     const y = window.scrollY || 0;
+    const delta = y - lastScrollY;
+    scrollVelocity = scrollVelocity * .76 + delta * .24;
+    lastScrollY = y;
     if (header) header.classList.toggle('scrolled', y > 20);
     if (progress) {
       const total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -65,18 +77,24 @@
     $$('a', nav).forEach(a => a.addEventListener('click', closeMenu));
   }
 
+  let lenis = null;
   if (!prefersReduced && window.Lenis) {
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.1 });
-    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
-    if (window.gsap && window.ScrollTrigger) {
-      lenis.on('scroll', ScrollTrigger.update);
+    lenis = new Lenis({ duration: 1.02, smoothWheel: true, touchMultiplier: 1.05 });
+    lenis.on('scroll', event => {
+      if (Number.isFinite(event.velocity)) scrollVelocity = event.velocity * 18;
+      if (window.ScrollTrigger) ScrollTrigger.update();
+    });
+
+    if (window.gsap) {
       gsap.ticker.add(time => lenis.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = time => { lenis.raf(time); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
     }
   }
 
-  if (!prefersReduced && matchMedia('(pointer:fine)').matches) {
+  if (!prefersReduced && finePointer) {
     const dot = $('.cursor-dot');
     const ring = $('.cursor-ring');
     let tx = 0, ty = 0, rx = 0, ry = 0;
@@ -121,33 +139,121 @@
     });
   }
 
+  const animateCounter = counter => {
+    if (!counter || counter.dataset.animated === 'true') return;
+    counter.dataset.animated = 'true';
+    const target = Number(counter.dataset.count || 0);
+    const prefix = counter.dataset.prefix || '';
+    const suffix = counter.dataset.suffix || '';
+    const parent = counter.closest('.metric,.proof-card');
+    if (prefersReduced || !window.gsap) {
+      counter.textContent = `${prefix}${target}${suffix}`;
+      return;
+    }
+    const state = { value: 0 };
+    if (parent) parent.classList.add('is-counting');
+    gsap.to(state, {
+      value: target,
+      duration: 1.65,
+      ease: 'power3.out',
+      onUpdate: () => { counter.textContent = `${prefix}${Math.round(state.value)}${suffix}`; },
+      onComplete: () => {
+        counter.textContent = `${prefix}${target}${suffix}`;
+        if (parent) setTimeout(() => parent.classList.remove('is-counting'), 450);
+      }
+    });
+  };
+
+  const setupNavState = () => {
+    const links = $$('.nav a[href^="#"]:not(.nav-cta)');
+    const map = new Map(links.map(link => [link.getAttribute('href').slice(1), link]));
+    const sections = [...map.keys()].map(id => document.getElementById(id)).filter(Boolean);
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      links.forEach(link => link.classList.toggle('is-active', link === map.get(visible.target.id)));
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, .15, .3, .6] });
+    sections.forEach(section => observer.observe(section));
+  };
+  setupNavState();
+
   if (window.gsap && window.ScrollTrigger && !prefersReduced) {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.to('.title-line > span', { y: 0, duration: 1.15, stagger: .09, ease: 'power4.out', delay: .65 });
-    gsap.fromTo('.hero-reveal', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: .8, stagger: .12, ease: 'power3.out', delay: .85 });
+    gsap.to('.title-line > span', { y: 0, duration: 1.18, stagger: .085, ease: 'power4.out', delay: .62 });
+    gsap.fromTo('.hero-reveal', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .86, stagger: .11, ease: 'power3.out', delay: .82 });
+    gsap.to('.hero-glow-a', { xPercent: -20, yPercent: 16, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.to('.hero-system', { y: 72, rotateZ: 1.15, scale: .985, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
 
-    $$('.reveal').forEach(el => {
-      if (el.classList.contains('hero-reveal')) return;
-      gsap.fromTo(el, { opacity: 0, y: 42 }, {
-        opacity: 1, y: 0, duration: .95, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+    $$('.section').forEach(section => {
+      const intro = [
+        $('.section-kicker', section),
+        $('h2', section),
+        $('.problem-sticky p,.build-heading p,.method-intro p,.proof-heading p,.contact-copy p', section)
+      ].filter(Boolean);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          once: true,
+          onEnter: () => section.classList.add('is-flow-active')
+        }
       });
+      if (intro[0]) tl.fromTo(intro[0], { opacity: 0, x: -22 }, { opacity: 1, x: 0, duration: .58, ease: 'power3.out' }, 0);
+      if (intro[1]) tl.fromTo(intro[1], { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: .92, ease: 'power4.out' }, .08);
+      if (intro[2]) tl.fromTo(intro[2], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .72, ease: 'power3.out' }, .26);
     });
 
-    gsap.to('.hero-glow-a', { xPercent: -18, yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
-    gsap.to('.hero-system', { y: 70, rotateZ: 1.2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
-    gsap.to('.method-rail span', { height: '100%', ease: 'none', scrollTrigger: { trigger: '.method-stage', start: 'top 65%', end: 'bottom 55%', scrub: true } });
+    $$('.diagnostic-card').forEach((card, index) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 62, x: index % 2 ? 18 : -18, scale: .975 },
+        { opacity: 1, y: 0, x: 0, scale: 1, duration: .92, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 86%', once: true } }
+      );
+    });
 
-    $$('.method-step').forEach(step => {
+    const commandCenter = $('.command-center');
+    if (commandCenter) {
+      gsap.fromTo(commandCenter, { opacity: 0, y: 60, scale: .972 }, { opacity: 1, y: 0, scale: 1, duration: 1.05, ease: 'power3.out', scrollTrigger: { trigger: commandCenter, start: 'top 84%', once: true } });
+    }
+
+    gsap.to('.method-rail span', { height: '100%', ease: 'none', scrollTrigger: { trigger: '.method-stage', start: 'top 66%', end: 'bottom 55%', scrub: true } });
+    $$('.method-step').forEach((step, index) => {
+      gsap.fromTo(step, { opacity: .22, x: index % 2 ? 30 : -18 }, {
+        opacity: 1, x: 0, duration: .72, ease: 'power2.out',
+        scrollTrigger: { trigger: step, start: 'top 76%', end: 'top 46%', scrub: .5 }
+      });
       ScrollTrigger.create({ trigger: step, start: 'top 65%', end: 'bottom 35%', toggleClass: { targets: step, className: 'is-active' } });
     });
 
-    $$('.chart-visual span').forEach((bar, i) => {
-      gsap.from(bar, { scaleY: 0, duration: .6, delay: i * .04, ease: 'power2.out', scrollTrigger: { trigger: '.chart-visual', start: 'top 90%', once: true } });
+    $$('.proof-card').forEach((card, index) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 46 + (index % 2) * 18, scale: .982 },
+        { opacity: 1, y: 0, scale: 1, duration: .88, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 87%', once: true } }
+      );
     });
+
+    $$('.fit-item').forEach((item, index) => {
+      gsap.fromTo(item, { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: .62, delay: index * .025, ease: 'power3.out', scrollTrigger: { trigger: item, start: 'top 90%', once: true } });
+    });
+
+    const contactForm = $('.contact-form');
+    if (contactForm) gsap.fromTo(contactForm, { opacity: 0, y: 46, rotateX: 3 }, { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: contactForm, start: 'top 86%', once: true } });
+
+    $$('.chart-visual span').forEach((bar, i) => {
+      gsap.from(bar, { scaleY: 0, duration: .62, delay: i * .045, ease: 'power2.out', scrollTrigger: { trigger: '.chart-visual', start: 'top 90%', once: true } });
+    });
+
+    $$('.counter').forEach(counter => {
+      ScrollTrigger.create({ trigger: counter, start: 'top 88%', once: true, onEnter: () => animateCounter(counter) });
+    });
+
+    gsap.to('.node-a', { x: -22, y: 14, duration: 4.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.node-b', { x: 18, y: -18, duration: 5.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.node-c', { x: -14, y: -22, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
   } else {
-    $$('.title-line > span').forEach(el => el.style.transform = 'none');
+    $$('.title-line > span').forEach(el => { el.style.transform = 'none'; });
+    $$('.counter').forEach(animateCounter);
   }
 
   const panelButtons = $$('.cc-nav button');
@@ -157,42 +263,146 @@
       const key = button.dataset.panel;
       panelButtons.forEach(b => b.classList.toggle('active', b === button));
       panels.forEach(p => p.classList.toggle('active', p.dataset.panelContent === key));
+      const active = panels.find(p => p.dataset.panelContent === key);
+      if (active && window.gsap && !prefersReduced) {
+        gsap.fromTo(active.children, { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: .07, duration: .48, ease: 'power2.out' });
+      }
     });
   });
 
-  const canvas = $('#hero-canvas');
-  if (canvas && !prefersReduced) {
-    const ctx = canvas.getContext('2d');
-    let w = 0, h = 0, dpr = 1, particles = [], mouseX = .72, mouseY = .42;
+  const setupFlowCanvas = () => {
+    if (prefersReduced) return;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'flow-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.prepend(canvas);
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let pointerX = .72;
+    let pointerY = .35;
+    let lastFrame = 0;
+    let time = 0;
+    let active = !document.hidden;
+    const targetFps = isMobile ? 30 : 60;
+    const minFrame = 1000 / targetFps;
+    const tracerCount = isMobile ? 18 : Math.min(46, Math.max(28, Math.round(window.innerWidth / 36)));
+    const tracers = [];
+
+    const resetTracer = (tracer, fresh = false) => {
+      tracer.x = Math.random() * width;
+      tracer.y = fresh ? Math.random() * height : height + Math.random() * height * .18;
+      tracer.px = tracer.x;
+      tracer.py = tracer.y;
+      tracer.life = 90 + Math.random() * 170;
+      tracer.maxLife = tracer.life;
+      tracer.speed = .42 + Math.random() * .7;
+      tracer.seed = Math.random() * Math.PI * 2;
+      tracer.width = .35 + Math.random() * .75;
+    };
+
     const resize = () => {
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      const r = canvas.getBoundingClientRect();
-      w = r.width; h = r.height;
-      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      const count = Math.min(75, Math.max(32, Math.floor(w / 20)));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.3 + .2,
-        vx: (Math.random() - .5) * .12, vy: (Math.random() - .5) * .12, a: Math.random() * .5 + .15
-      }));
-    };
-    const draw = () => {
-      ctx.clearRect(0,0,w,h);
-      for (const p of particles) {
-        p.x += p.vx + (mouseX - .5) * .012; p.y += p.vy + (mouseY - .5) * .012;
-        if (p.x < -5) p.x = w + 5; if (p.x > w + 5) p.x = -5;
-        if (p.y < -5) p.y = h + 5; if (p.y > h + 5) p.y = -5;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = `rgba(183,255,55,${p.a})`; ctx.fill();
+      dpr = Math.min(isMobile ? 1 : 1.35, window.devicePixelRatio || 1);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      tracers.length = 0;
+      for (let i = 0; i < tracerCount; i += 1) {
+        const tracer = {};
+        resetTracer(tracer, true);
+        tracers.push(tracer);
       }
-      for (let i=0;i<particles.length;i++) for (let j=i+1;j<particles.length;j++) {
-        const a=particles[i], b=particles[j], dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
-        if (dist < 95) { ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(112,244,208,${(1-dist/95)*.055})`;ctx.stroke(); }
-      }
-      requestAnimationFrame(draw);
     };
-    window.addEventListener('mousemove', e => { mouseX = e.clientX / innerWidth; mouseY = e.clientY / innerHeight; }, { passive:true });
-    window.addEventListener('resize', resize); resize(); draw();
-  }
+
+    const vectorAt = (x, y, seed) => {
+      const nx = x / Math.max(width, 1);
+      const ny = y / Math.max(height, 1);
+      const base = -1.12;
+      const wave = Math.sin(nx * 5.8 + time * .00042 + seed) * .24;
+      const cross = Math.cos(ny * 4.2 - time * .00028 + seed * .6) * .12;
+      const pointerPull = finePointer ? (pointerX - nx) * .12 : 0;
+      const scrollLean = Math.max(-.12, Math.min(.18, scrollVelocity * .0018));
+      return base + wave + cross + pointerPull + scrollLean;
+    };
+
+    const drawArrow = (x, y, angle, alpha, size) => {
+      const back = angle + Math.PI;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(back + .48) * size, y + Math.sin(back + .48) * size);
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(back - .48) * size, y + Math.sin(back - .48) * size);
+      ctx.strokeStyle = `rgba(183,255,55,${alpha})`;
+      ctx.lineWidth = .7;
+      ctx.stroke();
+    };
+
+    const render = now => {
+      requestAnimationFrame(render);
+      if (!active || now - lastFrame < minFrame) return;
+      lastFrame = now;
+      time = now;
+      scrollVelocity *= .94;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for (let i = 0; i < tracers.length; i += 1) {
+        const tracer = tracers[i];
+        tracer.px = tracer.x;
+        tracer.py = tracer.y;
+        const angle = vectorAt(tracer.x, tracer.y, tracer.seed);
+        const velocityBoost = 1 + Math.min(1.3, Math.abs(scrollVelocity) * .012);
+        const step = tracer.speed * velocityBoost * (isMobile ? 1.35 : 1.55);
+        tracer.x += Math.cos(angle) * step;
+        tracer.y += Math.sin(angle) * step;
+        tracer.life -= 1;
+
+        const progress = Math.max(0, tracer.life / tracer.maxLife);
+        const edgeFade = Math.min(1, tracer.y / 90, (height - tracer.y) / 90, tracer.x / 90, (width - tracer.x) / 90);
+        const alpha = Math.max(0, Math.min(.23, progress * .16 * Math.max(.15, edgeFade)));
+
+        const gradient = ctx.createLinearGradient(tracer.px, tracer.py, tracer.x, tracer.y);
+        gradient.addColorStop(0, `rgba(112,244,208,${alpha * .22})`);
+        gradient.addColorStop(1, `rgba(183,255,55,${alpha})`);
+        ctx.beginPath();
+        ctx.moveTo(tracer.px, tracer.py);
+        ctx.lineTo(tracer.x, tracer.y);
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = tracer.width;
+        ctx.stroke();
+
+        if (i % 7 === 0 && Math.floor(tracer.life) % 38 === 0 && alpha > .03) {
+          drawArrow(tracer.x, tracer.y, angle, alpha * 1.5, 4.5);
+        }
+
+        if (tracer.life <= 0 || tracer.y < -30 || tracer.x < -60 || tracer.x > width + 60) resetTracer(tracer, false);
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    };
+
+    if (finePointer) {
+      window.addEventListener('mousemove', event => {
+        pointerX = event.clientX / Math.max(window.innerWidth, 1);
+        pointerY = event.clientY / Math.max(window.innerHeight, 1);
+      }, { passive: true });
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    document.addEventListener('visibilitychange', () => { active = !document.hidden; });
+    resize();
+    requestAnimationFrame(render);
+  };
+  setupFlowCanvas();
+
+  const heroCanvas = $('#hero-canvas');
+  if (heroCanvas) heroCanvas.style.opacity = prefersReduced ? '0' : '.16';
 
   const form = $('#lead-form');
   const status = $('#form-status');
@@ -205,8 +415,8 @@
     form.addEventListener('submit', e => {
       e.preventDefault();
       const data = new FormData(form);
-      const required = ['name','company','email','challenge','objective'];
-      const missing = required.some(k => !String(data.get(k) || '').trim());
+      const required = ['name', 'company', 'email', 'challenge', 'objective'];
+      const missing = required.some(key => !String(data.get(key) || '').trim());
       const email = String(data.get('email') || '').trim();
       if (missing) return showStatus('Preencha os campos principais para preparar o contato.', 'error');
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showStatus('Digite um e-mail válido.', 'error');
