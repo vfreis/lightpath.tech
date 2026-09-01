@@ -1,0 +1,79 @@
+name: Deploy LightPath to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate static site
+        run: python scripts/validate_site.py
+
+      - name: Validate JavaScript syntax
+        run: node --check script.js
+
+      - name: Static HTTP smoke test
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python -m http.server 8000 --bind 127.0.0.1 >/tmp/lightpath-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill ${SERVER_PID} 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:8000/index.html -o /tmp/lightpath-index.html; then break; fi
+            sleep 0.25
+          done
+          curl --fail --silent http://127.0.0.1:8000/styles.css -o /tmp/lightpath-styles.css
+          curl --fail --silent http://127.0.0.1:8000/script.js -o /tmp/lightpath-script.js
+          curl --fail --silent http://127.0.0.1:8000/assets/social-card.svg -o /tmp/lightpath-social.svg
+          grep -Fq 'LightPath Tecnologia' /tmp/lightpath-index.html
+          grep -Fq 'Menos operação manual.' /tmp/lightpath-index.html
+          grep -Fq 'Mapear uma oportunidade' /tmp/lightpath-index.html
+          test -s /tmp/lightpath-styles.css
+          test -s /tmp/lightpath-script.js
+          test -s /tmp/lightpath-social.svg
+
+  deploy:
+    needs: validate
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload static artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
