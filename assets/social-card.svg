@@ -2,7 +2,6 @@
 <defs>
   <radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(985 137) rotate(132) scale(475 560)"><stop stop-color="#B7FF37" stop-opacity=".28"/><stop offset="1" stop-color="#05070B" stop-opacity="0"/></radialGradient>
   <linearGradient id="g2" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse"><stop stop-color="#0B1017"/><stop offset="1" stop-color="#05070B"/></linearGradient>
-  <filter id="blur"><feGaussianBlur stdDeviation="35"/></filter>
 </defs>
 <rect width="1200" height="630" fill="url(#g2)"/>
 <rect width="1200" height="630" fill="url(#g1)"/>
@@ -10,23 +9,22 @@
   <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200" stroke="white"/>
   <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630" stroke="white"/>
 </g>
-<circle cx="958" cy="303" r="150" stroke="#B7FF37" stroke-opacity=".22"/>
-<circle cx="958" cy="303" r="104" stroke="#70F4D0" stroke-opacity=".22" stroke-dasharray="7 11"/>
-<circle cx="958" cy="303" r="58" fill="#B7FF37" fill-opacity=".12" stroke="#B7FF37" stroke-opacity=".55"/>
-<circle cx="958" cy="303" r="16" fill="#B7FF37"/>
-<circle cx="1049" cy="223" r="6" fill="#70F4D0"/>
-<circle cx="879" cy="393" r="4" fill="#B7FF37"/>
+<g opacity=".58" stroke-linecap="round">
+  <path d="M820 472C870 434 890 364 916 326S987 257 1020 208" stroke="#70F4D0" stroke-width="1.4"/>
+  <path d="M880 510C922 468 943 413 973 372S1045 305 1091 240" stroke="#B7FF37" stroke-width="1.1"/>
+  <path d="m1019 208-2 17m2-17-16 7M1091 240l-3 17m3-17-16 7" stroke="#B7FF37" stroke-width="1.6"/>
+</g>
 <g transform="translate(74 67)">
-  <path d="M4 31.5 14.8 9l6.8 13.7L28.6 9 38 28.3" stroke="#B7FF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M8 31.5h27" stroke="#B7FF37" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="28.5" cy="9" r="3" fill="#B7FF37"/>
+  <path d="M3 32 12 19.8l5.4 6.2L25.2 13 38 32" stroke="#B7FF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7 31 14 24m0 0-.7 5m.7-5-4.9.9M16 30l6.5-8m0 0-.7 5m.7-5-4.9.9M25 28.5 32.3 18m0 0-.8 5.2m.8-5.2-5.1.9" stroke="#70F4D0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M5 32h31" stroke="#B7FF37" stroke-width="2.5" stroke-linecap="round" opacity=".65"/>
 </g>
 <text x="128" y="92" fill="#F5F8FB" font-family="Arial, sans-serif" font-size="26" font-weight="700">LightPath</text>
 <text x="128" y="116" fill="#7B8793" font-family="Arial, sans-serif" font-size="11" letter-spacing="4">TECNOLOGIA</text>
 <text x="74" y="260" fill="#F5F8FB" font-family="Arial, sans-serif" font-size="70" font-weight="700" letter-spacing="-4">MENOS OPERAÇÃO.</text>
 <text x="74" y="335" fill="#B7FF37" font-family="Arial, sans-serif" font-size="70" font-weight="700" letter-spacing="-4">MAIS INTELIGÊNCIA.</text>
 <text x="74" y="410" fill="#F5F8FB" font-family="Arial, sans-serif" font-size="70" font-weight="700" letter-spacing="-4">MAIS ESCALA.</text>
-<text x="76" y="492" fill="#96A1AE" font-family="Arial, sans-serif" font-size="20">Engenharia de dados · IA aplicada · Automação</text>
+<text x="76" y="492" fill="#96A1AE" font-family="Arial, sans-serif" font-size="20">Dados · IA · Automação · Performance operacional</text>
 <rect x="74" y="548" width="318" height="1" fill="#B7FF37" fill-opacity=".4"/>
-<text x="74" y="579" fill="#687581" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">SYSTEMS THAT CREATE LEVERAGE</text>
+<text x="74" y="579" fill="#687581" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">ENGINEERING LEVERAGE INTO OPERATIONS</text>
 </svg>
