@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="enhancements.css" />
   <link rel="stylesheet" href="business-cases.css" />
   <link rel="stylesheet" href="mobile-first.css" />
+  <link rel="stylesheet" href="storytelling.css" />
 </head>
 <body>
   <div class="loader" aria-hidden="true">
@@ -160,6 +161,11 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="kinetic-bridge" aria-label="Transformação operacional">
+      <div class="kinetic-ghost" aria-hidden="true">OPERAÇÃO MANUAL</div>
+      <div class="kinetic-word">ROTINA REPETITIVA <span>VIRA MARGEM.</span></div>
     </section>
 
     <section class="section build-section" aria-labelledby="build-title">
@@ -320,7 +326,7 @@
       </div>
     </section>
 
-    <section class="section fit-section">
+    <section class="section fit-section" id="fit">
       <div class="shell fit-grid">
         <div class="fit-copy reveal"><div class="section-kicker"><span>06</span> Quando faz sentido</div><h2>Nem todo problema precisa de IA.<br/><em>O seu pode precisar.</em></h2></div>
         <div class="fit-list reveal">
@@ -329,6 +335,35 @@
           <div class="fit-item"><span>03</span><p>Existe um processo repetitivo consumindo pessoas que deveriam estar decidindo, não copiando.</p><i>↗</i></div>
           <div class="fit-item"><span>04</span><p>Você quer aplicar IA, mas precisa transformar uma ideia genérica em caso de uso com ROI.</p><i>↗</i></div>
           <div class="fit-item"><span>05</span><p>O negócio cresceu mais rápido do que a arquitetura de dados e operação.</p><i>↗</i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section scanner-section" id="diagnostico" aria-labelledby="scanner-title">
+      <div class="shell scanner-grid">
+        <div class="scanner-copy reveal">
+          <div class="section-kicker"><span>07</span> Opportunity scanner</div>
+          <h2 id="scanner-title">Onde está o próximo <em>ganho?</em></h2>
+          <p>Escolha a pressão que mais incomoda sua operação. A LightPath traduz o sintoma em um primeiro vetor de solução e nas métricas que precisam provar valor.</p>
+        </div>
+        <div class="scanner-app reveal">
+          <div class="scanner-head"><span>LIGHTPATH / VALUE SCAN</span><span class="scanner-live"><i></i> READY</span></div>
+          <div class="scanner-options" role="group" aria-label="Escolha o principal sinal operacional">
+            <button type="button" class="scanner-option is-selected" data-signal="tempo"><small>01</small><strong>TEMPO</strong></button>
+            <button type="button" class="scanner-option" data-signal="custo"><small>02</small><strong>CUSTO</strong></button>
+            <button type="button" class="scanner-option" data-signal="risco"><small>03</small><strong>RISCO</strong></button>
+            <button type="button" class="scanner-option" data-signal="capacidade"><small>04</small><strong>CAPACIDADE</strong></button>
+            <button type="button" class="scanner-option" data-signal="decisao"><small>05</small><strong>DECISÃO</strong></button>
+          </div>
+          <div class="scanner-result">
+            <div>
+              <div class="scanner-result-top"><small>PRIMEIRO VETOR</small><span>HYPOTHESIS / 01</span></div>
+              <h3 id="scanner-result-title">Automação de processo</h3>
+              <p id="scanner-result-copy">Mapeamos esperas, handoffs e tarefas repetitivas. O primeiro alvo é reduzir lead time sem criar uma nova camada de operação.</p>
+              <div class="scanner-kpis" id="scanner-result-kpis"><span>lead time</span><span>horas recuperadas</span><span>SLA</span></div>
+            </div>
+            <button type="button" class="scanner-action" id="scanner-to-contact"><span>Transformar em diagnóstico</span><i>↗</i></button>
+          </div>
         </div>
       </div>
     </section>
@@ -368,5 +403,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
   <script src="script.js"></script>
+  <script src="storytelling.js"></script>
 </body>
 </html>
