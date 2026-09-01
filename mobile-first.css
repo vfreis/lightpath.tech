@@ -28,10 +28,76 @@
   .menu-toggle span{width:18px;left:12px}
   .menu-toggle span:first-child{top:17px}.menu-toggle span:last-child{top:25px}
   .menu-toggle[aria-expanded=true] span:first-child,.menu-toggle[aria-expanded=true] span:last-child{top:21px}
-  .nav{inset:0;background:radial-gradient(circle at 72% 18%,rgba(183,255,55,.08),transparent 24%),rgba(4,6,10,.985);padding:110px 24px 38px;justify-content:flex-start;align-items:stretch;gap:0;font:600 32px/1 var(--display);letter-spacing:-.04em}
-  .nav>a:not(.nav-cta){padding:22px 2px;border-bottom:1px solid rgba(255,255,255,.08)}
+
+  /* Full-screen mobile menu. It is a separate app screen, never a translucent layer over the hero. */
+  .nav{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    min-height:100svh;
+    z-index:4998!important;
+    display:flex!important;
+    flex-direction:column;
+    background:
+      radial-gradient(circle at 78% 12%,rgba(183,255,55,.11),transparent 26%),
+      radial-gradient(circle at 12% 82%,rgba(112,244,208,.045),transparent 31%),
+      #05070b!important;
+    padding:104px 24px max(30px,env(safe-area-inset-bottom,0px))!important;
+    justify-content:flex-start;
+    align-items:stretch;
+    gap:0;
+    font:600 32px/1 var(--display);
+    letter-spacing:-.04em;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translate3d(0,-10px,0);
+    transition:opacity .28s ease,transform .36s cubic-bezier(.2,.8,.2,1),visibility 0s linear .36s;
+    isolation:isolate;
+  }
+  .nav::before{
+    content:"";
+    position:absolute;
+    inset:68px 0 auto;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(183,255,55,.2),transparent);
+    pointer-events:none;
+  }
+  .nav.open{
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    transform:none!important;
+    transition:opacity .28s ease,transform .36s cubic-bezier(.2,.8,.2,1),visibility 0s;
+  }
+  .nav>a:not(.nav-cta){padding:20px 2px;border-bottom:1px solid rgba(255,255,255,.08);position:relative;z-index:2;color:#f4f7f2}
   .nav>a:not(.nav-cta):after{display:none}
-  .nav-cta{margin-top:auto;min-height:56px;border-color:rgba(183,255,55,.22);background:rgba(183,255,55,.06);font:700 12px var(--body);letter-spacing:0;justify-content:space-between}
+  .nav-cta{margin-top:auto;min-height:58px;border-color:rgba(183,255,55,.25);background:var(--accent);color:#07100b;font:800 12px var(--body);letter-spacing:0;justify-content:space-between;position:relative;z-index:2}
+  .nav-cta span{color:#07100b}
+
+  /* When the menu is open, completely retire the page scene beneath it. This prevents Safari/iOS
+     compositing layers from bleeding through the menu. */
+  body.menu-open{overflow:hidden;height:100dvh;touch-action:none;background:#05070b}
+  body.menu-open main,
+  body.menu-open .story-field,
+  body.menu-open .story-wash,
+  body.menu-open .energy-spine,
+  body.menu-open .flow-canvas,
+  body.menu-open #hero-canvas,
+  body.menu-open .scroll-progress{
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  body.menu-open .site-header{height:100dvh;background:#05070b!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-color:transparent!important}
+  body.menu-open .header-inner{position:relative;z-index:5001}
+  body.menu-open .brand,body.menu-open .menu-toggle{position:relative;z-index:5002}
+  body.menu-open .page-grain{opacity:.014;z-index:5003}
+  body.menu-open .menu-toggle{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.12)}
 
   /* Hero: mobile composition, not desktop shrink */
   .hero{min-height:auto;padding:104px 0 34px;overflow:hidden}
