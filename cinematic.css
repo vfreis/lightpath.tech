@@ -1,0 +1,259 @@
+/* LightPath Tecnologia — cinematic art direction layer
+   Progressive enhancement only: the base experience remains functional without it. */
+
+:root{
+  --cinema-glow:rgba(183,255,55,.22);
+  --cinema-cyan:rgba(112,244,208,.2);
+  --cinema-line:rgba(183,255,55,.15);
+}
+
+/* Global visual continuity */
+main{overflow:clip}
+main:before{
+  content:"";
+  position:absolute;
+  top:100vh;
+  bottom:0;
+  left:clamp(18px,4.15vw,74px);
+  width:1px;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(to bottom,transparent 0,rgba(183,255,55,.12) 4%,rgba(112,244,208,.2) 42%,rgba(183,255,55,.12) 78%,transparent 100%);
+  opacity:.72;
+}
+.section>.shell{position:relative}
+.section>.shell:before{
+  content:"";
+  position:absolute;
+  left:calc(clamp(18px,4.15vw,74px) - ((100vw - var(--shell))/2));
+  top:14px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 6px rgba(183,255,55,.035),0 0 22px rgba(183,255,55,.38);
+  opacity:.45;
+  pointer-events:none;
+}
+
+/* Brand: make the growth vectors behave like actual vectors */
+.brand-icon .growth-vector{
+  stroke-dasharray:28;
+  stroke-dashoffset:0;
+  transform-origin:center;
+}
+.brand:hover .growth-vector{animation:brandVectorDrive .72s cubic-bezier(.2,.7,.2,1)}
+@keyframes brandVectorDrive{0%{stroke-dashoffset:28;opacity:.25}70%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.82}}
+
+/* HERO — cinematic depth, light-path trajectories and scroll decomposition */
+.hero{perspective:1400px;transform-style:preserve-3d}
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:-12%;
+  pointer-events:none;
+  opacity:.55;
+  background:
+    radial-gradient(ellipse at 72% 44%,rgba(183,255,55,.11),transparent 28%),
+    conic-gradient(from 225deg at 82% 76%,transparent 0 10%,rgba(112,244,208,.045) 11%,transparent 12% 21%,rgba(183,255,55,.04) 22%,transparent 23% 100%);
+  filter:blur(.2px);
+  mix-blend-mode:screen;
+}
+.hero-copy:before{
+  content:"LIGHTPATH / PERFORMANCE VECTOR";
+  position:absolute;
+  top:3vh;left:0;
+  color:rgba(183,255,55,.34);
+  font:600 8px var(--display);
+  letter-spacing:.22em;
+  writing-mode:vertical-rl;
+  transform:translateX(-30px) rotate(180deg);
+}
+.hero-title{position:relative;text-wrap:balance}
+.hero-title:after{
+  content:"";
+  position:absolute;
+  right:2%;bottom:-34px;
+  width:min(31vw,390px);height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent));
+  transform:rotate(-14deg);transform-origin:right center;
+  box-shadow:0 0 18px rgba(183,255,55,.22);
+  opacity:.38;
+}
+.hero-title em{position:relative}
+.hero-title em:after{
+  content:"↗";
+  position:absolute;
+  right:-.52em;top:-.18em;
+  font-size:.18em;
+  color:var(--accent2);
+  opacity:.62;
+  text-shadow:none;
+}
+.hero-system{
+  transform-origin:50% 65%;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 42px 120px rgba(0,0,0,.42),0 0 70px rgba(183,255,55,.035);
+}
+.hero-system:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(112deg,transparent 22%,rgba(255,255,255,.055) 36%,transparent 48%);
+  transform:translateX(-130%);
+  animation:systemSweep 8s ease-in-out infinite;
+}
+@keyframes systemSweep{0%,58%{transform:translateX(-130%)}78%,100%{transform:translateX(140%)}}
+
+/* Signal strip becomes a visual hinge rather than a simple marquee */
+.signal-strip{position:relative;z-index:6;box-shadow:0 0 60px rgba(183,255,55,.08)}
+.signal-strip:before,.signal-strip:after{
+  content:"";position:absolute;top:50%;width:18vw;height:1px;background:#07100b;opacity:.2
+}
+.signal-strip:before{left:-3vw;transform:rotate(8deg)}
+.signal-strip:after{right:-3vw;transform:rotate(-8deg)}
+
+/* Problem cards: visual energy travels through the card stack */
+.problem-cards{position:relative}
+.problem-cards:before{
+  content:"";position:absolute;left:-34px;top:30px;bottom:30px;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--accent2) 18%,rgba(183,255,55,.2) 50%,var(--accent2) 82%,transparent);
+  opacity:.2;pointer-events:none
+}
+.diagnostic-card:after{
+  content:"";position:absolute;left:0;top:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  transform:translateX(-110%);opacity:0;pointer-events:none
+}
+.diagnostic-card:hover:after{animation:cardSignal 1.3s ease-out}
+@keyframes cardSignal{0%{transform:translateX(-110%);opacity:0}18%{opacity:.6}100%{transform:translateX(110%);opacity:0}}
+
+/* CONTROL LAYER — portal / reveal moment */
+.build-section{overflow:clip}
+.build-section:before{
+  background:linear-gradient(90deg,transparent,rgba(112,244,208,.28) 24%,rgba(183,255,55,.48) 50%,rgba(112,244,208,.2) 76%,transparent)
+}
+.build-section>.shell:after{
+  content:"";
+  position:absolute;
+  left:50%;top:205px;
+  width:min(82vw,1050px);height:470px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(183,255,55,.065),transparent 63%);
+  filter:blur(20px);opacity:.72
+}
+.command-center{
+  isolation:isolate;
+  transform-origin:50% 0;
+  border-color:rgba(183,255,55,.16);
+}
+.command-center:after{
+  content:"";
+  position:absolute;
+  z-index:4;
+  left:-10%;right:-10%;top:-2px;height:2px;
+  background:linear-gradient(90deg,transparent 6%,var(--accent2) 30%,var(--accent) 50%,var(--accent2) 70%,transparent 94%);
+  box-shadow:0 0 22px rgba(183,255,55,.35);
+  transform:translateX(-100%);
+  animation:controlScan 5.8s ease-in-out infinite;
+  pointer-events:none;
+}
+.command-center .cc-main:after{
+  content:"";position:absolute;inset:54px 0 0;pointer-events:none;
+  background-image:linear-gradient(rgba(183,255,55,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(112,244,208,.018) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.75),transparent 90%);
+  opacity:.55
+}
+@keyframes controlScan{0%,18%{transform:translateX(-100%);opacity:0}32%{opacity:.8}64%{transform:translateX(100%);opacity:.5}75%,100%{transform:translateX(100%);opacity:0}}
+
+/* Method becomes a measured rising trajectory */
+.method-stage:after{
+  content:"";position:absolute;left:49px;top:0;bottom:0;width:46vw;max-width:660px;pointer-events:none;
+  background:linear-gradient(135deg,transparent 0 24%,rgba(183,255,55,.018) 24.2% 24.5%,transparent 24.8% 46%,rgba(112,244,208,.018) 46.2% 46.5%,transparent 46.8% 100%);
+  opacity:.9
+}
+.method-step.is-active h3{text-shadow:0 0 30px rgba(183,255,55,.045)}
+.method-step.is-active aside b{color:#d7e1d7}
+
+/* PROOF — data/results become an actual growth trajectory */
+.proof-section{overflow:clip;isolation:isolate}
+.proof-section:before{
+  content:"";
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at 78% 35%,rgba(183,255,55,.055),transparent 25%),linear-gradient(120deg,transparent 30%,rgba(112,244,208,.018) 50%,transparent 70%);
+}
+.proof-bento{position:relative;isolation:isolate}
+.proof-bento:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-4%;right:-4%;top:8%;bottom:3%;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 435 C145 410 205 338 325 354 S505 330 590 245 S760 260 835 160 S930 128 980 52' fill='none' stroke='%23b7ff37' stroke-opacity='.34' stroke-width='2'/%3E%3Cpath d='M20 435 C145 410 205 338 325 354 S505 330 590 245 S760 260 835 160 S930 128 980 52' fill='none' stroke='%2370f4d0' stroke-opacity='.12' stroke-width='10'/%3E%3Ccircle cx='325' cy='354' r='5' fill='%23b7ff37'/%3E%3Ccircle cx='590' cy='245' r='5' fill='%2370f4d0'/%3E%3Ccircle cx='835' cy='160' r='5' fill='%23b7ff37'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-size:100% 100%;
+  filter:drop-shadow(0 0 12px rgba(183,255,55,.12));
+  opacity:.52;
+  clip-path:inset(0 100% 0 0)
+}
+.proof-section.is-flow-active .proof-bento:before{animation:proofTrajectory 2.4s .35s cubic-bezier(.17,.84,.2,1) forwards}
+@keyframes proofTrajectory{to{clip-path:inset(0 0 0 0)}}
+.proof-card{backdrop-filter:blur(7px)}
+.proof-card:hover strong{color:var(--accent);text-shadow:0 0 35px rgba(183,255,55,.13)}
+.sparkline path:first-child{stroke-dasharray:720;stroke-dashoffset:720}
+.proof-section.is-flow-active .sparkline path:first-child{animation:drawSpark 2.2s .7s ease-out forwards}
+@keyframes drawSpark{to{stroke-dashoffset:0}}
+
+/* CTA — the flow converges into conversion */
+.contact-section:after{
+  content:"";position:absolute;right:-12vw;bottom:-18vw;width:50vw;height:50vw;border-radius:50%;
+  border:1px solid rgba(183,255,55,.065);box-shadow:inset 0 0 90px rgba(183,255,55,.025);pointer-events:none
+}
+.contact-form{position:relative;overflow:hidden}
+.contact-form:before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 30%,rgba(183,255,55,.035),transparent 70%);
+  transform:translateX(-120%);transition:transform 1.2s ease
+}
+.contact-form:focus-within:before{transform:translateX(120%)}
+.submit-button{position:relative;overflow:hidden}
+.submit-button:after{
+  content:"";position:absolute;top:-60%;left:-35%;width:28%;height:220%;background:rgba(255,255,255,.26);transform:rotate(20deg) translateX(-260%);transition:transform .7s ease
+}
+.submit-button:hover:after{transform:rotate(20deg) translateX(620%)}
+
+/* Modern scroll-driven art direction. Existing GSAP remains the fallback. */
+@supports (animation-timeline: scroll()){
+  .hero-copy{animation:heroCopyExit linear both;animation-timeline:scroll(root block);animation-range:0 78vh}
+  .hero-system{animation:heroSystemExit linear both;animation-timeline:scroll(root block);animation-range:0 90vh}
+  .signal-strip{animation:signalHinge linear both;animation-timeline:scroll(root block);animation-range:52vh 120vh}
+  .command-center{animation:controlPortal linear both;animation-timeline:view();animation-range:entry 0% cover 44%}
+  .proof-bento{animation:proofDepth linear both;animation-timeline:view();animation-range:entry 5% cover 35%}
+}
+@keyframes heroCopyExit{0%,16%{transform:translate3d(0,0,0);opacity:1}100%{transform:translate3d(-2vw,-7vh,70px) scale(.965);opacity:.62}}
+@keyframes heroSystemExit{0%,12%{transform:translate3d(0,0,0) rotateY(0)}100%{transform:translate3d(4vw,10vh,-100px) rotateY(-7deg);opacity:.55}}
+@keyframes signalHinge{0%{transform:rotate(-.5deg) scale(1.012)}100%{transform:rotate(.35deg) scale(1.016)}}
+@keyframes controlPortal{0%{transform:perspective(1200px) rotateX(7deg) scale(.93);filter:brightness(.72);opacity:.36}58%{transform:perspective(1200px) rotateX(0) scale(1);filter:brightness(1);opacity:1}100%{transform:perspective(1200px) rotateX(0) scale(1);filter:brightness(1);opacity:1}}
+@keyframes proofDepth{0%{transform:perspective(1300px) rotateX(5deg) scale(.965)}100%{transform:perspective(1300px) rotateX(0) scale(1)}}
+
+@media(max-width:1100px){
+  main:before,.section>.shell:before{display:none}
+  .hero-copy:before{display:none}
+  .proof-bento:before{opacity:.34}
+}
+@media(max-width:760px){
+  .hero:after{opacity:.34}
+  .hero-title:after{width:48vw;right:-5%;bottom:-22px}
+  .hero-title em:after{display:none}
+  .problem-cards:before,.method-stage:after{display:none}
+  .build-section>.shell:after{height:300px;top:180px;opacity:.5}
+  .command-center:after{animation-duration:7.5s}
+  .proof-bento:before{left:-18%;right:-22%;top:10%;bottom:6%;opacity:.2;background-size:130% 100%}
+  .contact-section:after{width:90vw;height:90vw;right:-48vw;bottom:-30vw}
+}
+@media(prefers-reduced-motion:reduce){
+  .brand:hover .growth-vector,.hero-system:after,.command-center:after,.proof-section.is-flow-active .proof-bento:before,.proof-section.is-flow-active .sparkline path:first-child{animation:none!important}
+  .proof-bento:before{clip-path:none;opacity:.2}
+  .sparkline path:first-child{stroke-dasharray:none;stroke-dashoffset:0}
+  .submit-button:after{display:none}
+}
