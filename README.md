@@ -1,6 +1,6 @@
 # LightPath Tecnologia
 
-Site institucional e de geração de demanda da LightPath Tecnologia.
+Site institucional e de geração de demanda da **LightPath Tecnologia**.
 
 ## Posicionamento
 
@@ -14,31 +14,44 @@ A LightPath transforma dados, processos e operações em sistemas mais inteligen
 - Otimização de processos, operações e projetos
 - APIs, integrações e produtos internos
 
+## Experiência do site
+
+A landing page foi construída para combinar conversão B2B com linguagem visual premium:
+
+- hero imersivo com canvas procedural;
+- smooth scrolling com Lenis;
+- animações e storytelling com GSAP + ScrollTrigger;
+- microinterações, cursor, magnetic buttons e tilt cards;
+- painel interativo de soluções;
+- suporte a `prefers-reduced-motion`;
+- layout responsivo para desktop e mobile.
+
 ## Arquitetura
 
-O site foi construído sem framework para ser rápido, portátil e simples de publicar em hospedagem compartilhada:
+Site estático, sem build e sem framework:
 
-- `index.html` — conteúdo e estrutura
-- `styles.css` — design system e responsividade
-- `script.js` — interações e formulário
-- `contact.php` — endpoint leve para leads via PHP
+- `index.html` — conteúdo e estrutura;
+- `styles.css` — design system, responsividade e animações CSS;
+- `script.js` — motion, interações, canvas e formulário;
+- `assets/social-card.svg` — social preview;
+- `scripts/validate_site.py` — validação estrutural de CI;
+- `.github/workflows/pages.yml` — CI + deploy automático no GitHub Pages;
+- `.nojekyll` — publicação estática direta.
 
-## Configuração do formulário
+## Formulário durante a fase GitHub Pages
 
-O endpoint `contact.php` utiliza a variável de ambiente `CONTACT_TO_EMAIL` como destinatário.
+Como GitHub Pages não executa backend, o formulário valida os campos e abre o cliente de e-mail do visitante com o diagnóstico preenchido.
 
-Configure-a no ambiente de hospedagem antes de publicar o formulário em produção.
-
-Exemplo conceitual:
-
-```text
-CONTACT_TO_EMAIL=seu-email-de-destino
-```
-
-O site continua navegável sem a variável, mas o envio de leads retorna uma mensagem de configuração pendente.
+Quando o domínio próprio e a infraestrutura final forem conectados, essa camada poderá ser substituída por endpoint/API, CRM, webhook ou automação sem alterar a experiência visual.
 
 ## Deploy
 
-Pode ser publicado diretamente na raiz pública de um domínio/subdomínio com suporte a HTML/CSS/JS e PHP 8+.
+Todo push em `main` executa validações e publica o site no GitHub Pages.
+
+URL esperada:
+
+```text
+https://vfreis.github.io/lightpath.tech/
+```
 
 Não há etapa de build.
