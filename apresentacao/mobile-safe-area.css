@@ -1,63 +1,63 @@
-/* LightPath presentation — iOS/mobile navigation dock fix */
+/* LightPath interactive presentation — mobile-first app shell */
+
+/* Growth Systems scene */
+.growth-app-layout{gap:18px}.growth-app{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(145deg,rgba(112,244,208,.04),rgba(255,255,255,.015));box-shadow:0 22px 70px rgba(0,0,0,.24)}.growth-app-head{height:44px;padding:0 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);font:700 7px var(--display);letter-spacing:.15em;color:var(--muted)}.growth-app-head i{flex:1;height:1px;background:linear-gradient(90deg,rgba(112,244,208,.18),rgba(183,255,55,.6),transparent)}.growth-app-head b{color:var(--accent);font-size:7px}.growth-app-flow{padding:12px;display:grid;gap:6px}.growth-app-flow>span{display:none}.growth-app-node{border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);padding:9px 10px;color:var(--text);text-align:left;display:grid;grid-template-columns:30px 1fr;grid-template-rows:auto auto;cursor:pointer}.growth-app-node small{grid-row:1/3;align-self:center;color:var(--accent2);font:700 7px var(--display)}.growth-app-node b{font:700 10px var(--display)}.growth-app-node span{font-size:8px;color:var(--muted);margin-top:2px}.growth-app-node.is-active{border-color:rgba(183,255,55,.5);background:rgba(183,255,55,.08)}.growth-app-data{padding:10px 12px;border-top:1px solid rgba(112,244,208,.14);border-bottom:1px solid rgba(112,244,208,.14);display:flex;gap:5px;flex-wrap:wrap;background:rgba(112,244,208,.025)}.growth-app-data span{width:100%;font:700 7px var(--display);letter-spacing:.13em;color:var(--accent2)}.growth-app-data b{font-size:7px;padding:4px 6px;border:1px solid var(--line);border-radius:999px;color:#aab5ae}.growth-app-value{padding:12px 14px;display:flex;flex-direction:column;gap:5px}.growth-app-value small{font:700 7px var(--display);letter-spacing:.12em;color:var(--accent2)}.growth-app-value strong{font:700 18px var(--display)}.growth-app-value p{font-size:9px;line-height:1.45}
+
 @media (max-width:759px){
-  :root{--mobile-controls-h:66px;--mobile-controls-gap:10px}
-
+  :root{--mobile-controls-h:62px;--mobile-controls-gap:8px}
   html,body{height:100%;height:100dvh;overflow:hidden}
-  .story{
-    height:100dvh;
-    min-height:100dvh;
-    padding-bottom:calc(var(--mobile-controls-h) + var(--mobile-controls-gap) + env(safe-area-inset-bottom,0px));
-  }
+  .story{height:100dvh;min-height:100dvh;padding-bottom:calc(var(--mobile-controls-h) + var(--mobile-controls-gap) + env(safe-area-inset-bottom,0px))}
 
-  /* The active scene ends before the navigation dock, so controls never cover content. */
-  .scene{
-    inset:0 0 calc(var(--mobile-controls-h) + var(--mobile-controls-gap) + env(safe-area-inset-bottom,0px)) 0;
-    padding:82px 16px 22px;
-    scroll-padding-bottom:24px;
-    overscroll-behavior-y:contain;
-  }
-  .scene-inner{
-    min-height:calc(100dvh - 82px - var(--mobile-controls-h) - var(--mobile-controls-gap) - env(safe-area-inset-bottom,0px) - 22px);
-  }
+  /* Every scene behaves like an app screen, not a long web page. */
+  .scene{inset:0 0 calc(var(--mobile-controls-h) + var(--mobile-controls-gap) + env(safe-area-inset-bottom,0px)) 0;padding:70px 14px 8px;overflow:hidden;overscroll-behavior:none}
+  .scene-inner{height:100%;min-height:0;margin:0 auto;justify-content:center;gap:12px;overflow:hidden}
+  .scene-kicker{font-size:7px;letter-spacing:.15em;gap:7px}.scene-kicker:before{width:16px}
+  h1{font-size:clamp(34px,10.5vw,54px);line-height:.92}h2{font-size:clamp(30px,9.5vw,48px);line-height:.93}
+  p{font-size:11px;line-height:1.45}.scene-copy{gap:10px}.compact-copy{gap:9px}.scene-heading{gap:7px}
+  .primary-action{min-height:46px;padding:0 16px;font-size:10px}.primary-action span{font-size:15px}
 
-  /* Dedicated bottom dock: visually anchored to the app, not floating over the slide. */
-  .story-controls{
-    left:12px;
-    right:12px;
-    bottom:max(8px,env(safe-area-inset-bottom,0px));
-    height:58px;
-    z-index:35;
-    margin:0;
-    padding:6px;
-    border-radius:22px;
-    background:rgba(7,10,14,.96);
-    box-shadow:0 -12px 38px rgba(5,7,11,.58),0 10px 34px rgba(0,0,0,.28);
-    backdrop-filter:blur(18px) saturate(130%);
-    -webkit-backdrop-filter:blur(18px) saturate(130%);
-  }
-  .story-controls button{width:46px;height:46px}
+  /* Hero */
+  .hero-layout{gap:8px}.hero-vector{min-height:210px}.hero-vector svg{width:min(72vw,290px)}.hero-badge{bottom:2%;right:3%;font-size:6px;padding:8px 9px}
 
-  /* Fade separates scene content from the fixed navigation zone. */
-  .story:after{
-    content:'';
-    position:fixed;
-    z-index:29;
-    pointer-events:none;
-    left:0;
-    right:0;
-    bottom:0;
-    height:calc(var(--mobile-controls-h) + 30px + env(safe-area-inset-bottom,0px));
-    background:linear-gradient(to bottom,transparent,rgba(5,7,11,.82) 34%,#05070b 72%);
-  }
+  /* Thesis */
+  .impact-layout{gap:12px}.impact-stage{min-height:315px;border-radius:20px}.impact-core{width:126px;height:126px}.impact-core strong{font-size:15px}.impact-choice{min-width:92px;padding:9px}.impact-choice b{font-size:7px;margin-bottom:5px}.impact-choice span{font-size:9px}
 
-  /* Taller content, such as the architecture scene, gets a clean final breathing area. */
-  .architecture,.diagnostic-app,.ai-product,.method-app,.proof-meaning{margin-bottom:8px}
+  /* Diagnosis */
+  .bottleneck-grid{grid-template-columns:1fr 1fr;gap:7px}.bottleneck{min-height:82px;padding:10px;gap:7px;border-radius:14px}.bottleneck>span{font-size:7px}.bottleneck>b{font-size:9px}.bottleneck>i{font-size:21px}.bottleneck-result{padding:12px 13px;gap:7px;border-radius:15px}.bottleneck-result strong{font-size:15px}.bottleneck-result p{font-size:9px}.bottleneck-result span{font-size:8px}
+
+  /* Solutions */
+  .solutions-layout{gap:10px}.solution-console{min-height:330px;border-radius:22px}.solution-core{width:158px;height:158px;padding:15px}.solution-core>strong{font-size:17px}.solution-core>p{font-size:8px}.solution-core>small{font-size:7px}.solution-node{width:62px;height:62px}.solution-node i{font-size:16px}.solution-node span{font-size:7px}.orbit-a{width:250px;height:250px}.orbit-b{width:330px;height:330px}
+
+  /* Architecture: 6 blocks fit in the screen; no vertical list. */
+  .architecture{gap:8px;margin:0}.architecture-flow{display:grid;grid-template-columns:1fr 1fr;gap:6px}.arch-link{display:none}.arch-node{min-height:61px;padding:8px 9px;border-radius:12px;grid-template-columns:25px 1fr}.arch-node small{font-size:7px}.arch-node b{font-size:9px}.arch-node span{font-size:7px}.arch-node.is-live{transform:none}.control-layer{padding:8px;gap:4px;border-radius:11px;white-space:nowrap;overflow:hidden}.control-layer span{font-size:6px}.control-layer b{font-size:5.5px;padding:4px 5px}.ghost-action{padding:8px 10px;font-size:8px}
+
+  /* Growth Systems: compact revenue architecture screen. */
+  .growth-app-layout{gap:10px}.growth-app{border-radius:18px}.growth-app-head{height:34px;padding:0 10px}.growth-app-flow{grid-template-columns:1fr 1fr;gap:5px;padding:8px}.growth-app-node{min-height:51px;padding:7px 8px;border-radius:10px;grid-template-columns:24px 1fr}.growth-app-node:last-of-type{grid-column:1/-1}.growth-app-node small{font-size:6px}.growth-app-node b{font-size:8px}.growth-app-node span{font-size:6.5px}.growth-app-data{padding:7px 8px;gap:4px}.growth-app-data span{font-size:6px}.growth-app-data b{font-size:6px;padding:3px 5px}.growth-app-value{padding:9px 10px;gap:3px}.growth-app-value small{font-size:6px}.growth-app-value strong{font-size:14px}.growth-app-value p{font-size:7.5px;line-height:1.35}
+
+  /* Method */
+  .method-layout{gap:10px}.method-app{border-radius:17px}.method-nav{min-height:46px}.method-nav button{min-height:46px;padding:0 10px;font-size:7px}.method-nav button span{font-size:6px}.method-content{min-height:165px;padding:17px 14px;gap:9px}.method-content>small{font-size:7px}.method-content>strong{font-size:20px}.method-output{padding-top:9px}.method-output b{font-size:9px}
+
+  /* Proof */
+  .proof-grid{grid-template-columns:1fr 1fr;gap:6px}.proof-tile{min-height:91px;padding:10px;border-radius:14px}.proof-tile strong{font-size:clamp(25px,8vw,38px)}.proof-tile span{font-size:6px;margin-top:6px}.proof-meaning{padding:11px 12px;gap:4px;margin:0}.proof-meaning small{font-size:6px}.proof-meaning strong{font-size:13px}.proof-meaning p{font-size:8px;line-height:1.35}
+
+  /* AI */
+  .ai-layout{gap:10px}.ai-product{border-radius:17px}.ai-product-head{padding:10px}.ai-product-head span{font-size:6px}.ai-product-head strong{font-size:14px}.ai-product-head small{font-size:5.5px}.ai-pipeline button{min-height:48px;padding:7px 10px;grid-template-columns:54px 1fr auto}.ai-pipeline button span,.ai-pipeline button i{font-size:6px}.ai-pipeline button b{font-size:8px}.ai-signal{padding:8px 10px}.ai-signal b{font-size:7px}
+
+  /* Discovery */
+  .final-layout{gap:10px}.diagnostic-app{gap:7px;margin:0}.diagnostic-options{grid-template-columns:1fr 1fr;gap:5px}.diagnostic-options button{min-height:38px;padding:7px;font-size:8px;border-radius:10px}.diagnostic-options button:last-child{grid-column:1/-1}.diagnostic-result{min-height:105px;padding:12px;border-radius:14px;gap:5px}.diagnostic-result span{font-size:6px}.diagnostic-result strong{font-size:16px}.diagnostic-result p{font-size:8px}.diagnostic-cta{min-height:42px}.legal-line{font-size:6px}
+
+  /* Dock occupies its own zone and never covers a scene. */
+  .story-controls{left:10px;right:10px;bottom:max(6px,env(safe-area-inset-bottom,0px));height:54px;z-index:35;margin:0;padding:5px;border-radius:20px;background:rgba(7,10,14,.97);box-shadow:0 -10px 32px rgba(5,7,11,.6),0 8px 28px rgba(0,0,0,.28);backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%)}
+  .story-controls button{width:44px;height:44px}.story:after{content:'';position:fixed;z-index:29;pointer-events:none;left:0;right:0;bottom:0;height:calc(var(--mobile-controls-h) + 24px + env(safe-area-inset-bottom,0px));background:linear-gradient(to bottom,transparent,rgba(5,7,11,.84) 34%,#05070b 72%)}
 }
 
-/* Older iOS fallback where dynamic viewport units are unavailable. */
-@supports not (height:100dvh){
-  @media (max-width:759px){
-    .story{height:100svh;min-height:100svh}
-    .scene-inner{min-height:calc(100svh - 180px)}
-  }
+/* Very short mobile viewport: preserve app feel rather than reintroducing scroll. */
+@media (max-width:759px) and (max-height:700px){
+  .scene{padding-top:62px}.scene-inner{gap:7px}h1{font-size:32px}h2{font-size:29px}.scene-copy>p,.scene-heading>p{display:none}.hero-vector{min-height:175px}.impact-stage{min-height:275px}.solution-console{min-height:285px}.method-content{min-height:138px}.proof-tile{min-height:76px}.proof-meaning p{display:none}.ai-pipeline button{min-height:42px}.diagnostic-result{min-height:88px}.growth-app-value p{display:none}.growth-app-flow{gap:4px}.growth-app-node{min-height:44px}
 }
+
+@media (min-width:760px){
+  .growth-app-layout{display:grid;grid-template-columns:minmax(0,.82fr) minmax(500px,1.18fr);align-items:center;gap:48px}.growth-app-flow{grid-template-columns:1fr 22px 1fr 22px 1fr 22px 1fr 22px 1fr;align-items:center;padding:18px}.growth-app-flow>span{display:block;text-align:center;color:var(--accent);font-size:16px}.growth-app-node{min-height:112px;grid-template-columns:1fr;grid-template-rows:auto auto 1fr}.growth-app-node small{grid-row:auto}.growth-app-node span{align-self:end}.growth-app-data{padding:14px 18px}.growth-app-data span{width:auto;margin-right:auto}.growth-app-value{padding:18px}.growth-app-value strong{font-size:22px}.growth-app-value p{font-size:11px}
+}
+
+@supports not (height:100dvh){@media (max-width:759px){html,body,.story{height:100svh;min-height:100svh}.scene-inner{height:100%;min-height:0}}}
