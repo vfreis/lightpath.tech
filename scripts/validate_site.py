@@ -8,6 +8,8 @@ required_files = [
     INDEX,
     ROOT / "styles.css",
     ROOT / "enhancements.css",
+    ROOT / "cinematic.css",
+    ROOT / "polish.css",
     ROOT / "script.js",
     ROOT / "favicon.svg",
     ROOT / ".nojekyll",
@@ -27,15 +29,17 @@ required_strings = [
     'id="metodo"',
     'id="provas"',
     'id="contato"',
+    'href="favicon.svg"',
     'href="styles.css"',
     'href="enhancements.css"',
-    'href="favicon.svg"',
     'src="script.js"',
     'class="counter"',
+    'class="growth-vector"',
 ]
 for value in required_strings:
     if value not in html:
         raise SystemExit(f"index.html missing required marker: {value}")
+
 
 class Checker(HTMLParser):
     def __init__(self):
@@ -56,6 +60,7 @@ class Checker(HTMLParser):
                 continue
             self.local_refs.append(ref.split("?", 1)[0].split("#", 1)[0])
 
+
 checker = Checker()
 checker.feed(html)
 if checker.duplicates:
@@ -65,17 +70,22 @@ for ref in checker.local_refs:
     if ref and not (ROOT / ref).exists():
         raise SystemExit(f"Broken local reference in index.html: {ref}")
 
-css = (ROOT / "styles.css").read_text(encoding="utf-8")
-enhancements = (ROOT / "enhancements.css").read_text(encoding="utf-8")
+css = "\n".join(
+    (ROOT / name).read_text(encoding="utf-8")
+    for name in ("styles.css", "enhancements.css", "cinematic.css", "polish.css")
+)
 js = (ROOT / "script.js").read_text(encoding="utf-8")
-if "prefers-reduced-motion" not in css or "prefers-reduced-motion" not in enhancements:
+
+if "prefers-reduced-motion" not in css:
     raise SystemExit("Accessibility check failed: reduced-motion CSS missing")
 if "prefersReduced" not in js:
     raise SystemExit("Accessibility check failed: reduced-motion JS guard missing")
-if "flow-canvas" not in js:
-    raise SystemExit("Motion check failed: flow canvas missing")
-if "data-count" not in html:
+if "setupFlowCanvas" not in js:
+    raise SystemExit("Motion check failed: vector flow canvas missing")
+if "animateCounter" not in js:
     raise SystemExit("Motion check failed: animated counters missing")
+if "animation-timeline" not in css:
+    raise SystemExit("Cinematic check failed: progressive scroll animation layer missing")
 if "vifalqueiro@gmail.com" not in js:
     raise SystemExit("Lead mailto destination missing")
 
