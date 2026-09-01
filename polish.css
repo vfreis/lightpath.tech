@@ -1,0 +1,50 @@
+/* Final polish: brand consistency + micro-motion */
+.loader-brand{gap:14px}
+.loader-mark{width:31px;height:31px;border:0;transform:none;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg' fill='none'%3E%3Cpath d='M3 27 10.5 16.8l4.5 5.2L21.5 11 31 27' stroke='%23b7ff37' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M6.5 26 12.2 20.2m0 0-.5 4.1m.5-4.1-4 .7M13.5 25 19 18.3m0 0-.6 4.2m.6-4.2-4.1.7M20.5 23.5 26.6 15m0 0-.6 4.3m.6-4.3-4.2.7' stroke='%2370f4d0' stroke-width='1.55' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 27h25' stroke='%23b7ff37' stroke-width='2.1' stroke-linecap='round' opacity='.62'/%3E%3C/svg%3E")}
+.loader-mark:after{display:none}
+.loader-brand>span:last-child{background:linear-gradient(90deg,#fff 0 64%,var(--accent) 64%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.card-symbol{transition:transform .35s ease,text-shadow .35s ease,opacity .35s ease}
+.diagnostic-card:hover .card-symbol{transform:translate3d(0,-5px,0) rotate(-7deg) scale(1.12);opacity:1;text-shadow:0 0 22px rgba(183,255,55,.35)}
+.diagnostic-card li{transition:transform .25s ease,color .25s ease}
+.diagnostic-card:hover li:nth-child(1){transform:translateX(4px)}
+.diagnostic-card:hover li:nth-child(2){transform:translateX(8px)}
+.diagnostic-card:hover li:nth-child(3){transform:translateX(12px)}
+
+.cc-nav button i{transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+.cc-nav button.active i{transform:scale(1.35)}
+.pipe-node{transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+.pipeline-visual:hover .pipe-node{border-color:rgba(183,255,55,.22);box-shadow:0 12px 38px rgba(0,0,0,.18)}
+.pipeline-visual:hover .pipe-node:nth-of-type(1){transform:translateY(5px)}
+.pipeline-visual:hover .pipe-node:nth-of-type(3){transform:translateY(-3px)}
+.pipeline-visual:hover .pipe-node:nth-of-type(5){transform:translateY(-9px)}
+
+.method-step h3,.method-step p,.method-step aside{transition:transform .4s ease,color .35s ease,opacity .35s ease}
+.method-step:not(.is-active) p,.method-step:not(.is-active) aside{opacity:.65}
+.method-step.is-active h3{transform:translateX(6px)}
+.method-step.is-active p{transform:translateX(3px)}
+
+.proof-card{transition:border-color .35s ease,transform .35s ease,box-shadow .35s ease,background .35s ease}
+.proof-card:hover{box-shadow:0 28px 85px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.055);background:linear-gradient(145deg,rgba(17,25,32,.96),rgba(8,14,18,.96))}
+.proof-card strong{transition:color .3s ease,text-shadow .3s ease,transform .3s ease}
+.proof-card:hover strong{transform:translateY(-3px)}
+
+.fit-item i{transition:transform .3s ease,opacity .3s ease,text-shadow .3s ease}
+.fit-item:hover i{transform:translate(5px,-5px);opacity:1;text-shadow:0 0 13px rgba(183,255,55,.35)}
+
+.contact-form input,.contact-form textarea,.contact-form select{transition:border-color .25s ease,box-shadow .25s ease,background .25s ease,transform .25s ease}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{background:#0a1016;transform:translateY(-1px)}
+.linkedin-link span{display:inline-block;transition:transform .3s ease}
+.linkedin-link:hover span{transform:translate(4px,-4px)}
+
+.footer-brand i{display:inline-block;transition:transform .35s ease,text-shadow .35s ease}
+.footer-brand:hover i{transform:translate(7px,-7px);text-shadow:0 0 20px rgba(183,255,55,.3)}
+
+@media(max-width:760px){
+  .diagnostic-card:hover li:nth-child(n){transform:none}
+  .pipeline-visual:hover .pipe-node:nth-of-type(n){transform:none}
+  .method-step.is-active h3,.method-step.is-active p{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .card-symbol,.diagnostic-card li,.pipe-node,.method-step h3,.method-step p,.method-step aside,.proof-card,.proof-card strong,.fit-item i,.contact-form input,.contact-form textarea,.contact-form select,.linkedin-link span,.footer-brand i{transition:none!important;transform:none!important}
+}
