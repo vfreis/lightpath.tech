@@ -10,6 +10,7 @@ required_files = [
     ROOT / "enhancements.css",
     ROOT / "cinematic.css",
     ROOT / "polish.css",
+    ROOT / "mobile-first.css",
     ROOT / "script.js",
     ROOT / "favicon.svg",
     ROOT / ".nojekyll",
@@ -32,6 +33,7 @@ required_strings = [
     'href="favicon.svg"',
     'href="styles.css"',
     'href="enhancements.css"',
+    'href="mobile-first.css"',
     'src="script.js"',
     'class="counter"',
     'class="growth-vector"',
@@ -72,7 +74,7 @@ for ref in checker.local_refs:
 
 css = "\n".join(
     (ROOT / name).read_text(encoding="utf-8")
-    for name in ("styles.css", "enhancements.css", "cinematic.css", "polish.css")
+    for name in ("styles.css", "enhancements.css", "cinematic.css", "polish.css", "mobile-first.css")
 )
 js = (ROOT / "script.js").read_text(encoding="utf-8")
 
@@ -86,6 +88,8 @@ if "animateCounter" not in js:
     raise SystemExit("Motion check failed: animated counters missing")
 if "animation-timeline" not in css:
     raise SystemExit("Cinematic check failed: progressive scroll animation layer missing")
+if "@media (max-width: 900px)" not in (ROOT / "mobile-first.css").read_text(encoding="utf-8"):
+    raise SystemExit("Mobile-first check failed: dedicated small-screen art direction missing")
 if "vifalqueiro@gmail.com" not in js:
     raise SystemExit("Lead mailto destination missing")
 
