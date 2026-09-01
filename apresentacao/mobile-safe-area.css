@@ -1,0 +1,63 @@
+/* LightPath presentation — iOS/mobile navigation dock fix */
+@media (max-width:759px){
+  :root{--mobile-controls-h:66px;--mobile-controls-gap:10px}
+
+  html,body{height:100%;height:100dvh;overflow:hidden}
+  .story{
+    height:100dvh;
+    min-height:100dvh;
+    padding-bottom:calc(var(--mobile-controls-h) + var(--mobile-controls-gap) + env(safe-area-inset-bottom,0px));
+  }
+
+  /* The active scene ends before the navigation dock, so controls never cover content. */
+  .scene{
+    inset:0 0 calc(var(--mobile-controls-h) + var(--mobile-controls-gap) + env(safe-area-inset-bottom,0px)) 0;
+    padding:82px 16px 22px;
+    scroll-padding-bottom:24px;
+    overscroll-behavior-y:contain;
+  }
+  .scene-inner{
+    min-height:calc(100dvh - 82px - var(--mobile-controls-h) - var(--mobile-controls-gap) - env(safe-area-inset-bottom,0px) - 22px);
+  }
+
+  /* Dedicated bottom dock: visually anchored to the app, not floating over the slide. */
+  .story-controls{
+    left:12px;
+    right:12px;
+    bottom:max(8px,env(safe-area-inset-bottom,0px));
+    height:58px;
+    z-index:35;
+    margin:0;
+    padding:6px;
+    border-radius:22px;
+    background:rgba(7,10,14,.96);
+    box-shadow:0 -12px 38px rgba(5,7,11,.58),0 10px 34px rgba(0,0,0,.28);
+    backdrop-filter:blur(18px) saturate(130%);
+    -webkit-backdrop-filter:blur(18px) saturate(130%);
+  }
+  .story-controls button{width:46px;height:46px}
+
+  /* Fade separates scene content from the fixed navigation zone. */
+  .story:after{
+    content:'';
+    position:fixed;
+    z-index:29;
+    pointer-events:none;
+    left:0;
+    right:0;
+    bottom:0;
+    height:calc(var(--mobile-controls-h) + 30px + env(safe-area-inset-bottom,0px));
+    background:linear-gradient(to bottom,transparent,rgba(5,7,11,.82) 34%,#05070b 72%);
+  }
+
+  /* Taller content, such as the architecture scene, gets a clean final breathing area. */
+  .architecture,.diagnostic-app,.ai-product,.method-app,.proof-meaning{margin-bottom:8px}
+}
+
+/* Older iOS fallback where dynamic viewport units are unavailable. */
+@supports not (height:100dvh){
+  @media (max-width:759px){
+    .story{height:100svh;min-height:100svh}
+    .scene-inner{min-height:calc(100svh - 180px)}
+  }
+}
