@@ -1,6 +1,5 @@
 from pathlib import Path
 from html.parser import HTMLParser
-import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
@@ -8,7 +7,9 @@ INDEX = ROOT / "index.html"
 required_files = [
     INDEX,
     ROOT / "styles.css",
+    ROOT / "enhancements.css",
     ROOT / "script.js",
+    ROOT / "favicon.svg",
     ROOT / ".nojekyll",
     ROOT / "assets" / "social-card.svg",
 ]
@@ -21,13 +22,16 @@ html = INDEX.read_text(encoding="utf-8")
 required_strings = [
     "LightPath Tecnologia",
     "Menos operação manual.",
-    "Mapear uma oportunidade",
+    "Diagnosticar uma oportunidade",
     'id="solucoes"',
     'id="metodo"',
     'id="provas"',
     'id="contato"',
     'href="styles.css"',
+    'href="enhancements.css"',
+    'href="favicon.svg"',
     'src="script.js"',
+    'class="counter"',
 ]
 for value in required_strings:
     if value not in html:
@@ -62,11 +66,16 @@ for ref in checker.local_refs:
         raise SystemExit(f"Broken local reference in index.html: {ref}")
 
 css = (ROOT / "styles.css").read_text(encoding="utf-8")
+enhancements = (ROOT / "enhancements.css").read_text(encoding="utf-8")
 js = (ROOT / "script.js").read_text(encoding="utf-8")
-if "prefers-reduced-motion" not in css:
+if "prefers-reduced-motion" not in css or "prefers-reduced-motion" not in enhancements:
     raise SystemExit("Accessibility check failed: reduced-motion CSS missing")
 if "prefersReduced" not in js:
     raise SystemExit("Accessibility check failed: reduced-motion JS guard missing")
+if "flow-canvas" not in js:
+    raise SystemExit("Motion check failed: flow canvas missing")
+if "data-count" not in html:
+    raise SystemExit("Motion check failed: animated counters missing")
 if "vifalqueiro@gmail.com" not in js:
     raise SystemExit("Lead mailto destination missing")
 
