@@ -10,6 +10,95 @@
 
   document.body.classList.add('story-engine-enabled');
 
+  /* Copy clarity layer — explain the business before the stack. */
+  document.title = 'LightPath Tecnologia — Dados, IA, Automação e Growth Systems';
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) metaDescription.content = 'Construímos e conectamos dados, sistemas, IA e funis comerciais para reduzir trabalho manual, melhorar conversão e criar operações que crescem com controle.';
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription) ogDescription.content = 'Do clique ao caixa, do dado à decisão, da rotina ao sistema e da IA ao produto. Tecnologia aplicada ao gargalo que move resultado.';
+
+  const clarityStyles = document.createElement('style');
+  clarityStyles.textContent = `
+    .clarity-paths{position:relative;padding:72px 0 82px;overflow:hidden;background:linear-gradient(180deg,rgba(5,7,11,.94),rgba(8,12,16,.82));border-bottom:1px solid rgba(255,255,255,.07)}
+    .clarity-paths:before{content:"";position:absolute;inset:-30% -20%;background:radial-gradient(circle at 72% 35%,rgba(183,255,55,.07),transparent 29%),radial-gradient(circle at 15% 75%,rgba(112,244,208,.045),transparent 28%);pointer-events:none}
+    .clarity-intro{position:relative;z-index:2;display:grid;gap:14px;margin-bottom:26px}.clarity-intro small{font:700 9px/1 "Manrope",sans-serif;letter-spacing:.16em;color:#70f4d0;text-transform:uppercase}.clarity-intro h2{margin:0;font:600 clamp(36px,10vw,60px)/.93 "Space Grotesk",sans-serif;letter-spacing:-.055em;max-width:950px}.clarity-intro h2 em{font-style:normal;color:#b7ff37}.clarity-intro p{margin:0;max-width:650px;color:#98a4af;font-size:13px;line-height:1.65}
+    .clarity-grid{position:relative;z-index:2;display:grid;gap:8px}.clarity-card{position:relative;min-height:128px;padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:linear-gradient(145deg,rgba(16,22,30,.84),rgba(8,12,17,.9));overflow:hidden;transition:border-color .28s ease,transform .28s ease,background .28s ease}.clarity-card:after{content:"↗";position:absolute;right:16px;top:15px;color:#b7ff37;font-size:14px}.clarity-card small{display:block;color:#70f4d0;font:700 7px/1 "Manrope",sans-serif;letter-spacing:.13em;margin-bottom:13px}.clarity-card strong{display:block;font:600 25px/.94 "Space Grotesk",sans-serif;letter-spacing:-.045em;text-transform:uppercase;max-width:86%}.clarity-card p{margin:11px 0 0;color:#84909c;font-size:10px;line-height:1.5;max-width:90%}.clarity-card:hover{border-color:rgba(183,255,55,.28);background:linear-gradient(145deg,rgba(183,255,55,.065),rgba(8,12,17,.92));transform:translateY(-3px)}
+    .diagnostic-card-growth{border-color:rgba(183,255,55,.15)!important}.diagnostic-card-growth .card-symbol{color:#b7ff37}.diagnostic-card-growth:after{content:"REVENUE";position:absolute;right:22px;bottom:62px;color:transparent;-webkit-text-stroke:1px rgba(183,255,55,.08);font:700 48px/.8 "Space Grotesk",sans-serif;letter-spacing:-.07em;pointer-events:none}
+    @media(min-width:760px){.clarity-paths{padding:105px 0}.clarity-intro{grid-template-columns:1fr .72fr;align-items:end;margin-bottom:36px}.clarity-intro p{justify-self:end;font-size:14px}.clarity-grid{grid-template-columns:repeat(4,1fr);gap:10px}.clarity-card{min-height:230px;padding:23px}.clarity-card strong{font-size:clamp(25px,2.2vw,36px)}.clarity-card p{margin-top:18px;font-size:11px}.clarity-card:nth-child(2),.clarity-card:nth-child(4){transform:translateY(24px)}.clarity-card:nth-child(2):hover,.clarity-card:nth-child(4):hover{transform:translateY(20px)}}
+    @media(max-width:759px){.clarity-paths{padding:64px 0 72px}.clarity-grid{grid-template-columns:1fr 1fr}.clarity-card{min-height:160px;padding:15px}.clarity-card strong{font-size:22px}.clarity-card p{font-size:9px}.diagnostic-card-growth:after{font-size:38px;right:14px}}
+    @media(max-width:390px){.clarity-grid{grid-template-columns:1fr}.clarity-card{min-height:132px}}
+  `;
+  document.head.appendChild(clarityStyles);
+
+  const eyebrow = $('.hero .eyebrow');
+  if (eyebrow) eyebrow.innerHTML = '<span class="eyebrow-dot"></span> Dados · IA · Automação · Growth Systems';
+  const heroParagraph = $('.hero-bottom p');
+  if (heroParagraph) heroParagraph.innerHTML = 'Conectamos <strong>dados, sistemas, IA e funis comerciais</strong> para reduzir trabalho manual, melhorar conversão e criar operações que crescem com controle.';
+  const heroPrimary = $('.hero .button-primary span');
+  if (heroPrimary) heroPrimary.textContent = 'Encontrar oportunidade de ganho';
+  const navCtaText = $('.nav-cta');
+  if (navCtaText) navCtaText.innerHTML = 'Encontrar oportunidade <span>↗</span>';
+
+  const signalStrip = $('.signal-strip');
+  if (signalStrip && !$('.clarity-paths')) {
+    const clarity = document.createElement('section');
+    clarity.className = 'clarity-paths section';
+    clarity.setAttribute('aria-labelledby', 'clarity-title');
+    clarity.innerHTML = `
+      <div class="shell">
+        <div class="clarity-intro">
+          <div><small>Onde a LightPath entra?</small><h2 id="clarity-title">Do gargalo ao <em>resultado.</em></h2></div>
+          <p>Construímos e conectamos os sistemas que movem uma empresa — da aquisição à operação, do dado à decisão.</p>
+        </div>
+        <div class="clarity-grid">
+          <a class="clarity-card" href="#growth"><small>RECEITA</small><strong>Do clique<br>ao caixa.</strong><p>Mídia, landing, checkout, tracking, CRM e retenção trabalhando juntos.</p></a>
+          <a class="clarity-card" href="#solucoes"><small>DECISÃO</small><strong>Do dado<br>à decisão.</strong><p>Integração, pipelines, BI e analytics para enxergar e agir mais rápido.</p></a>
+          <a class="clarity-card" href="#solucoes"><small>OPERAÇÃO</small><strong>Da rotina<br>ao sistema.</strong><p>Automação, APIs, integrações e software para tirar trabalho manual do caminho.</p></a>
+          <a class="clarity-card" href="#solucoes"><small>INOVAÇÃO</small><strong>Da IA<br>ao produto.</strong><p>Agentes, RAG, copilots e aplicações de IA conectadas ao trabalho real.</p></a>
+        </div>
+      </div>`;
+    signalStrip.insertAdjacentElement('afterend', clarity);
+  }
+
+  const problemTitle = $('.problem-sticky h2');
+  if (problemTitle) problemTitle.innerHTML = 'O problema raramente é falta de tecnologia. É <em>valor travado entre as peças.</em>';
+  const problemCopy = $('.problem-sticky p');
+  if (problemCopy) problemCopy.textContent = 'Uma campanha sem tracking, um processo manual, dados espalhados ou IA sem contexto têm algo em comum: dinheiro, tempo e velocidade ficam pelo caminho.';
+
+  const problemCards = $('.problem-cards');
+  if (problemCards && !$('.diagnostic-card-growth')) {
+    const decisionCard = [...problemCards.querySelectorAll('.diagnostic-card')].find(card => card.textContent.includes('Dados só valem'));
+    if (decisionCard) {
+      const index = $('.card-index', decisionCard);
+      if (index) index.textContent = '05 / DECISÃO';
+    }
+    const growthCard = document.createElement('article');
+    growthCard.className = 'diagnostic-card diagnostic-card-growth reveal tilt-card';
+    growthCard.innerHTML = '<span class="card-index">04 / GROWTH</span><div class="card-symbol">↗</div><h3>Se você não sabe onde o funil vaza, otimiza no escuro.</h3><p>Conectamos aquisição, experiência, checkout e dados para descobrir o que realmente aumenta receita.</p><ul><li>Tráfego pago e estratégia de aquisição</li><li>Landing, quiz, oferta e checkout</li><li>Tracking, CRO, CRM e analytics</li></ul><div class="card-footer"><span>Growth Systems</span><i>↗</i></div>';
+    problemCards.insertBefore(growthCard, decisionCard || null);
+  }
+
+  const buildTitle = $('.build-heading h2');
+  if (buildTitle) buildTitle.innerHTML = 'Do gargalo ao <em>sistema que trabalha.</em>';
+  const buildCopy = $('.build-heading p');
+  if (buildCopy) buildCopy.textContent = 'Podemos melhorar uma peça — tracking, checkout, automação, dados — ou conectar a cadeia inteira. Desenhamos, construímos, integramos e medimos no fluxo real da empresa.';
+
+  const contactTitle = $('.contact-copy h2');
+  if (contactTitle) contactTitle.innerHTML = 'Onde sua empresa perde <em>tempo, conversão ou margem?</em>';
+  const contactCopy = $('.contact-copy>p');
+  if (contactCopy) contactCopy.textContent = 'Mostre onde dói. Nós ajudamos a descobrir onde está o maior ganho antes de propor tecnologia.';
+  const submitText = $('.submit-button span');
+  if (submitText) submitText.textContent = 'Mapear meu gargalo';
+
+  const objectiveSelect = $('#lead-form select[name="objective"]');
+  if (objectiveSelect && ![...objectiveSelect.options].some(option => option.textContent.includes('funil'))) {
+    const option = document.createElement('option');
+    option.textContent = 'Otimizar funil / Growth System';
+    option.value = 'Otimizar funil / Growth System';
+    const last = objectiveSelect.lastElementChild;
+    objectiveSelect.insertBefore(option, last || null);
+  }
+
   const retireLegacyField = () => {
     const legacy = $('.flow-canvas');
     if (!legacy) return;
@@ -24,7 +113,7 @@
   const heroDemo = $('.hero .text-link');
   if (heroDemo) {
     heroDemo.href = 'apresentacao/';
-    heroDemo.innerHTML = 'Abrir apresentação interativa <span>↗</span>';
+    heroDemo.innerHTML = 'Ver a LightPath em 2 minutos <span>↗</span>';
   }
 
   const nav = $('.nav');
@@ -43,62 +132,62 @@
     growth.id = 'growth';
     growth.innerHTML = `
       <div class="shell growth-shell">
-        <div class="section-kicker reveal"><span>GROWTH</span> Revenue architecture</div>
+        <div class="section-kicker reveal"><span>GROWTH</span> Engenharia de crescimento</div>
         <div class="growth-heading reveal">
           <div>
-            <span class="growth-overline">AQUISIÇÃO → CONVERSÃO → DADOS → RETENÇÃO</span>
-            <h2>Da mídia ao caixa.<br><em>Um sistema de receita.</em></h2>
+            <span class="growth-overline">ANÚNCIO → LANDING → CHECKOUT → PAGAMENTO → RETENÇÃO</span>
+            <h2>Do clique ao caixa.<br><em>Onde o valor vaza?</em></h2>
           </div>
-          <p>Não tratamos tráfego, site, checkout, tracking e operação como peças isoladas. Projetamos o <strong>sistema comercial completo</strong> para que cada investimento gere sinal, cada sinal gere decisão e cada venda volte como aprendizado para o funil.</p>
+          <p>Você investe para trazer uma pessoa. Entre o anúncio e o dinheiro no caixa, muita coisa pode quebrar. <strong>Nós conectamos e medimos o caminho inteiro</strong> para descobrir o que otimizar primeiro.</p>
         </div>
 
         <div class="growth-console reveal">
-          <div class="growth-console-head"><span>LIGHTPATH / REVENUE SYSTEM</span><span class="growth-live"><i></i> SIGNAL LIVE</span></div>
+          <div class="growth-console-head"><span>LIGHTPATH / REVENUE SYSTEM</span><span class="growth-live"><i></i> CAMINHO ATIVO</span></div>
           <div class="growth-machine" aria-label="Arquitetura comercial integrada">
-            <button class="growth-node is-active" type="button" data-growth="acquisition"><small>01</small><b>PAID MEDIA</b><span>Meta · Google · creative</span></button>
+            <button class="growth-node is-active" type="button" data-growth="acquisition"><small>01</small><b>MÍDIA</b><span>Meta · Google · criativos</span></button>
             <i class="growth-link"><span></span></i>
-            <button class="growth-node" type="button" data-growth="conversion"><small>02</small><b>LANDING / QUIZ</b><span>message · UX · routing</span></button>
+            <button class="growth-node" type="button" data-growth="conversion"><small>02</small><b>LANDING / QUIZ</b><span>mensagem · UX · segmentação</span></button>
             <i class="growth-link"><span></span></i>
-            <button class="growth-node" type="button" data-growth="checkout"><small>03</small><b>CHECKOUT</b><span>offer · payment · recovery</span></button>
+            <button class="growth-node" type="button" data-growth="checkout"><small>03</small><b>CHECKOUT</b><span>oferta · pagamento · recovery</span></button>
             <i class="growth-link"><span></span></i>
-            <button class="growth-node" type="button" data-growth="truth"><small>04</small><b>ORDER TRUTH</b><span>commerce · payment · CRM</span></button>
+            <button class="growth-node" type="button" data-growth="truth"><small>04</small><b>PEDIDO</b><span>venda real · pagamento · CRM</span></button>
             <i class="growth-link"><span></span></i>
-            <button class="growth-node" type="button" data-growth="retention"><small>05</small><b>DELIVERY</b><span>members · lifecycle · support</span></button>
+            <button class="growth-node" type="button" data-growth="retention"><small>05</small><b>RETENÇÃO</b><span>members · CRM · lifecycle</span></button>
           </div>
-          <div class="growth-data-rail"><span>DATA & ATTRIBUTION LAYER</span><b>UTM</b><b>event_id</b><b>Meta / CAPI</b><b>GA4</b><b>webhooks</b><b>reconciliation</b></div>
+          <div class="growth-data-rail"><span>RASTREAMENTO — O QUE LIGA A ORIGEM AO RESULTADO</span><b>UTM</b><b>event_id</b><b>Meta / CAPI</b><b>GA4</b><b>webhooks</b><b>reconciliação</b></div>
           <div class="growth-insight" id="growth-insight">
-            <div><small>LENTE ATIVA</small><strong id="growth-insight-title">Aquisição com feedback de negócio.</strong></div>
-            <p id="growth-insight-copy">Criativo e mídia são avaliados até o pedido real — não apenas por clique, LPV ou evento incompleto.</p>
-            <span id="growth-insight-kpi">Decisão → CAC · receita · qualidade do tráfego</span>
+            <div><small>O QUE PERGUNTAMOS</small><strong id="growth-insight-title">O anúncio trouxe comprador — ou só clique?</strong></div>
+            <p id="growth-insight-copy">Seguimos o caminho até o pedido real para separar tráfego barato de aquisição que gera receita.</p>
+            <span id="growth-insight-kpi">Medimos → CAC · receita · qualidade do tráfego</span>
           </div>
         </div>
 
         <div class="growth-case reveal">
           <div class="growth-case-copy">
-            <span class="growth-case-label">BUSINESS CASE · DIGITAL COMMERCE / HEALTH</span>
-            <h3>Quando o funil inteiro vira um produto de engenharia.</h3>
-            <p>Ecossistema real combinando mídia paga, landing/quiz, checkout externo, verdade comercial, acesso ao produto, tracking e analytics. O desafio deixa de ser “rodar anúncios” e passa a ser <strong>saber exatamente onde o valor entra, onde vaza e qual mudança merece o próximo real investido.</strong></p>
+            <span class="growth-case-label">BUSINESS CASE · DIGITAL COMMERCE</span>
+            <h3>Quando o funil deixa de ser um conjunto de ferramentas e vira um sistema.</h3>
+            <p>Mídia, landing/quiz, checkout, pagamento, acesso ao produto e analytics conectados. Assim fica possível enxergar <strong>onde a receita entra, onde ela vaza e qual mudança merece o próximo investimento.</strong></p>
           </div>
           <div class="growth-case-grid">
-            <article><span>ANTES</span><b>Sinais desconectados</b><p>Plataformas divergentes, eventos incompletos e pouca confiança para diagnosticar mídia, landing ou checkout.</p></article>
-            <article><span>SISTEMA</span><b>Reconciliação ponta a ponta</b><p>Pedido, sessão, UTM, event_id, checkout, webhooks e destinos analíticos conectados numa arquitetura observável.</p></article>
-            <article><span>VALOR</span><b>Growth com engenharia</b><p>Gates de decisão por criativo, landing, checkout e oferta; mídia passa a aprender com resultado comercial real.</p></article>
+            <article><span>ANTES</span><b>Cada ferramenta conta uma história.</b><p>Métricas divergentes e pouca confiança para saber se o problema está no anúncio, página, checkout ou oferta.</p></article>
+            <article><span>SISTEMA</span><b>Um caminho rastreável.</b><p>Sessão, campanha, checkout, pedido e eventos conectados para reconstruir a jornada comercial de ponta a ponta.</p></article>
+            <article><span>VALOR</span><b>O próximo teste deixa de ser chute.</b><p>Decisões de mídia, criativo, landing, checkout e oferta passam a usar resultado comercial real.</p></article>
           </div>
         </div>
 
         <div class="growth-capabilities reveal">
-          <span>Estratégia de mídia</span><span>Arquitetura de funil</span><span>Tracking & CAPI</span><span>Attribution</span><span>CRO</span><span>CRM & lifecycle</span><span>Checkout systems</span><span>Growth analytics</span>
+          <span>Tráfego pago</span><span>Criativos & testes</span><span>Landing & quiz</span><span>Checkout & oferta</span><span>Tracking & CAPI</span><span>CRO</span><span>CRM & lifecycle</span><span>Growth analytics</span>
         </div>
       </div>`;
     methodSection.parentNode.insertBefore(growth, methodSection);
   }
 
   const growthData = {
-    acquisition: ['Aquisição com feedback de negócio.', 'Criativo e mídia são avaliados até o pedido real — não apenas por clique, LPV ou evento incompleto.', 'Decisão → CAC · receita · qualidade do tráfego'],
-    conversion: ['Conversão tratada como sistema.', 'Mensagem, UX, quiz, segmentação e roteamento são medidos por avanço real no funil e não por opinião estética.', 'Decisão → LPV→checkout · intenção · abandono'],
-    checkout: ['Checkout como infraestrutura de receita.', 'Oferta, pagamento, recovery e eventos de fundo de funil precisam funcionar juntos e continuar rastreáveis.', 'Decisão → checkout→payment · aprovação · perda'],
-    truth: ['Uma verdade comercial confiável.', 'Pedido e pagamento são reconciliados com sessão, campanha e eventos para impedir que telemetria incompleta governe a mídia.', 'Decisão → purchase real · deduplicação · atribuição'],
-    retention: ['Receita continua depois da compra.', 'Entitlement, members, lifecycle e suporte fecham o loop entre aquisição, entrega e retenção.', 'Decisão → ativação · retenção · LTV']
+    acquisition: ['O anúncio trouxe comprador — ou só clique?', 'Seguimos o caminho até o pedido real para separar tráfego barato de aquisição que gera receita.', 'Medimos → CAC · receita · qualidade do tráfego'],
+    conversion: ['A pessoa chegou. Por que não avançou?', 'Mensagem, UX, quiz e segmentação são avaliados pelo avanço real no funil — não por preferência estética.', 'Medimos → visita→checkout · intenção · abandono'],
+    checkout: ['Ela quis comprar. Onde a venda morreu?', 'Oferta, pagamento, recuperação e tracking precisam funcionar como uma única etapa comercial.', 'Medimos → checkout→pagamento · aprovação · perda'],
+    truth: ['Qual venda aconteceu de verdade?', 'Reconciliamos pedido e pagamento com sessão e campanha para não deixar evento incompleto governar a mídia.', 'Medimos → compra real · deduplicação · atribuição'],
+    retention: ['A receita não termina na compra.', 'Acesso, members, CRM, lifecycle e suporte fecham o loop entre aquisição, entrega e retenção.', 'Medimos → ativação · retenção · LTV']
   };
   $$('.growth-node').forEach(button => button.addEventListener('click', () => {
     $$('.growth-node').forEach(node => node.classList.toggle('is-active', node === button));
@@ -114,12 +203,23 @@
     const demo = document.createElement('a');
     demo.className = 'presentation-demo-card reveal';
     demo.href = 'apresentacao/';
-    demo.innerHTML = '<span><small>INTERACTIVE SALES APP</small><strong>Veja a LightPath funcionando como uma experiência.</strong><p>Abra a apresentação interativa — arquitetura, impacto, growth e diagnóstico em uma narrativa clicável.</p></span><i>ABRIR DEMO ↗</i>';
+    demo.innerHTML = '<span><small>APRESENTAÇÃO INTERATIVA</small><strong>Veja como pensamos um gargalo até virar resultado.</strong><p>Uma experiência clicável de impacto, arquitetura, growth e diagnóstico — sem deck de 40 slides.</p></span><i>ABRIR ↗</i>';
     commandCenterForDemo.insertAdjacentElement('afterend', demo);
+  }
+
+  const scannerOptionsHost = $('.scanner-options');
+  if (scannerOptionsHost && !scannerOptionsHost.querySelector('[data-signal="receita"]')) {
+    const revenueOption = document.createElement('button');
+    revenueOption.className = 'scanner-option';
+    revenueOption.type = 'button';
+    revenueOption.dataset.signal = 'receita';
+    revenueOption.innerHTML = '<small>06</small><strong>Receita / conversão</strong>';
+    scannerOptionsHost.appendChild(revenueOption);
   }
 
   const stageMap = [
     { selector: '.hero', key: 'chaos', label: 'POTENCIAL' },
+    { selector: '.clarity-paths', key: 'paths', label: 'CAMINHOS' },
     { selector: '.problem', key: 'signal', label: 'GARGALO' },
     { selector: '.build-section', key: 'structure', label: 'SISTEMA' },
     { selector: '.business-cases', key: 'measure', label: 'IMPACTO' },
@@ -180,7 +280,7 @@
     const reset = p => {
       const key = activeStage?.key || 'chaos';
       if (key === 'final' || key === 'growth') { p.x = Math.random() * width * .75; p.y = height + Math.random() * 80; }
-      else if (key === 'structure' || key === 'flow' || key === 'revenue') { p.x = -30 - Math.random() * 100; p.y = Math.random() * height; }
+      else if (key === 'structure' || key === 'flow' || key === 'revenue' || key === 'paths') { p.x = -30 - Math.random() * 100; p.y = Math.random() * height; }
       else { p.x = Math.random() * width; p.y = Math.random() * height; }
       p.px = p.x; p.py = p.y; p.age = 0; p.seed = Math.random() * 20;
     };
@@ -190,6 +290,7 @@
       const nx = p.x / Math.max(width, 1), ny = p.y / Math.max(height, 1);
       let angle = -1.1, boost = 1;
       if (key === 'chaos') { angle = -1.05 + Math.sin(nx * 8 + time * .00045 + p.seed) * .52 + Math.cos(ny * 5 - time * .00025) * .22; boost = .75; }
+      else if (key === 'paths') { angle = -.48 + Math.sin(p.seed + time * .00025) * .1; boost = .96; }
       else if (key === 'signal') { const lane = Math.round(nx * 4) / 4; angle = -1.16 + (lane - nx) * .88 + Math.sin(time * .0004 + p.seed) * .12; }
       else if (key === 'structure') { angle = -.18 + Math.sin(ny * 6 + p.seed) * .07; boost = 1.08; }
       else if (key === 'measure') { angle = -.7 + Math.sin(nx * 5 + p.seed) * .12; boost = 1.16; }
@@ -235,7 +336,7 @@
   if (spinePath) { spinePath.style.strokeDasharray = `${spineLength}`; spinePath.style.strokeDashoffset = `${spineLength}`; }
 
   const kineticLabels = new Map([
-    ['problem', 'GARGALO'], ['build-section', 'SISTEMA'], ['business-cases', 'IMPACTO'], ['growth-systems', 'RECEITA'], ['method', 'FLUXO'], ['proof-section', 'RESULTADO'], ['fit-section', 'DECISÃO'], ['scanner-section', 'DIAGNÓSTICO'], ['contact-section', 'ESCALA']
+    ['clarity-paths', 'CAMINHOS'], ['problem', 'GARGALO'], ['build-section', 'SISTEMA'], ['business-cases', 'IMPACTO'], ['growth-systems', 'RECEITA'], ['method', 'FLUXO'], ['proof-section', 'RESULTADO'], ['fit-section', 'DECISÃO'], ['scanner-section', 'DIAGNÓSTICO'], ['contact-section', 'ESCALA']
   ]);
   $$('.section').forEach(section => {
     const classKey = [...kineticLabels.keys()].find(key => section.classList.contains(key));
@@ -279,7 +380,8 @@
     custo: { title: 'Data + automação orientados a margem', copy: 'Identificamos onde pessoas, compute ou retrabalho estão crescendo mais rápido que o resultado e desenhamos a menor arquitetura que quebra essa relação.', kpis: ['custo / transação', 'retrabalho', 'runtime'], objective: 'Estruturar dados / Data Platform' },
     risco: { title: 'Observabilidade + guardrails', copy: 'Transformamos dependência de memória, erro manual e baixa rastreabilidade em controles, logs, validações e supervisão onde realmente importa.', kpis: ['erro', 'incidentes', 'rastreabilidade'], objective: 'Desenvolver uma solução sob medida' },
     capacidade: { title: 'Arquitetura para escala', copy: 'Quando o volume cresce mais rápido que a operação, conectamos dados, software e automação para absorver crescimento sem linearizar esforço humano.', kpis: ['volume', 'throughput', 'custo marginal'], objective: 'Estruturar dados / Data Platform' },
-    decisao: { title: 'Analytics + IA aplicada', copy: 'Reduzimos a distância entre o evento e a decisão com dados confiáveis, alertas, modelos e interfaces orientadas ao próximo movimento.', kpis: ['latência decisória', 'qualidade', 'forecast'], objective: 'Analytics / Data Science' }
+    decisao: { title: 'Analytics + IA aplicada', copy: 'Reduzimos a distância entre o evento e a decisão com dados confiáveis, alertas, modelos e interfaces orientadas ao próximo movimento.', kpis: ['latência decisória', 'qualidade', 'forecast'], objective: 'Analytics / Data Science' },
+    receita: { title: 'Growth System / funil comercial', copy: 'Seguimos a jornada do anúncio ao pagamento para descobrir onde conversão e receita estão vazando — e qual teste deve vir primeiro.', kpis: ['CAC', 'conversão', 'receita por visita'], objective: 'Otimizar funil / Growth System' }
   };
   const scanner = $('.scanner-section');
   if (scanner) {
