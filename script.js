@@ -2,8 +2,9 @@
   'use strict';
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.matchMedia('(max-width: 760px)').matches;
+  const isMobile = window.matchMedia('(max-width: 900px)').matches;
   const finePointer = window.matchMedia('(pointer:fine)').matches;
+  const useSmoothScroll = !isMobile && finePointer;
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 
@@ -20,9 +21,9 @@
     if (!loader || loaderDone) return;
     loaderDone = true;
     if (window.gsap && !prefersReduced) {
-      gsap.to(loaderLine, { width: '100%', duration: .2, ease: 'power2.out' });
-      gsap.to(loaderCount, { innerText: 100, snap: { innerText: 1 }, duration: .2 });
-      gsap.to(loader, { yPercent: -100, duration: .82, delay: .22, ease: 'power4.inOut', onComplete: () => loader.remove() });
+      gsap.to(loaderLine, { width: '100%', duration: isMobile ? .14 : .2, ease: 'power2.out' });
+      gsap.to(loaderCount, { innerText: 100, snap: { innerText: 1 }, duration: isMobile ? .14 : .2 });
+      gsap.to(loader, { yPercent: -100, duration: isMobile ? .58 : .82, delay: isMobile ? .12 : .22, ease: 'power4.inOut', onComplete: () => loader.remove() });
     } else {
       loader.remove();
     }
@@ -33,9 +34,9 @@
       loadValue = Math.min(93, loadValue + Math.ceil(Math.random() * 10));
       if (loaderLine) loaderLine.style.width = `${loadValue}%`;
       if (loaderCount) loaderCount.textContent = String(loadValue).padStart(2, '0');
-    }, 70);
+    }, isMobile ? 55 : 70);
     window.addEventListener('load', () => { clearInterval(timer); finishLoader(); }, { once: true });
-    setTimeout(() => { clearInterval(timer); finishLoader(); }, 1800);
+    setTimeout(() => { clearInterval(timer); finishLoader(); }, isMobile ? 1100 : 1800);
   } else if (loader) {
     loader.remove();
   }
@@ -78,7 +79,7 @@
   }
 
   let lenis = null;
-  if (!prefersReduced && window.Lenis) {
+  if (!prefersReduced && window.Lenis && useSmoothScroll) {
     lenis = new Lenis({ duration: 1.02, smoothWheel: true, touchMultiplier: 1.05 });
     lenis.on('scroll', event => {
       if (Number.isFinite(event.velocity)) scrollVelocity = event.velocity * 18;
@@ -154,7 +155,7 @@
     if (parent) parent.classList.add('is-counting');
     gsap.to(state, {
       value: target,
-      duration: 1.65,
+      duration: isMobile ? 1.15 : 1.65,
       ease: 'power3.out',
       onUpdate: () => { counter.textContent = `${prefix}${Math.round(state.value)}${suffix}`; },
       onComplete: () => {
@@ -181,10 +182,13 @@
   if (window.gsap && window.ScrollTrigger && !prefersReduced) {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.to('.title-line > span', { y: 0, duration: 1.18, stagger: .085, ease: 'power4.out', delay: .62 });
-    gsap.fromTo('.hero-reveal', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .86, stagger: .11, ease: 'power3.out', delay: .82 });
-    gsap.to('.hero-glow-a', { xPercent: -20, yPercent: 16, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
-    gsap.to('.hero-system', { y: 72, rotateZ: 1.15, scale: .985, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.to('.title-line > span', { y: 0, duration: isMobile ? .82 : 1.18, stagger: .085, ease: 'power4.out', delay: isMobile ? .28 : .62 });
+    gsap.fromTo('.hero-reveal', { opacity: 0, y: isMobile ? 15 : 24 }, { opacity: 1, y: 0, duration: isMobile ? .62 : .86, stagger: .11, ease: 'power3.out', delay: isMobile ? .42 : .82 });
+
+    if (!isMobile) {
+      gsap.to('.hero-glow-a', { xPercent: -20, yPercent: 16, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+      gsap.to('.hero-system', { y: 72, rotateZ: 1.15, scale: .985, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    }
 
     $$('.section').forEach(section => {
       const intro = [
@@ -195,62 +199,66 @@
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%',
+          start: isMobile ? 'top 88%' : 'top 80%',
           once: true,
           onEnter: () => section.classList.add('is-flow-active')
         }
       });
-      if (intro[0]) tl.fromTo(intro[0], { opacity: 0, x: -22 }, { opacity: 1, x: 0, duration: .58, ease: 'power3.out' }, 0);
-      if (intro[1]) tl.fromTo(intro[1], { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: .92, ease: 'power4.out' }, .08);
-      if (intro[2]) tl.fromTo(intro[2], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .72, ease: 'power3.out' }, .26);
+      if (intro[0]) tl.fromTo(intro[0], { opacity: 0, x: isMobile ? -10 : -22 }, { opacity: 1, x: 0, duration: isMobile ? .42 : .58, ease: 'power3.out' }, 0);
+      if (intro[1]) tl.fromTo(intro[1], { opacity: 0, y: isMobile ? 28 : 54 }, { opacity: 1, y: 0, duration: isMobile ? .62 : .92, ease: 'power4.out' }, .08);
+      if (intro[2]) tl.fromTo(intro[2], { opacity: 0, y: isMobile ? 14 : 24 }, { opacity: 1, y: 0, duration: isMobile ? .5 : .72, ease: 'power3.out' }, .22);
     });
 
     $$('.diagnostic-card').forEach((card, index) => {
       gsap.fromTo(card,
-        { opacity: 0, y: 62, x: index % 2 ? 18 : -18, scale: .975 },
-        { opacity: 1, y: 0, x: 0, scale: 1, duration: .92, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 86%', once: true } }
+        { opacity: 0, y: isMobile ? 28 : 62, x: isMobile ? 0 : (index % 2 ? 18 : -18), scale: isMobile ? .992 : .975 },
+        { opacity: 1, y: 0, x: 0, scale: 1, duration: isMobile ? .58 : .92, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%', once: true } }
       );
     });
 
     const commandCenter = $('.command-center');
     if (commandCenter) {
-      gsap.fromTo(commandCenter, { opacity: 0, y: 60, scale: .972 }, { opacity: 1, y: 0, scale: 1, duration: 1.05, ease: 'power3.out', scrollTrigger: { trigger: commandCenter, start: 'top 84%', once: true } });
+      gsap.fromTo(commandCenter, { opacity: 0, y: isMobile ? 30 : 60, scale: isMobile ? .992 : .972 }, { opacity: 1, y: 0, scale: 1, duration: isMobile ? .68 : 1.05, ease: 'power3.out', scrollTrigger: { trigger: commandCenter, start: 'top 86%', once: true } });
     }
 
-    gsap.to('.method-rail span', { height: '100%', ease: 'none', scrollTrigger: { trigger: '.method-stage', start: 'top 66%', end: 'bottom 55%', scrub: true } });
+    gsap.to('.method-rail span', { height: '100%', ease: 'none', scrollTrigger: { trigger: '.method-stage', start: 'top 72%', end: 'bottom 58%', scrub: true } });
     $$('.method-step').forEach((step, index) => {
-      gsap.fromTo(step, { opacity: .22, x: index % 2 ? 30 : -18 }, {
-        opacity: 1, x: 0, duration: .72, ease: 'power2.out',
-        scrollTrigger: { trigger: step, start: 'top 76%', end: 'top 46%', scrub: .5 }
-      });
-      ScrollTrigger.create({ trigger: step, start: 'top 65%', end: 'bottom 35%', toggleClass: { targets: step, className: 'is-active' } });
+      if (!isMobile) {
+        gsap.fromTo(step, { opacity: .22, x: index % 2 ? 30 : -18 }, {
+          opacity: 1, x: 0, duration: .72, ease: 'power2.out',
+          scrollTrigger: { trigger: step, start: 'top 76%', end: 'top 46%', scrub: .5 }
+        });
+      }
+      ScrollTrigger.create({ trigger: step, start: 'top 68%', end: 'bottom 35%', toggleClass: { targets: step, className: 'is-active' } });
     });
 
     $$('.proof-card').forEach((card, index) => {
       gsap.fromTo(card,
-        { opacity: 0, y: 46 + (index % 2) * 18, scale: .982 },
-        { opacity: 1, y: 0, scale: 1, duration: .88, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 87%', once: true } }
+        { opacity: 0, y: isMobile ? 24 : 46 + (index % 2) * 18, scale: isMobile ? .994 : .982 },
+        { opacity: 1, y: 0, scale: 1, duration: isMobile ? .56 : .88, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 89%', once: true } }
       );
     });
 
     $$('.fit-item').forEach((item, index) => {
-      gsap.fromTo(item, { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: .62, delay: index * .025, ease: 'power3.out', scrollTrigger: { trigger: item, start: 'top 90%', once: true } });
+      gsap.fromTo(item, { opacity: 0, x: isMobile ? 14 : 36 }, { opacity: 1, x: 0, duration: isMobile ? .42 : .62, delay: index * .025, ease: 'power3.out', scrollTrigger: { trigger: item, start: 'top 91%', once: true } });
     });
 
     const contactForm = $('.contact-form');
-    if (contactForm) gsap.fromTo(contactForm, { opacity: 0, y: 46, rotateX: 3 }, { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: contactForm, start: 'top 86%', once: true } });
+    if (contactForm) gsap.fromTo(contactForm, { opacity: 0, y: isMobile ? 24 : 46, rotateX: isMobile ? 0 : 3 }, { opacity: 1, y: 0, rotateX: 0, duration: isMobile ? .62 : 1, ease: 'power3.out', scrollTrigger: { trigger: contactForm, start: 'top 88%', once: true } });
 
     $$('.chart-visual span').forEach((bar, i) => {
-      gsap.from(bar, { scaleY: 0, duration: .62, delay: i * .045, ease: 'power2.out', scrollTrigger: { trigger: '.chart-visual', start: 'top 90%', once: true } });
+      gsap.from(bar, { scaleY: 0, duration: isMobile ? .45 : .62, delay: i * .035, ease: 'power2.out', scrollTrigger: { trigger: '.chart-visual', start: 'top 92%', once: true } });
     });
 
     $$('.counter').forEach(counter => {
-      ScrollTrigger.create({ trigger: counter, start: 'top 88%', once: true, onEnter: () => animateCounter(counter) });
+      ScrollTrigger.create({ trigger: counter, start: 'top 90%', once: true, onEnter: () => animateCounter(counter) });
     });
 
-    gsap.to('.node-a', { x: -22, y: 14, duration: 4.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    gsap.to('.node-b', { x: 18, y: -18, duration: 5.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    gsap.to('.node-c', { x: -14, y: -22, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    if (!isMobile) {
+      gsap.to('.node-a', { x: -22, y: 14, duration: 4.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to('.node-b', { x: 18, y: -18, duration: 5.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to('.node-c', { x: -14, y: -22, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    }
   } else {
     $$('.title-line > span').forEach(el => { el.style.transform = 'none'; });
     $$('.counter').forEach(animateCounter);
@@ -263,9 +271,10 @@
       const key = button.dataset.panel;
       panelButtons.forEach(b => b.classList.toggle('active', b === button));
       panels.forEach(p => p.classList.toggle('active', p.dataset.panelContent === key));
+      if (isMobile) button.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
       const active = panels.find(p => p.dataset.panelContent === key);
       if (active && window.gsap && !prefersReduced) {
-        gsap.fromTo(active.children, { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: .07, duration: .48, ease: 'power2.out' });
+        gsap.fromTo(active.children, { opacity: 0, y: isMobile ? 9 : 15 }, { opacity: 1, y: 0, stagger: .06, duration: isMobile ? .34 : .48, ease: 'power2.out' });
       }
     });
   });
@@ -287,9 +296,9 @@
     let lastFrame = 0;
     let time = 0;
     let active = !document.hidden;
-    const targetFps = isMobile ? 30 : 60;
+    const targetFps = isMobile ? 24 : 60;
     const minFrame = 1000 / targetFps;
-    const tracerCount = isMobile ? 18 : Math.min(46, Math.max(28, Math.round(window.innerWidth / 36)));
+    const tracerCount = isMobile ? 12 : Math.min(46, Math.max(28, Math.round(window.innerWidth / 36)));
     const tracers = [];
 
     const resetTracer = (tracer, fresh = false) => {
@@ -325,8 +334,8 @@
       const nx = x / Math.max(width, 1);
       const ny = y / Math.max(height, 1);
       const base = -1.12;
-      const wave = Math.sin(nx * 5.8 + time * .00042 + seed) * .24;
-      const cross = Math.cos(ny * 4.2 - time * .00028 + seed * .6) * .12;
+      const wave = Math.sin(nx * 5.8 + time * .00042 + seed) * (isMobile ? .17 : .24);
+      const cross = Math.cos(ny * 4.2 - time * .00028 + seed * .6) * (isMobile ? .08 : .12);
       const pointerPull = finePointer ? (pointerX - nx) * .12 : 0;
       const scrollLean = Math.max(-.12, Math.min(.18, scrollVelocity * .0018));
       return base + wave + cross + pointerPull + scrollLean;
@@ -359,15 +368,16 @@
         tracer.px = tracer.x;
         tracer.py = tracer.y;
         const angle = vectorAt(tracer.x, tracer.y, tracer.seed);
-        const velocityBoost = 1 + Math.min(1.3, Math.abs(scrollVelocity) * .012);
-        const step = tracer.speed * velocityBoost * (isMobile ? 1.35 : 1.55);
+        const velocityBoost = 1 + Math.min(isMobile ? .55 : 1.3, Math.abs(scrollVelocity) * .012);
+        const step = tracer.speed * velocityBoost * (isMobile ? 1.08 : 1.55);
         tracer.x += Math.cos(angle) * step;
         tracer.y += Math.sin(angle) * step;
         tracer.life -= 1;
 
         const progress = Math.max(0, tracer.life / tracer.maxLife);
         const edgeFade = Math.min(1, tracer.y / 90, (height - tracer.y) / 90, tracer.x / 90, (width - tracer.x) / 90);
-        const alpha = Math.max(0, Math.min(.23, progress * .16 * Math.max(.15, edgeFade)));
+        const alphaCap = isMobile ? .12 : .23;
+        const alpha = Math.max(0, Math.min(alphaCap, progress * (isMobile ? .09 : .16) * Math.max(.15, edgeFade)));
 
         const gradient = ctx.createLinearGradient(tracer.px, tracer.py, tracer.x, tracer.y);
         gradient.addColorStop(0, `rgba(112,244,208,${alpha * .22})`);
@@ -379,8 +389,9 @@
         ctx.lineWidth = tracer.width;
         ctx.stroke();
 
-        if (i % 7 === 0 && Math.floor(tracer.life) % 38 === 0 && alpha > .03) {
-          drawArrow(tracer.x, tracer.y, angle, alpha * 1.5, 4.5);
+        const arrowModulo = isMobile ? 9 : 7;
+        if (i % arrowModulo === 0 && Math.floor(tracer.life) % 42 === 0 && alpha > .025) {
+          drawArrow(tracer.x, tracer.y, angle, alpha * 1.35, isMobile ? 3.5 : 4.5);
         }
 
         if (tracer.life <= 0 || tracer.y < -30 || tracer.x < -60 || tracer.x > width + 60) resetTracer(tracer, false);
@@ -402,7 +413,7 @@
   setupFlowCanvas();
 
   const heroCanvas = $('#hero-canvas');
-  if (heroCanvas) heroCanvas.style.opacity = prefersReduced ? '0' : '.16';
+  if (heroCanvas) heroCanvas.style.opacity = prefersReduced ? '0' : (isMobile ? '.06' : '.16');
 
   const form = $('#lead-form');
   const status = $('#form-status');
