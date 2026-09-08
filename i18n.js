@@ -8,7 +8,7 @@
   core.defer = true;
   core.onload = () => {
     const fixes = document.createElement('script');
-    fixes.src = `${prefix}i18n-fixes.js?v=20260908-1`;
+    fixes.src = `${prefix}i18n-fixes.js?v=20260908-2`;
     fixes.defer = true;
     document.head.appendChild(fixes);
   };
