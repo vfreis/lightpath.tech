@@ -14,6 +14,14 @@
   header?.classList.toggle('is-scrolled',scrollY>18);
   const year=$('#year'); if(year)year.textContent=new Date().getFullYear();
 
+  // Backward-compatible target used by the interactive presentation before V2.
+  const resolveLegacyHash=()=>{
+    if(location.hash!=='#contato')return;
+    const target=$('#diagnostic');
+    if(target){requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));history.replaceState(null,'','#diagnostic');}
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',resolveLegacyHash,{once:true});else resolveLegacyHash();
+
   const scanData={tempo:'scan.tempo',custo:'scan.custo',receita:'scan.receita',risco:'scan.risco',decisao:'scan.decisao'};
   const renderScan=key=>{
     const prefix=scanData[key]||scanData.tempo, i18n=window.LightPathI18n;
