@@ -1,59 +1,56 @@
 # LightPath Tecnologia
 
-Site comercial da **LightPath Tecnologia**, posicionado em Dados, IA aplicada, Automação, Analytics e **Growth Systems / Revenue Architecture**.
+Site comercial da **LightPath Tecnologia**, com posicionamento em engenharia de dados, IA aplicada, automação, analytics e Growth Systems.
 
-## Premium Scrolltelling V2
+## Experiência
 
-A home foi reconstruída como uma experiência narrativa única:
+- Hero premium com motion e canvas procedural
+- Storytelling por scroll com GSAP/ScrollTrigger
+- Navegação e interações mobile-first
+- Business cases orientados a impacto
+- Growth Systems / Revenue Architecture
+- Apresentação interativa em `/apresentacao/`
+- Apresentação com navegação por botões, teclado, swipe e scroll/trackpad convertidos em transições horizontais
+- Fit adaptativo por viewport real (`visualViewport`) para evitar scroll interno e conteúdo cortado
+- Toggle bilingue `PT | EN` com tradução determinística e persistência via `localStorage`
+- `prefers-reduced-motion` e fallback mobile leve
 
-- hero sticky/pinned com progressão `manual → inteligência → escala`;
-- um único **LightPath Object** em canvas que muda de forma conforme a narrativa: `chaos → path → system → revenue → impact → growth → decision → mountain`;
-- Growth scrollytelling com a pergunta **“R$1 entra aqui. Quanto chega no caixa?”**;
-- business cases `Before → System → After` em capítulos controlados pelo scroll;
-- métricas animadas e visualizações orientadas a transformação;
-- Opportunity Scanner como CTA comercial interativo;
-- fechamento em que o caminho converge visualmente para a montanha LightPath;
-- mobile-first e `prefers-reduced-motion`.
+## Arquitetura da home V2
 
-## Arquitetura da home
+A home usa uma arquitetura consolidada para evitar múltiplos loops e estilos concorrentes:
 
-Runtime intencionalmente pequeno e determinístico:
+- `index.html` — conteúdo semântico
+- `site-v2.css` — direção visual mobile-first
+- `app-v2.js` — navegação e interações
+- `motion-director.js` — único diretor de motion/scrolltelling
+- `i18n-v2.js` — PT/EN por chaves semânticas
 
-- `index.html` — todo o conteúdo comercial/semântico;
-- `site-v2.css` — única direção visual, escrita mobile-first;
-- `app-v2.js` — menu, scanner e comportamento de aplicação;
-- `motion-director.js` — único diretor de motion/scrolltelling;
-- `i18n-v2.js` — tradução semântica PT/EN por chaves `data-i18n`.
+O objeto visual LightPath atravessa a narrativa completa e muda de comportamento conforme o estágio: `chaos → paths → system → revenue → measure → growth → flow → decision → final`.
 
-A home declara **um único canvas**. Não há mais múltiplos loops de background ou conteúdo estático injetado pelo runtime.
+## Apresentação
 
-### Motion tiers
+A rota `/apresentacao/` se comporta como um sales app:
 
-O `MotionDirector` seleciona automaticamente:
-
-- `lite` — mobile, touch, dispositivos com menos CPU/memória;
-- `medium` — tablets/notebooks intermediários;
-- `high` — desktops com maior orçamento gráfico.
-
-DPR, FPS, quantidade de sinais e smooth scrolling variam por tier.
-
-## Apresentação interativa
-
-Disponível em `/apresentacao/`, com navegação por clique, teclado e swipe, layout mobile-first e toggle PT/EN persistente.
-
-## Validação
-
-`python scripts/validate_site.py`
-
-O validador cobra one-canvas architecture, semantic PT/EN, MotionDirector, reduced motion, Growth scrolltelling, business cases e integridade da apresentação.
+- cenas compartimentadas no viewport;
+- wheel/trackpad vertical avança horizontalmente;
+- swipe vertical ou horizontal navega entre cenas;
+- botões e teclado continuam disponíveis;
+- `visualViewport` acompanha a altura real do Safari/mobile;
+- cada frame é medido e recebe escala adaptativa quando necessário para que todos os elementos permaneçam visíveis;
+- a escolha PT/EN continua compartilhada com a home.
 
 ## Publicação
 
-GitHub Pages a partir da branch `gh-pages`.
+Site estático publicado pelo GitHub Pages a partir da branch `gh-pages`.
 
-- Home: `https://vfreis.github.io/lightpath.tech/`
-- Apresentação: `https://vfreis.github.io/lightpath.tech/apresentacao/`
+URL:
 
-## Empresa
+`https://vfreis.github.io/lightpath.tech/`
 
-**Lightpath Tecnologia Ltda · CNPJ 65.652.507/0001-75**
+Apresentação:
+
+`https://vfreis.github.io/lightpath.tech/apresentacao/`
+
+## Contato
+
+Durante a fase GitHub Pages, o formulário usa `mailto:` como fallback de contato.
