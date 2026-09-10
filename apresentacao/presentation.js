@@ -1,7 +1,77 @@
 (() => {
   'use strict';
   const root=document.getElementById('story'); if(!root)return;
+
+  /* Final conversion scene: created before the scene registry so it behaves
+     exactly like every other slide for wheel, swipe, dots, keyboard and arrows. */
+  const ensureCtaScene=()=>{
+    if(root.querySelector('[data-scene="cta"]'))return;
+    const scene=document.createElement('section');
+    scene.className='scene scene--cta';
+    scene.dataset.scene='cta';
+    scene.setAttribute('aria-labelledby','scene-cta-title');
+    scene.innerHTML=`
+      <div class="scene-inner cta-final-layout">
+        <div class="cta-final-copy">
+          <span class="scene-kicker" data-i18n="cta.kicker">10 / PRÓXIMO PASSO</span>
+          <h2 id="scene-cta-title"><span data-i18n="cta.a">Vamos encontrar</span> <em data-i18n="cta.b">seu próximo ganho?</em></h2>
+          <p data-i18n="cta.copy">Se existe um gargalo de receita, operação, dados ou decisão, nós podemos mapear o caminho e transformar em sistema.</p>
+          <div class="cta-final-actions">
+            <a href="../#contato" class="primary-action"><span data-i18n="cta.primary">Entre em contato</span> <b>↗</b></a>
+            <a href="https://br.linkedin.com/in/vfalqueiroreis" target="_blank" rel="noopener noreferrer" class="cta-final-secondary"><span data-i18n="cta.secondary">Falar pelo LinkedIn</span> <b>↗</b></a>
+          </div>
+          <small class="cta-final-note" data-i18n="cta.note">LightPath Tecnologia · Dados · IA · Automação · Growth Systems</small>
+        </div>
+        <div class="cta-final-visual" aria-hidden="true">
+          <svg viewBox="0 0 560 520" fill="none">
+            <defs><linearGradient id="ctaGrad" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#70f4d0"/><stop offset="1" stop-color="#b7ff37"/></linearGradient></defs>
+            <circle class="cta-ring cta-ring-a" cx="298" cy="254" r="176"/>
+            <circle class="cta-ring cta-ring-b" cx="298" cy="254" r="116"/>
+            <path class="cta-mountain" d="M72 396 183 249l69 79 94-159 122 227"/>
+            <path class="cta-vector cta-vector-a" d="M104 377 C177 331 202 282 246 221"/>
+            <path class="cta-vector cta-vector-b" d="M206 360 C283 307 325 250 363 183"/>
+            <path class="cta-vector cta-vector-c" d="M309 337 C369 289 411 232 447 170"/>
+            <circle class="cta-pulse" cx="447" cy="170" r="7"/>
+          </svg>
+          <div class="cta-final-signal"><span>DATA</span><span>AI</span><span>AUTOMATION</span><span>GROWTH</span></div>
+        </div>
+      </div>`;
+    root.appendChild(scene);
+
+    if(!document.getElementById('lp-presentation-cta-style')){
+      const style=document.createElement('style');
+      style.id='lp-presentation-cta-style';
+      style.textContent=`
+        .scene--cta{background:radial-gradient(circle at 77% 42%,rgba(183,255,55,.075),transparent 30%),linear-gradient(135deg,rgba(112,244,208,.018),transparent 45%)}
+        .cta-final-layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(320px,1.08fr);align-items:center;gap:clamp(32px,6vw,90px);max-width:1220px}
+        .cta-final-copy{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(12px,2.2vh,22px);min-width:0}
+        .cta-final-copy h2{margin:0;font-size:clamp(44px,5.25vw,78px);line-height:.91;letter-spacing:-.062em;max-width:760px}
+        .cta-final-copy h2 em{font-style:normal;color:var(--accent,#b7ff37)}
+        .cta-final-copy>p{margin:0;max-width:610px;color:var(--muted,#9ba3a6);font-size:clamp(13px,1.05vw,17px);line-height:1.62}
+        .cta-final-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px}
+        .cta-final-secondary{min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.13);border-radius:999px;color:#fff;display:inline-flex;align-items:center;gap:18px;font:700 10px/1 Manrope,sans-serif;letter-spacing:.02em;transition:.25s ease}
+        .cta-final-secondary:hover{border-color:rgba(183,255,55,.5);background:rgba(183,255,55,.055);transform:translateY(-2px)}
+        .cta-final-secondary b{color:#b7ff37;font-size:14px}
+        .cta-final-note{color:rgba(255,255,255,.35);font:700 7px/1.3 Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+        .cta-final-visual{position:relative;display:grid;place-items:center;min-height:0;height:min(54vh,480px)}
+        .cta-final-visual svg{width:min(100%,520px);height:100%;overflow:visible;filter:drop-shadow(0 0 30px rgba(183,255,55,.055))}
+        .cta-ring{stroke:rgba(183,255,55,.1);stroke-width:1;stroke-dasharray:4 12}.cta-ring-b{stroke:rgba(112,244,208,.12)}
+        .cta-mountain,.cta-vector{stroke:url(#ctaGrad);stroke-linecap:round;stroke-linejoin:round}.cta-mountain{stroke-width:2.4;opacity:.72}.cta-vector{stroke-width:2.1;filter:drop-shadow(0 0 7px rgba(183,255,55,.38))}.cta-pulse{fill:#b7ff37;filter:drop-shadow(0 0 10px rgba(183,255,55,.85))}
+        .cta-final-signal{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);display:flex;gap:6px;flex-wrap:wrap;justify-content:center;width:100%}.cta-final-signal span{padding:6px 8px;border:1px solid rgba(255,255,255,.08);border-radius:999px;color:rgba(255,255,255,.48);font:700 6px/1 Manrope,sans-serif;letter-spacing:.1em}
+        .scene--cta.is-active .cta-ring-a{animation:ctaSpin 24s linear infinite}.scene--cta.is-active .cta-ring-b{animation:ctaSpinReverse 19s linear infinite}.scene--cta.is-active .cta-pulse{animation:ctaPulse 1.55s ease-in-out infinite alternate}
+        @keyframes ctaSpin{to{transform:rotate(360deg);transform-origin:298px 254px}}@keyframes ctaSpinReverse{to{transform:rotate(-360deg);transform-origin:298px 254px}}@keyframes ctaPulse{to{r:10;opacity:.55}}
+        @media(max-width:759px){.cta-final-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(150px,1fr);gap:8px;text-align:left;align-content:center}.cta-final-copy{gap:10px}.cta-final-copy h2{font-size:clamp(32px,10.2vw,46px);max-width:94%}.cta-final-copy>p{font-size:10px;line-height:1.45;max-width:95%}.cta-final-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:7px}.cta-final-actions .primary-action,.cta-final-secondary{width:100%;min-height:42px;height:42px;padding:0 12px;justify-content:space-between;font-size:8px}.cta-final-note{font-size:5.5px}.cta-final-visual{height:min(31vh,260px)}.cta-final-visual svg{width:min(78vw,310px)}.cta-final-signal{bottom:0}.cta-final-signal span{font-size:5px;padding:5px 6px}}
+        @media(max-width:430px){.cta-final-actions{grid-template-columns:1fr}.cta-final-visual{height:min(27vh,220px)}}
+        @media(max-height:690px) and (min-width:760px){.cta-final-copy h2{font-size:clamp(40px,4.7vw,62px)}.cta-final-copy>p{font-size:12px}.cta-final-visual{height:min(48vh,360px)}}
+        @media(prefers-reduced-motion:reduce){.scene--cta.is-active .cta-ring-a,.scene--cta.is-active .cta-ring-b,.scene--cta.is-active .cta-pulse{animation:none}}
+      `;
+      document.head.appendChild(style);
+    }
+  };
+  ensureCtaScene();
+
   const scenes=[...document.querySelectorAll('.scene')],prev=document.getElementById('prev-scene'),next=document.getElementById('next-scene'),bar=document.getElementById('story-progress-bar'),num=document.getElementById('scene-number'),dotsRoot=document.getElementById('scene-dots');
+  const total=document.querySelector('.app-status span:last-child'); if(total)total.textContent=String(scenes.length).padStart(2,'0');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let current=0,transitioning=false,touchX=0,touchY=0;
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -14,7 +84,7 @@
   const dots=scenes.map((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',`Cena ${i+1}`);b.addEventListener('click',()=>goTo(i));dotsRoot?.appendChild(b);return b});
   const chrome=()=>{if(num)num.textContent=String(current+1).padStart(2,'0');if(bar)bar.style.transform=`scaleX(${(current+1)/scenes.length})`;if(prev)prev.disabled=current===0;if(next)next.disabled=current===scenes.length-1;dots.forEach((d,i)=>d.classList.toggle('is-active',i===current))};
 
-  const animateEntry=scene=>{if(reduced||!window.gsap)return;const items=[...scene.querySelector('.scene-inner')?.children||[]];gsap.killTweensOf(items);gsap.fromTo(items,{opacity:0,y:14},{opacity:1,y:0,duration:.48,stagger:.055,ease:'power3.out',clearProps:'transform'});const vectors=scene.querySelectorAll('.hero-vector .vector');if(vectors.length){gsap.set(vectors,{strokeDashoffset:500});gsap.to(vectors,{strokeDashoffset:0,duration:1.1,stagger:.12,ease:'power2.inOut'})}scene.querySelectorAll('[data-count]').forEach(el=>{const target=Number(el.dataset.count||0),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'';const s={v:0};gsap.to(s,{v:target,duration:.9,ease:'power3.out',onUpdate:()=>el.textContent=`${prefix}${Math.round(s.v)}${suffix}`,onComplete:()=>el.textContent=`${prefix}${target}${suffix}`})})};
+  const animateEntry=scene=>{if(reduced||!window.gsap)return;const items=[...scene.querySelector('.scene-inner')?.children||[]];gsap.killTweensOf(items);gsap.fromTo(items,{opacity:0,y:14},{opacity:1,y:0,duration:.48,stagger:.055,ease:'power3.out',clearProps:'transform'});const vectors=scene.querySelectorAll('.hero-vector .vector,.cta-final-visual .cta-vector');if(vectors.length){gsap.set(vectors,{strokeDasharray:500,strokeDashoffset:500});gsap.to(vectors,{strokeDashoffset:0,duration:1.1,stagger:.12,ease:'power2.inOut'})}scene.querySelectorAll('[data-count]').forEach(el=>{const target=Number(el.dataset.count||0),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'';const s={v:0};gsap.to(s,{v:target,duration:.9,ease:'power3.out',onUpdate:()=>el.textContent=`${prefix}${Math.round(s.v)}${suffix}`,onComplete:()=>el.textContent=`${prefix}${target}${suffix}`})})};
 
   function goTo(target){target=clamp(target,0,scenes.length-1);if(target===current||transitioning)return false;const from=current,out=scenes[from],inc=scenes[target],dir=target>from?1:-1;transitioning=true;current=target;chrome();inc.classList.add('is-active');inc.setAttribute('aria-hidden','false');
     if(reduced||!window.gsap){out.classList.remove('is-active');out.setAttribute('aria-hidden','true');animateEntry(inc);transitioning=false;return true}
@@ -44,7 +114,7 @@
   const growth={media:{pt:['Aquisição com feedback de negócio.','Criativo e mídia precisam ser avaliados até o pedido real — não só pelo clique.','Decisão → CAC · receita · qualidade do tráfego'],en:['Acquisition with business feedback.','Creative and media should be evaluated through the real order — not only the click.','Decision → CAC · revenue · traffic quality']},landing:{pt:['Conversão tratada como sistema.','Mensagem, UX, quiz e roteamento são medidos por avanço real no funil.','Decisão → visita · intenção · abandono'],en:['Conversion treated as a system.','Message, UX, quiz and routing are measured by real funnel progression.','Decision → visit · intent · abandonment']},checkout:{pt:['Checkout como infraestrutura de receita.','Oferta, pagamento e recovery precisam funcionar juntos e continuar rastreáveis.','Decisão → checkout · aprovação · perda'],en:['Checkout as revenue infrastructure.','Offer, payment and recovery must work together and remain traceable.','Decision → checkout · approval · loss']},order:{pt:['Uma verdade comercial confiável.','Pedido e pagamento são reconciliados com sessão, campanha e eventos.','Decisão → compra real · deduplicação · atribuição'],en:['A reliable commercial truth.','Order and payment are reconciled with session, campaign and events.','Decision → real purchase · deduplication · attribution']},lifecycle:{pt:['Receita continua depois da compra.','Entrega, CRM e lifecycle fecham o loop entre aquisição, experiência e retenção.','Decisão → ativação · retenção · LTV'],en:['Revenue continues after purchase.','Delivery, CRM and lifecycle close the loop between acquisition, experience and retention.','Decision → activation · retention · LTV']}};
   const renderGrowth=key=>{const d=growth[key][lang()];document.getElementById('growth-insight-title').textContent=d[0];document.getElementById('growth-insight-copy').textContent=d[1];document.getElementById('growth-insight-kpi').textContent=d[2]};document.querySelectorAll('[data-growth-step]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-growth-step]').forEach(x=>x.classList.toggle('is-selected',x===b));renderGrowth(b.dataset.growthStep)}));
 
-  const method=[{pt:['DIAGNÓSTICO','Mapeamos onde o valor está travado.','Mapa de oportunidades priorizado'],en:['DIAGNOSIS','We map where value is stuck.','Prioritized opportunity map']},{pt:['DESENHO','Escolhemos a menor arquitetura que resolve.','Architecture + plano de execução'],en:['DESIGN','We choose the smallest architecture that solves it.','Architecture + execution plan']},{pt:['IMPLEMENTAÇÃO','Construímos para uso real, não para demo.','Solução em produção'],en:['IMPLEMENTATION','We build for real use, not for a demo.','Solution in production']},{pt:['OTIMIZAÇÃO','Medimos o que mudou e ampliamos o ganho.','ROI operacional + próximos ganhos'],en:['OPTIMIZATION','We measure what changed and expand the gain.','Operational ROI + next gains']}];
+  const method=[{pt:['DIAGNÓSTICO','Mapeamos onde o valor está travado.','Mapa de oportunidades priorizado'],en:['DIAGNOSIS','We map where value is stuck.','Prioritized opportunity map']},{pt:['DESENHO','Escolhemos a menor arquitetura que resolve.','Arquitetura + plano de execução'],en:['DESIGN','We choose the smallest architecture that solves it.','Architecture + execution plan']},{pt:['IMPLEMENTAÇÃO','Construímos para uso real, não para demo.','Solução em produção'],en:['IMPLEMENTATION','We build for real use, not for a demo.','Solution in production']},{pt:['OTIMIZAÇÃO','Medimos o que mudou e ampliamos o ganho.','ROI operacional + próximos ganhos'],en:['OPTIMIZATION','We measure what changed and expand the gain.','Operational ROI + next gains']}];
   const renderMethod=i=>{const d=method[i][lang()];document.getElementById('method-tag').textContent=d[0];document.getElementById('method-title').textContent=d[1];document.getElementById('method-output').textContent=d[2]};document.querySelectorAll('[data-method]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-method]').forEach(x=>x.classList.toggle('is-selected',x===b));renderMethod(Number(b.dataset.method))}));
 
   const proof={scale:{pt:['Capacidade para crescer sem linearizar infraestrutura.','Pipelines distribuídos e runtime otimizado transformam volume em capacidade previsível.'],en:['Capacity to grow without linear infrastructure growth.','Distributed pipelines and optimized runtime turn volume into predictable capacity.']},auto:{pt:['Rotina deixa de consumir atenção humana.','Orquestração recorrente reduz intervenção, dependência de memória e risco.'],en:['Routine stops consuming human attention.','Recurring orchestration reduces intervention, memory dependency and risk.']},manual:{pt:['Software absorve trabalho antes feito por pessoas.','Serviços de ingestão substituem coleta e movimentação manual.'],en:['Software absorbs work previously done by people.','Ingestion services replace manual collection and movement.']},ops:{pt:['Informação chega mais perto da decisão.','SQL, BI e automação reduzem latência operacional e aumentam previsibilidade.'],en:['Information gets closer to the decision.','SQL, BI and automation reduce operational latency and increase predictability.']}};
