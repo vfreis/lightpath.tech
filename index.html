@@ -2,408 +2,235 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#05070b" />
   <meta name="color-scheme" content="dark" />
-  <meta name="description" content="Engenharia de dados, IA aplicada e automação para reduzir custo operacional, acelerar decisões e transformar gargalos em capacidade de escala." />
-  <meta property="og:title" content="LightPath Tecnologia — Transforme gargalos em sistemas que escalam" />
-  <meta property="og:description" content="Dados, software e IA aplicados ao processo certo para reduzir trabalho manual, aumentar previsibilidade e gerar impacto mensurável." />
+  <meta name="description" content="LightPath Tecnologia conecta dados, software, IA, automação e growth systems para transformar gargalos em receita, eficiência e escala." data-i18n-attr="content:meta.description" />
+  <meta property="og:title" content="LightPath Tecnologia — Do gargalo ao resultado" data-i18n-attr="content:meta.ogTitle" />
+  <meta property="og:description" content="Do clique ao caixa. Do dado à decisão. Da rotina ao sistema. Da IA ao produto." data-i18n-attr="content:meta.ogDescription" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/social-card.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>LightPath Tecnologia — Dados, IA e Automação para resultado</title>
+  <title data-i18n="meta.title">LightPath Tecnologia — Do gargalo ao resultado</title>
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="enhancements.css" />
-  <link rel="stylesheet" href="business-cases.css" />
-  <link rel="stylesheet" href="mobile-first.css" />
-  <link rel="stylesheet" href="storytelling.css" />
+  <link rel="stylesheet" href="site-v2.css" />
 </head>
 <body>
-  <div class="loader" aria-hidden="true">
-    <div class="loader-brand"><span class="loader-mark"></span><span>LIGHTPATH</span></div>
-    <div class="loader-line"><span></span></div>
-    <span class="loader-count">00</span>
-  </div>
+  <canvas id="lp-path-canvas" aria-hidden="true"></canvas>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-meter" aria-hidden="true"><span></span></div>
 
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-  <div class="page-grain" aria-hidden="true"></div>
-  <div class="scroll-progress" aria-hidden="true"><span></span></div>
-
-  <header class="site-header" id="top">
+  <header class="header" id="top">
     <div class="shell header-inner">
-      <a href="#top" class="brand magnetic" aria-label="LightPath, início">
-        <svg class="brand-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+      <a href="#top" class="brand" aria-label="LightPath Tecnologia">
+        <svg viewBox="0 0 34 34" fill="none" aria-hidden="true">
           <path d="M3 27 10.5 16.8l4.5 5.2L21.5 11 31 27" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.5 26 12.2 20.2m0 0-.5 4.1m.5-4.1-4 .7M13.5 25 19 18.3m0 0-.6 4.2m.6-4.2-4.1.7M20.5 23.5 26.6 15m0 0-.6 4.3m.6-4.3-4.2.7" class="growth-vector" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6.5 26 12.2 20.2m0 0-.5 4.1m.5-4.1-4 .7M13.5 25 19 18.3m0 0-.6 4.2m.6-4.2-4.1.7M20.5 23.5 26.6 15m0 0-.6 4.3m.6-4.3-4.2.7" class="brand-vectors" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M5 27h25" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" opacity=".62"/>
         </svg>
-        <span class="brand-text"><strong>LightPath</strong><small>tecnologia</small></span>
+        <span><strong>LightPath</strong><small>tecnologia</small></span>
       </a>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span></button>
-
-      <nav class="nav" aria-label="Navegação principal">
-        <a href="#solucoes">Soluções</a>
-        <a href="apresentacao/">Apresentação</a>
-        <a href="#impacto">Impacto</a>
-        <a href="#metodo">Método</a>
-        <a href="#provas">Experiência</a>
-        <a href="#contato" class="nav-cta magnetic">Diagnosticar oportunidade <span>↗</span></a>
+      <nav class="nav" id="nav" aria-label="Navegação principal" data-i18n-attr="aria-label:nav.aria">
+        <a href="#capabilities" data-i18n="nav.capabilities">Capabilities</a>
+        <a href="#impact" data-i18n="nav.impact">Impacto</a>
+        <a href="#method" data-i18n="nav.method">Como atuamos</a>
+        <a href="apresentacao/" data-i18n="nav.presentation">Apresentação</a>
       </nav>
+
+      <div class="header-actions">
+        <button class="lang-toggle" type="button" data-lang-toggle aria-label="Alternar idioma" data-i18n-attr="aria-label:lang.aria"><span>PT</span><i></i><span>EN</span></button>
+        <a href="#diagnostic" class="header-cta"><span data-i18n="nav.cta">Encontrar oportunidade</span><i>↗</i></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu" data-i18n-attr="aria-label:nav.open"><span></span><span></span></button>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
-
-      <div class="shell hero-inner">
-        <div class="hero-copy">
-          <div class="eyebrow hero-reveal"><span class="eyebrow-dot"></span> Dados · IA · Automação · Performance operacional</div>
-
-          <h1 id="hero-title" class="hero-title" aria-label="Menos operação manual. Mais inteligência. Mais escala.">
-            <span class="title-line"><span>Menos operação manual.</span></span>
-            <span class="title-line"><span>Mais <em>inteligência.</em></span></span>
-            <span class="title-line"><span>Mais escala.</span></span>
-          </h1>
-
-          <div class="hero-bottom hero-reveal">
-            <p>Transformamos gargalos de dados e processos em sistemas que <strong>reduzem custo operacional, aceleram decisões e criam capacidade de escala</strong> — da arquitetura à produção.</p>
+    <section class="hero-story" data-path-state="chaos" aria-labelledby="hero-title">
+      <div class="hero-sticky">
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><i></i><span data-i18n="hero.eyebrow">DADOS · IA · AUTOMAÇÃO · GROWTH SYSTEMS</span></div>
+            <h1 id="hero-title">
+              <span class="hero-line" data-beat="0" data-i18n="hero.line1">MENOS OPERAÇÃO MANUAL.</span>
+              <span class="hero-line accent" data-beat="1" data-i18n="hero.line2">MAIS INTELIGÊNCIA.</span>
+              <span class="hero-line" data-beat="2" data-i18n="hero.line3">MAIS ESCALA.</span>
+            </h1>
+            <p class="hero-sub" data-i18n="hero.sub">Conectamos dados, sistemas, IA e funis comerciais para reduzir atrito, melhorar conversão e criar operações que crescem com controle.</p>
             <div class="hero-actions">
-              <a href="#contato" class="button button-primary magnetic"><span>Diagnosticar uma oportunidade</span><i>↗</i></a>
-              <a href="#solucoes" class="text-link">Ver como geramos resultado <span>↓</span></a>
+              <a href="#diagnostic" class="button button-primary"><span data-i18n="hero.cta">Encontrar meu próximo ganho</span><i>↗</i></a>
+              <a href="apresentacao/" class="button button-ghost"><span data-i18n="hero.demo">Ver apresentação interativa</span><i>→</i></a>
             </div>
           </div>
-        </div>
 
-        <aside class="hero-system hero-reveal" aria-label="Sistema LightPath">
-          <div class="system-head"><span>OPERATION / INTELLIGENCE</span><span class="live"><i></i> LIVE</span></div>
-          <div class="system-orbit" aria-hidden="true">
-            <div class="orbit-ring ring-1"></div><div class="orbit-ring ring-2"></div><div class="orbit-ring ring-3"></div>
-            <div class="orbit-core"><span>LP</span></div>
-            <span class="orbit-node node-a"></span><span class="orbit-node node-b"></span><span class="orbit-node node-c"></span>
+          <div class="hero-orbit" aria-hidden="true">
+            <div class="orbit-ring ring-a"></div><div class="orbit-ring ring-b"></div><div class="orbit-ring ring-c"></div>
+            <div class="orbit-core">LP</div>
+            <span class="orbit-node n1"></span><span class="orbit-node n2"></span><span class="orbit-node n3"></span>
+            <div class="orbit-caption"><small data-i18n="hero.orbitKicker">LIGHTPATH / VALUE ENGINE</small><strong data-i18n="hero.orbitTitle">Gargalo → Sistema → Resultado</strong></div>
           </div>
-          <div class="system-stats">
-            <div><span>INPUT</span><b>DADOS + PROCESSOS</b></div>
-            <div><span>ENGINE</span><b>AUTOMAÇÃO + IA</b></div>
-            <div><span>OUTPUT</span><b>IMPACTO MENSURÁVEL</b></div>
-          </div>
-        </aside>
-      </div>
-
-      <div class="shell hero-proof hero-reveal">
-        <span class="proof-label">Resultados e escala já operados em produção</span>
-        <div class="proof-metrics">
-          <div class="metric"><strong class="counter" data-count="10" data-suffix="+ TB">10+ TB</strong><span>processados / mês</span></div>
-          <div class="metric"><strong class="counter" data-count="95" data-suffix="%">95%</strong><span>de fluxos recorrentes automatizados</span></div>
-          <div class="metric"><strong class="counter" data-count="50" data-prefix="-" data-suffix="%">-50%</strong><span>de esforço manual em ingestão</span></div>
-          <div class="metric"><strong class="counter" data-count="20" data-prefix="+" data-suffix="%">+20%</strong><span>de eficiência operacional</span></div>
         </div>
+        <div class="hero-progress shell" aria-hidden="true"><span></span><b>01</b><i></i><b>02</b><i></i><b>03</b></div>
       </div>
     </section>
 
-    <section class="signal-strip" aria-label="Resultados que buscamos">
-      <div class="marquee" aria-hidden="true"><div class="marquee-track">
-        <span>MENOS TRABALHO MANUAL</span><i>✦</i><span>DADOS CONFIÁVEIS</span><i>✦</i><span>DECISÕES MAIS RÁPIDAS</span><i>✦</i><span>IA EM PRODUÇÃO</span><i>✦</i><span>PROCESSOS ESCALÁVEIS</span><i>✦</i><span>MENOS TRABALHO MANUAL</span><i>✦</i><span>DADOS CONFIÁVEIS</span><i>✦</i><span>DECISÕES MAIS RÁPIDAS</span><i>✦</i><span>IA EM PRODUÇÃO</span><i>✦</i><span>PROCESSOS ESCALÁVEIS</span><i>✦</i>
-      </div></div>
-    </section>
-
-    <section class="section problem" id="solucoes">
+    <section class="pathways section" data-path-state="paths" aria-labelledby="pathways-title">
       <div class="shell">
-        <div class="section-kicker reveal"><span>01</span> O problema real</div>
-        <div class="problem-layout">
-          <div class="problem-sticky reveal">
-            <h2>IA sem processo, dados e métrica vira <em>piloto caro.</em></h2>
-            <p>O valor aparece quando a tecnologia entra no processo certo, sustentada por dados confiáveis, uma decisão clara e uma métrica de sucesso que o negócio consegue enxergar.</p>
-          </div>
-
-          <div class="problem-cards">
-            <article class="diagnostic-card reveal tilt-card">
-              <span class="card-index">01 / DADOS</span><div class="card-symbol">⌁</div>
-              <h3>Se o dado chega tarde, a decisão já perdeu valor.</h3>
-              <p>Integramos fontes, criamos pipelines confiáveis e preparamos a base para analytics, automação e IA.</p>
-              <ul><li>Data lakes & lakehouses</li><li>ETL / ELT e integrações</li><li>Qualidade, observabilidade e governança</li></ul>
-              <div class="card-footer"><span>Engenharia de Dados</span><i>↗</i></div>
-            </article>
-
-            <article class="diagnostic-card reveal tilt-card">
-              <span class="card-index">02 / IA</span><div class="card-symbol">✦</div>
-              <h3>IA só gera ROI quando executa trabalho real.</h3>
-              <p>Projetamos soluções com LLMs, classificação, extração, recomendação e agentes conectados ao contexto real da operação.</p>
-              <ul><li>Assistentes e copilots internos</li><li>RAG e conhecimento corporativo</li><li>Agentes e workflows com supervisão</li></ul>
-              <div class="card-footer"><span>IA Aplicada</span><i>↗</i></div>
-            </article>
-
-            <article class="diagnostic-card reveal tilt-card">
-              <span class="card-index">03 / AUTOMAÇÃO</span><div class="card-symbol">↯</div>
-              <h3>Rotina repetitiva é margem escondida.</h3>
-              <p>Redesenhamos rotinas e conectamos sistemas para reduzir handoffs, retrabalho e dependência de planilhas.</p>
-              <ul><li>APIs e webhooks</li><li>Orquestração de processos</li><li>Integrações entre sistemas e times</li></ul>
-              <div class="card-footer"><span>Automação & Integração</span><i>↗</i></div>
-            </article>
-
-            <article class="diagnostic-card reveal tilt-card">
-              <span class="card-index">04 / DECISÃO</span><div class="card-symbol">◫</div>
-              <h3>Dados só valem quando mudam a decisão.</h3>
-              <p>Criamos indicadores, modelos e produtos de dados que colocam a informação certa na decisão certa.</p>
-              <ul><li>BI e analytics operacional</li><li>Data Science aplicada</li><li>Forecast, segmentação e otimização</li></ul>
-              <div class="card-footer"><span>Analytics & Data Science</span><i>↗</i></div>
-            </article>
-          </div>
+        <div class="section-kicker"><span>01</span><b data-i18n="pathways.kicker">ONDE A LIGHTPATH ENTRA</b></div>
+        <div class="split-heading">
+          <h2 id="pathways-title" data-i18n-html="pathways.title">DO GARGALO AO <em>RESULTADO.</em></h2>
+          <p data-i18n="pathways.copy">Quatro caminhos simples explicam quase tudo que fazemos. A tecnologia aparece depois — quando sabemos qual resultado precisa mudar.</p>
+        </div>
+        <div class="pathway-grid">
+          <a href="#growth" class="pathway"><small data-i18n="pathways.p1.kicker">RECEITA</small><strong data-i18n-html="pathways.p1.title">DO CLIQUE<br>AO CAIXA.</strong><p data-i18n="pathways.p1.copy">Mídia, landing, checkout, tracking, CRM e retenção conectados.</p><i>↗</i></a>
+          <a href="#capabilities" class="pathway"><small data-i18n="pathways.p2.kicker">DECISÃO</small><strong data-i18n-html="pathways.p2.title">DO DADO<br>À DECISÃO.</strong><p data-i18n="pathways.p2.copy">Integração, pipelines, BI e analytics para agir mais rápido.</p><i>↗</i></a>
+          <a href="#capabilities" class="pathway"><small data-i18n="pathways.p3.kicker">OPERAÇÃO</small><strong data-i18n-html="pathways.p3.title">DA ROTINA<br>AO SISTEMA.</strong><p data-i18n="pathways.p3.copy">Automação, APIs, integrações e software tirando trabalho manual do caminho.</p><i>↗</i></a>
+          <a href="#capabilities" class="pathway"><small data-i18n="pathways.p4.kicker">INOVAÇÃO</small><strong data-i18n-html="pathways.p4.title">DA IA<br>AO PRODUTO.</strong><p data-i18n="pathways.p4.copy">Agentes, RAG, copilots e aplicações de IA conectadas ao trabalho real.</p><i>↗</i></a>
         </div>
       </div>
     </section>
 
-    <section class="kinetic-bridge" aria-label="Transformação operacional">
-      <div class="kinetic-ghost" aria-hidden="true">OPERAÇÃO MANUAL</div>
-      <div class="kinetic-word">ROTINA REPETITIVA <span>VIRA MARGEM.</span></div>
-    </section>
-
-    <section class="section build-section" aria-labelledby="build-title">
+    <section class="capabilities section" id="capabilities" data-path-state="system" aria-labelledby="capabilities-title">
       <div class="shell">
-        <div class="section-kicker reveal"><span>02</span> O que construímos</div>
-        <div class="build-heading reveal"><h2 id="build-title">Da arquitetura ao <em>resultado em produção.</em></h2><p>Não entregamos estratégia para outro time descobrir como executar. Desenhamos, construímos, integramos e medimos a solução no fluxo real da operação.</p></div>
-
-        <div class="command-center reveal">
-          <div class="cc-sidebar">
-            <div class="cc-logo"><span></span> LP / OPS</div>
-            <div class="cc-nav">
-              <button class="active" data-panel="data"><i></i> Data Platform</button>
-              <button data-panel="ai"><i></i> AI Operations</button>
-              <button data-panel="automation"><i></i> Automation</button>
-              <button data-panel="analytics"><i></i> Analytics</button>
-            </div>
-            <div class="cc-status"><span><i></i> Systems healthy</span><small>Last sync · now</small></div>
-          </div>
-          <div class="cc-main">
-            <div class="cc-topbar"><span>LIGHTPATH / CONTROL LAYER</span><div><i></i><i></i><i></i></div></div>
-            <div class="cc-panel active" data-panel-content="data">
-              <div class="cc-copy"><span class="mini-kicker">DATA PLATFORM</span><h3>Uma base preparada para crescer.</h3><p>Pipelines escaláveis, contratos de dados, qualidade e observabilidade para transformar fontes dispersas em dados prontos para uso.</p></div>
-              <div class="pipeline-visual" aria-hidden="true">
-                <div class="pipe-node"><span>01</span><b>Sources</b><small>APIs · DB · Files</small></div><div class="pipe-line"><i></i></div>
-                <div class="pipe-node"><span>02</span><b>Lakehouse</b><small>Raw · Refined</small></div><div class="pipe-line"><i></i></div>
-                <div class="pipe-node"><span>03</span><b>Serving</b><small>BI · AI · APIs</small></div>
-              </div>
-            </div>
-            <div class="cc-panel" data-panel-content="ai">
-              <div class="cc-copy"><span class="mini-kicker">AI OPERATIONS</span><h3>IA conectada ao contexto da empresa.</h3><p>Camadas de conhecimento, ferramentas e avaliação para que agentes e assistentes executem tarefas úteis — com rastreabilidade.</p></div>
-              <div class="ai-console" aria-hidden="true"><div class="console-line"><span>agent</span><b>process_invoice</b><i>RUNNING</i></div><div class="console-line"><span>context</span><b>erp + contracts + policy</b><i>READY</i></div><div class="console-line"><span>guardrail</span><b>human approval &gt; R$ 5k</b><i>ON</i></div><div class="console-progress"><span></span></div></div>
-            </div>
-            <div class="cc-panel" data-panel-content="automation">
-              <div class="cc-copy"><span class="mini-kicker">AUTOMATION</span><h3>Processos que deixam de depender de memória.</h3><p>Integrações, eventos, filas, automações e alertas que movem o trabalho sem exigir acompanhamento manual constante.</p></div>
-              <div class="automation-grid" aria-hidden="true"><span>CRM</span><i>→</i><span>API</span><i>→</i><span>AI</span><i>→</i><span>ERP</span><i>→</i><span>BI</span></div>
-            </div>
-            <div class="cc-panel" data-panel-content="analytics">
-              <div class="cc-copy"><span class="mini-kicker">ANALYTICS</span><h3>Dados que apontam o próximo movimento.</h3><p>KPIs operacionais, modelos analíticos e interfaces de decisão que tornam risco, capacidade e oportunidade visíveis.</p></div>
-              <div class="chart-visual" aria-hidden="true"><span style="--h:31%"></span><span style="--h:46%"></span><span style="--h:38%"></span><span style="--h:66%"></span><span style="--h:58%"></span><span style="--h:82%"></span><span style="--h:76%"></span><span style="--h:94%"></span></div>
-            </div>
-          </div>
+        <div class="section-kicker"><span>02</span><b data-i18n="cap.kicker">CAPABILITIES</b></div>
+        <div class="split-heading"><h2 id="capabilities-title" data-i18n-html="cap.title">A MENOR ARQUITETURA<br>QUE <em>MOVE O NEGÓCIO.</em></h2><p data-i18n="cap.copy">Podemos melhorar uma peça ou conectar a cadeia inteira. O ponto de partida é sempre o gargalo — não a tecnologia da moda.</p></div>
+        <div class="cap-list">
+          <article class="cap-item"><span>01</span><div><small>DATA</small><h3 data-i18n="cap.data.title">Dados confiáveis antes da decisão.</h3><p data-i18n="cap.data.copy">Pipelines, lakehouse, integrações, qualidade e observabilidade.</p></div><i>⌁</i></article>
+          <article class="cap-item"><span>02</span><div><small>AI</small><h3 data-i18n="cap.ai.title">IA executando trabalho real.</h3><p data-i18n="cap.ai.copy">Agentes, RAG, copilots, classificação, extração e produtos multimodais.</p></div><i>✦</i></article>
+          <article class="cap-item"><span>03</span><div><small>AUTOMATION</small><h3 data-i18n="cap.auto.title">Rotina vira sistema.</h3><p data-i18n="cap.auto.copy">APIs, eventos, webhooks, filas, integrações e processos observáveis.</p></div><i>↯</i></article>
+          <article class="cap-item"><span>04</span><div><small>GROWTH</small><h3 data-i18n="cap.growth.title">Do anúncio à receita real.</h3><p data-i18n="cap.growth.copy">Mídia, CRO, landing, checkout, tracking, attribution, CRM e lifecycle.</p></div><i>↗</i></article>
+          <article class="cap-item"><span>05</span><div><small>ANALYTICS</small><h3 data-i18n="cap.analytics.title">Dado que aponta o próximo movimento.</h3><p data-i18n="cap.analytics.copy">BI, Data Science, forecast, segmentação e otimização operacional.</p></div><i>◫</i></article>
         </div>
       </div>
     </section>
 
-    <section class="section business-cases" id="impacto" aria-labelledby="cases-title">
+    <section class="system-story section" data-path-state="system" aria-labelledby="system-title">
+      <div class="shell system-layout">
+        <div class="system-copy">
+          <div class="section-kicker"><span>03</span><b data-i18n="system.kicker">CONTROL LAYER</b></div>
+          <h2 id="system-title" data-i18n-html="system.title">NÃO ENTREGAMOS<br>UMA DEMO.<br><em>ENTREGAMOS FLUXO.</em></h2>
+          <p data-i18n="system.copy">Sources, dados, automação, IA e decisão funcionando como uma cadeia mensurável — com segurança, governança e observabilidade.</p>
+        </div>
+        <div class="system-diagram" aria-label="Fluxo de arquitetura" data-i18n-attr="aria-label:system.aria">
+          <div class="system-node"><small>01</small><b>SOURCES</b><span>APIs · DB · files</span></div><i>→</i>
+          <div class="system-node"><small>02</small><b>DATA</b><span>quality · lakehouse</span></div><i>→</i>
+          <div class="system-node"><small>03</small><b>AUTO</b><span>events · APIs</span></div><i>→</i>
+          <div class="system-node"><small>04</small><b>AI</b><span>RAG · agents</span></div><i>→</i>
+          <div class="system-node system-node-final"><small>05</small><b>DECISION</b><span>BI · alerts · APIs</span></div>
+          <div class="system-rail"><span>CONTROL</span><b data-i18n="system.rail1">segurança</b><b data-i18n="system.rail2">observabilidade</b><b data-i18n="system.rail3">governança</b><b>human-in-the-loop</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="growth-story" id="growth" data-path-state="revenue" aria-labelledby="growth-title">
+      <div class="growth-sticky shell">
+        <div class="growth-copy">
+          <div class="section-kicker"><span>04</span><b data-i18n="growth.kicker">GROWTH SYSTEMS</b></div>
+          <h2 id="growth-title" data-i18n-html="growth.title">R$1 ENTRA AQUI.<br><em>QUANTO CHEGA NO CAIXA?</em></h2>
+          <p data-i18n="growth.copy">Você investe para trazer uma pessoa. Nós seguimos o caminho até a venda e a retenção para descobrir onde o valor está vazando — sem adivinhar.</p>
+        </div>
+        <div class="revenue-stage">
+          <div class="revenue-top"><small data-i18n="growth.label">LIGHTPATH / REVENUE PATH</small><strong id="revenue-question" data-i18n="growth.question">R$1 investido → ? receita real</strong></div>
+          <div class="revenue-flow" aria-label="Funil comercial integrado" data-i18n-attr="aria-label:growth.aria">
+            <div class="revenue-line"><span></span><i class="revenue-token">R$1</i></div>
+            <article class="revenue-node" data-revenue-step="0"><small>01</small><b data-i18n="growth.s1.title">ANÚNCIO</b><span data-i18n="growth.s1.copy">Quem chegou?</span></article>
+            <article class="revenue-node" data-revenue-step="1"><small>02</small><b>LANDING</b><span data-i18n="growth.s2.copy">Quem avançou?</span></article>
+            <article class="revenue-node" data-revenue-step="2"><small>03</small><b>CHECKOUT</b><span data-i18n="growth.s3.copy">Quem tentou comprar?</span></article>
+            <article class="revenue-node" data-revenue-step="3"><small>04</small><b data-i18n="growth.s4.title">PAGAMENTO</b><span data-i18n="growth.s4.copy">Qual venda aconteceu?</span></article>
+            <article class="revenue-node" data-revenue-step="4"><small>05</small><b data-i18n="growth.s5.title">RETENÇÃO</b><span data-i18n="growth.s5.copy">Quanto valor ficou?</span></article>
+          </div>
+          <div class="revenue-insight"><span data-i18n="growth.insightKicker">O QUE A LIGHTPATH CONECTA</span><strong data-i18n="growth.insightTitle">Mídia + produto + tracking + verdade comercial.</strong><p data-i18n="growth.insightCopy">UTM, event_id, CAPI, GA4, checkout, pedido, CRM e lifecycle voltam a contar a mesma história.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="impact-story" id="impact" data-path-state="measure" aria-labelledby="impact-title">
+      <div class="impact-sticky shell">
+        <div class="impact-head">
+          <div class="section-kicker"><span>05</span><b data-i18n="impact.kicker">BUSINESS IMPACT</b></div>
+          <h2 id="impact-title" data-i18n-html="impact.title">ANTES → SISTEMA → <em>RESULTADO.</em></h2>
+          <p data-i18n="impact.copy">Experiência técnica real em produção, traduzida para o que o negócio sente: capacidade, custo, velocidade e eficiência.</p>
+        </div>
+        <div class="case-stage">
+          <article class="case-panel is-active" data-case="0"><div class="case-number">01</div><div class="case-copy"><small>DATA SCALE</small><h3 data-i18n="case1.title">Escalar processamento sem transformar infraestrutura em gargalo.</h3><div class="case-phases"><div><span data-i18n="common.before">ANTES</span><p data-i18n="case1.before">Grandes volumes e janelas críticas pressionando pipelines distribuídos.</p></div><div><span data-i18n="common.system">SISTEMA</span><p>AWS · Spark/PySpark · EMR · Airflow · lakehouse</p></div><div><span data-i18n="common.after">DEPOIS</span><strong>10+ TB</strong><p data-i18n="case1.after">processados por mês, com runtime até 20% menor.</p></div></div></div></article>
+          <article class="case-panel" data-case="1"><div class="case-number">02</div><div class="case-copy"><small>AUTOMATION</small><h3 data-i18n="case2.title">Retirar pessoas da rotina repetitiva sem perder controle.</h3><div class="case-phases"><div><span data-i18n="common.before">ANTES</span><p data-i18n="case2.before">Execuções recorrentes dependentes de intervenção e memória.</p></div><div><span data-i18n="common.system">SISTEMA</span><p data-i18n="case2.system">Orquestração, scheduling, retries, alertas e observabilidade.</p></div><div><span data-i18n="common.after">DEPOIS</span><strong>95%</strong><p data-i18n="case2.after">dos fluxos recorrentes automatizados no contexto operado.</p></div></div></div></article>
+          <article class="case-panel" data-case="2"><div class="case-number">03</div><div class="case-copy"><small>API INGESTION</small><h3 data-i18n="case3.title">Transformar coleta manual em serviço reutilizável.</h3><div class="case-phases"><div><span data-i18n="common.before">ANTES</span><p data-i18n="case3.before">Coleta e movimentação manual de dados entre fontes e consumidores.</p></div><div><span data-i18n="common.system">SISTEMA</span><p data-i18n="case3.system">FastAPI, integrações e camada programática de ingestão.</p></div><div><span data-i18n="common.after">DEPOIS</span><strong>-50%</strong><p data-i18n="case3.after">de esforço manual associado ao processo de ingestão.</p></div></div></div></article>
+          <article class="case-panel" data-case="3"><div class="case-number">04</div><div class="case-copy"><small>OPERATIONS</small><h3 data-i18n="case4.title">Fazer a gestão enxergar antes — e agir mais rápido.</h3><div class="case-phases"><div><span data-i18n="common.before">ANTES</span><p data-i18n="case4.before">Informação dispersa e consolidação manual atrasando decisões.</p></div><div><span data-i18n="common.system">SISTEMA</span><p data-i18n="case4.system">SQL, automação, BI e camada analítica orientada à gestão.</p></div><div><span data-i18n="common.after">DEPOIS</span><strong>+20%</strong><p data-i18n="case4.after">de eficiência operacional no contexto de gestão e planejamento.</p></div></div></div></article>
+        </div>
+        <div class="case-progress" aria-hidden="true"><span></span><b>01</b><b>02</b><b>03</b><b>04</b></div>
+        <p class="case-note" data-i18n="impact.note"><strong>Transparência:</strong> os cases representam experiência técnica real em sistemas e produtos de produção e não implicam que todos tenham sido contratados originalmente sob a marca LightPath Tecnologia.</p>
+      </div>
+    </section>
+
+    <section class="proof section" data-path-state="growth" aria-labelledby="proof-title">
       <div class="shell">
-        <div class="section-kicker reveal"><span>03</span> Business impact</div>
-        <div class="business-cases-heading reveal">
-          <h2 id="cases-title">Tecnologia só importa quando <em>move o resultado.</em></h2>
-          <div>
-            <div class="cases-intro-line">Experiência aplicada em produção</div>
-            <p>Casos que mostram como <strong>arquitetura, automação e IA se traduzem em capacidade, custo, velocidade e eficiência operacional</strong> — as métricas que chegam ao negócio.</p>
-          </div>
+        <div class="section-kicker"><span>06</span><b data-i18n="proof.kicker">ENGINEERING WITH PROOF</b></div>
+        <div class="split-heading"><h2 id="proof-title" data-i18n-html="proof.title">NÚMEROS QUE VIRAM<br><em>CAPACIDADE.</em></h2><p data-i18n="proof.copy">Não mostramos métricas como decoração. Cada uma representa trabalho manual removido, capacidade criada ou informação chegando mais perto da decisão.</p></div>
+        <div class="metric-wall">
+          <article><strong class="counter" data-count="10" data-suffix="+ TB">10+ TB</strong><span data-i18n="proof.m1">processados / mês</span><i class="metric-line"><b style="--p:.82"></b></i></article>
+          <article><strong class="counter" data-count="95" data-suffix="%">95%</strong><span data-i18n="proof.m2">fluxos recorrentes automatizados</span><i class="metric-ring" style="--p:95"></i></article>
+          <article><strong class="counter" data-count="50" data-prefix="-" data-suffix="%">-50%</strong><span data-i18n="proof.m3">esforço manual em ingestão</span><i class="metric-line"><b style="--p:.5"></b></i></article>
+          <article><strong class="counter" data-count="20" data-prefix="+" data-suffix="%">+20%</strong><span data-i18n="proof.m4">eficiência operacional</span><i class="metric-ring" style="--p:20"></i></article>
         </div>
-
-        <div class="business-case-grid">
-          <article class="business-case reveal">
-            <div class="business-case-top"><span class="business-case-code">CASE 01 · DATA SCALE</span><span class="business-case-value"><i></i> Capacidade + custo</span></div>
-            <h3>Escalar processamento sem transformar infraestrutura em gargalo.</h3>
-            <p class="business-case-lead">Operações de dados com volume crescente exigem arquitetura distribuída, observabilidade e otimização contínua — não apenas mais compute.</p>
-            <div class="business-case-flow">
-              <div class="case-flow-item"><span>Gargalo</span><p>Grandes volumes, pipelines distribuídos e janelas críticas de processamento.</p></div>
-              <div class="case-flow-item"><span>Sistema</span><p>AWS + Spark/PySpark + EMR + Airflow + arquitetura lakehouse.</p></div>
-            </div>
-            <div class="business-case-impact"><strong class="counter" data-count="10" data-suffix="+ TB">10+ TB</strong><small>de dados processados mensalmente em workloads de produção.</small></div>
-            <div class="case-pnl"><span><b>-20%</b> runtime</span><span>mais capacidade</span><span>menor custo marginal</span></div>
-          </article>
-
-          <article class="business-case reveal">
-            <div class="business-case-top"><span class="business-case-code">CASE 02 · AUTOMATION</span><span class="business-case-value"><i></i> Produtividade</span></div>
-            <h3>Retirar pessoas da operação repetitiva sem perder controle.</h3>
-            <p class="business-case-lead">Automação de valor não é criar atalhos. É transformar rotinas recorrentes em sistemas observáveis, recuperáveis e previsíveis.</p>
-            <div class="business-case-flow">
-              <div class="case-flow-item"><span>Gargalo</span><p>Execuções recorrentes dependentes de intervenção, memória e acompanhamento manual.</p></div>
-              <div class="case-flow-item"><span>Sistema</span><p>Orquestração, scheduling, alertas, retries e monitoramento operacional.</p></div>
-            </div>
-            <div class="business-case-impact"><strong class="counter" data-count="95" data-suffix="%">95%</strong><small>dos fluxos recorrentes automatizados no contexto operado.</small></div>
-            <div class="case-pnl"><span>menos handoffs</span><span>menor risco operacional</span><span>capacidade liberada</span></div>
-          </article>
-
-          <article class="business-case reveal">
-            <div class="business-case-top"><span class="business-case-code">CASE 03 · API INGESTION</span><span class="business-case-value"><i></i> Eficiência</span></div>
-            <h3>Transformar coleta manual em um serviço reutilizável.</h3>
-            <p class="business-case-lead">Quando ingestão depende de pessoas baixando, movendo e preparando arquivos, crescimento significa contratar mais operação. A arquitetura certa quebra essa relação.</p>
-            <div class="business-case-flow">
-              <div class="case-flow-item"><span>Gargalo</span><p>Coleta e movimentação manual de dados entre fontes e consumidores internos.</p></div>
-              <div class="case-flow-item"><span>Sistema</span><p>Serviços FastAPI, integrações e camada programática de ingestão.</p></div>
-            </div>
-            <div class="business-case-impact"><strong class="counter" data-count="50" data-prefix="-" data-suffix="%">-50%</strong><small>de esforço manual associado ao processo de ingestão.</small></div>
-            <div class="case-pnl"><span>menos horas operacionais</span><span>mais velocidade</span><span>escala via software</span></div>
-          </article>
-
-          <article class="business-case reveal">
-            <div class="business-case-top"><span class="business-case-code">CASE 04 · OPERATIONS</span><span class="business-case-value"><i></i> Performance</span></div>
-            <h3>Fazer a gestão enxergar antes — e agir mais rápido.</h3>
-            <p class="business-case-lead">Indicadores só criam valor quando reduzem o tempo entre um desvio operacional aparecer e alguém conseguir decidir sobre ele.</p>
-            <div class="business-case-flow">
-              <div class="case-flow-item"><span>Gargalo</span><p>Informação dispersa, consolidação manual e baixa visibilidade de performance.</p></div>
-              <div class="case-flow-item"><span>Sistema</span><p>SQL, automação, BI e camada analítica orientada a planejamento e gestão.</p></div>
-            </div>
-            <div class="business-case-impact"><strong class="counter" data-count="20" data-prefix="+" data-suffix="%">+20%</strong><small>de eficiência operacional no contexto de gestão e planejamento.</small></div>
-            <div class="case-pnl"><span>decisão mais rápida</span><span>menos retrabalho</span><span>mais previsibilidade</span></div>
-          </article>
-
-          <article class="business-case business-case-ai reveal">
-            <div class="business-case-top"><span class="business-case-code">CASE 05 · APPLIED AI PRODUCT</span><span class="business-case-value"><i></i> Nova capacidade digital</span></div>
-            <span class="ai-case-mark">AI → PRODUCT</span>
-            <h3>Levar IA multimodal do experimento até um produto operável.</h3>
-            <p class="business-case-lead">Um produto com IA precisa de muito mais que uma chamada de modelo: dados, outputs estruturados, APIs, autenticação, tracking, experiência multilíngue e operação de ponta a ponta.</p>
-            <div class="business-case-flow">
-              <div class="case-flow-item"><span>Gargalo</span><p>Converter capacidade de IA em uma experiência confiável, rastreável e utilizável.</p></div>
-              <div class="case-flow-item"><span>Sistema</span><p>Curadoria de dados + IA multimodal + APIs + auth + tracking + produto web.</p></div>
-            </div>
-            <div class="business-case-impact"><small><strong>Selected project / Dermaly AI.</strong> Repertório de produto aplicado para transformar modelos em fluxo real de usuário e operação.</small></div>
-            <div class="case-pnl"><span>IA em produção</span><span>produto end-to-end</span><span>capacidade escalável</span></div>
-          </article>
-        </div>
-
-        <p class="business-case-note reveal"><strong>Transparência:</strong> os cases acima representam experiência técnica real em sistemas e produtos de produção. Não implicam que todos tenham sido contratados originalmente sob a marca LightPath Tecnologia.</p>
+        <div class="selected-project"><span>SELECTED PROJECT / DERMALY AI</span><strong data-i18n="proof.projectTitle">IA multimodal do dado ao produto.</strong><p data-i18n="proof.projectCopy">Curadoria de dados, APIs, outputs estruturados, autenticação, tracking e operação de uma aplicação AI-assisted multilíngue.</p></div>
       </div>
     </section>
 
-    <section class="section method" id="metodo">
+    <section class="method section" id="method" data-path-state="flow" aria-labelledby="method-title">
       <div class="shell">
-        <div class="section-kicker reveal"><span>04</span> Como atuamos</div>
-        <div class="method-intro reveal"><h2>Primeiro o impacto.<br/>Depois a <em>tecnologia.</em></h2><p>Cada projeto começa por uma pergunta de negócio: qual mudança mensurável justificaria construir essa solução?</p></div>
-
-        <div class="method-stage">
-          <div class="method-rail" aria-hidden="true"><span></span></div>
-          <article class="method-step reveal"><span class="step-num">01</span><div><span class="step-tag">DIAGNÓSTICO</span><h3>Mapeamos onde o valor está travado.</h3><p>Processos, dados, decisões, tempos de espera, retrabalho, custo e risco. O objetivo é separar oportunidade real de hype.</p></div><aside>Output <b>Mapa de oportunidades priorizado</b></aside></article>
-          <article class="method-step reveal"><span class="step-num">02</span><div><span class="step-tag">DESENHO</span><h3>Escolhemos a menor arquitetura que resolve.</h3><p>Definimos solução, integrações, dados, segurança, métricas e caminho de entrega sem superdimensionar tecnologia.</p></div><aside>Output <b>Arquitetura + plano de execução</b></aside></article>
-          <article class="method-step reveal"><span class="step-num">03</span><div><span class="step-tag">IMPLEMENTAÇÃO</span><h3>Construímos para uso real, não para demo.</h3><p>Integrações, pipelines, interfaces, modelos, automações, testes e observabilidade até a solução entrar no fluxo da equipe.</p></div><aside>Output <b>Solução em produção</b></aside></article>
-          <article class="method-step reveal"><span class="step-num">04</span><div><span class="step-tag">OTIMIZAÇÃO</span><h3>Medimos o que mudou e iteramos.</h3><p>Tempo poupado, qualidade, custo, capacidade, conversão ou produtividade. O projeto continua apenas onde o impacto aparece.</p></div><aside>Output <b>ROI operacional + próximos ganhos</b></aside></article>
+        <div class="section-kicker"><span>07</span><b data-i18n="method.kicker">HOW WE WORK</b></div>
+        <div class="split-heading"><h2 id="method-title" data-i18n-html="method.title">PRIMEIRO O IMPACTO.<br><em>DEPOIS A TECNOLOGIA.</em></h2><p data-i18n="method.copy">Cada projeto começa por uma pergunta: qual mudança mensurável justificaria construir essa solução?</p></div>
+        <div class="method-list">
+          <article><span>01</span><div><small data-i18n="method.s1.kicker">DIAGNÓSTICO</small><h3 data-i18n="method.s1.title">Mapeamos onde o valor está travado.</h3><p data-i18n="method.s1.copy">Processos, dados, decisões, tempo, retrabalho, custo e risco.</p></div><b data-i18n="method.s1.out">Mapa de oportunidades</b></article>
+          <article><span>02</span><div><small data-i18n="method.s2.kicker">DESENHO</small><h3 data-i18n="method.s2.title">Escolhemos a menor arquitetura que resolve.</h3><p data-i18n="method.s2.copy">Solução, integrações, dados, segurança e métrica de sucesso.</p></div><b data-i18n="method.s2.out">Arquitetura + plano</b></article>
+          <article><span>03</span><div><small data-i18n="method.s3.kicker">IMPLEMENTAÇÃO</small><h3 data-i18n="method.s3.title">Construímos para uso real, não para demo.</h3><p data-i18n="method.s3.copy">Software, integrações, modelos, testes e observabilidade até produção.</p></div><b data-i18n="method.s3.out">Solução em produção</b></article>
+          <article><span>04</span><div><small data-i18n="method.s4.kicker">OTIMIZAÇÃO</small><h3 data-i18n="method.s4.title">Medimos o que mudou e ampliamos o ganho.</h3><p data-i18n="method.s4.copy">Tempo poupado, conversão, custo, capacidade, qualidade ou produtividade.</p></div><b data-i18n="method.s4.out">ROI + próximo ganho</b></article>
         </div>
       </div>
     </section>
 
-    <section class="section proof-section" id="provas">
-      <div class="shell">
-        <div class="section-kicker reveal"><span>05</span> Engenharia com prova</div>
-        <div class="proof-heading reveal"><h2>Experiência construída em <em>produção.</em></h2><p>O repertório técnico por trás da LightPath vem de sistemas de dados, automação e produtos com IA operando sobre problemas reais.</p></div>
-
-        <div class="proof-bento">
-          <article class="proof-card proof-card-hero reveal">
-            <div class="proof-card-top"><span>AWS DATA / PRODUCTION</span><i>01</i></div><strong class="counter" data-count="10" data-suffix="+ TB">10+ TB</strong><h3>processados por mês</h3><p>Pipelines distribuídos em Spark/PySpark sobre AWS EMR, com arquitetura lakehouse e orquestração Airflow.</p>
-            <div class="sparkline" aria-hidden="true"><svg viewBox="0 0 500 120" preserveAspectRatio="none"><path d="M0 99 C55 90 64 74 113 79 S186 93 232 61 300 73 342 44 409 51 500 17"/><path class="fill" d="M0 99 C55 90 64 74 113 79 S186 93 232 61 300 73 342 44 409 51 500 17 L500 120 L0 120Z"/></svg></div>
-          </article>
-          <article class="proof-card reveal"><div class="proof-card-top"><span>AUTOMATION</span><i>02</i></div><strong class="counter" data-count="95" data-suffix="%">95%</strong><h3>dos fluxos recorrentes automatizados</h3><p>Orquestração de ETL com ganho de confiabilidade de agenda e redução de operação manual.</p></article>
-          <article class="proof-card reveal"><div class="proof-card-top"><span>INGESTION</span><i>03</i></div><strong class="counter" data-count="50" data-prefix="-" data-suffix="%">-50%</strong><h3>de esforço manual</h3><p>Serviços de ingestão via FastAPI substituindo coleta e movimentação manual de dados.</p></article>
-          <article class="proof-card reveal"><div class="proof-card-top"><span>OPERATIONS</span><i>04</i></div><strong class="counter" data-count="20" data-prefix="+" data-suffix="%">+20%</strong><h3>de eficiência operacional</h3><p>SQL, BI e automação aplicados à gestão de performance e planejamento operacional.</p></article>
-          <article class="proof-card proof-card-product reveal">
-            <div class="proof-card-top"><span>APPLIED AI / PRODUCT</span><i>05</i></div><div class="product-orb" aria-hidden="true"><span></span></div><h3>Produto com IA multimodal, do dado ao deploy.</h3><p>Curadoria de dados, APIs, outputs estruturados, autenticação, tracking e operação de uma aplicação AI-assisted multilíngue.</p><span class="case-label">Selected project / Dermaly AI</span>
-          </article>
-        </div>
-
-        <div class="stack-row reveal" aria-label="Stack técnico"><span>AWS</span><span>Python</span><span>PySpark</span><span>Airflow</span><span>FastAPI</span><span>SQL</span><span>Power BI</span><span>OpenAI</span><span>Docker</span><span>Grafana</span></div>
-      </div>
-    </section>
-
-    <section class="section fit-section" id="fit">
-      <div class="shell fit-grid">
-        <div class="fit-copy reveal"><div class="section-kicker"><span>06</span> Quando faz sentido</div><h2>Nem todo problema precisa de IA.<br/><em>O seu pode precisar.</em></h2></div>
-        <div class="fit-list reveal">
-          <div class="fit-item"><span>01</span><p>Sua equipe ainda move dados entre planilhas, e-mails e sistemas manualmente.</p><i>↗</i></div>
-          <div class="fit-item"><span>02</span><p>Decisões importantes dependem de informação atrasada ou pouco confiável.</p><i>↗</i></div>
-          <div class="fit-item"><span>03</span><p>Existe um processo repetitivo consumindo pessoas que deveriam estar decidindo, não copiando.</p><i>↗</i></div>
-          <div class="fit-item"><span>04</span><p>Você quer aplicar IA, mas precisa transformar uma ideia genérica em caso de uso com ROI.</p><i>↗</i></div>
-          <div class="fit-item"><span>05</span><p>O negócio cresceu mais rápido do que a arquitetura de dados e operação.</p><i>↗</i></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section scanner-section" id="diagnostico" aria-labelledby="scanner-title">
-      <div class="shell scanner-grid">
-        <div class="scanner-copy reveal">
-          <div class="section-kicker"><span>07</span> Opportunity scanner</div>
-          <h2 id="scanner-title">Onde está o próximo <em>ganho?</em></h2>
-          <p>Escolha a pressão que mais incomoda sua operação. A LightPath traduz o sintoma em um primeiro vetor de solução e nas métricas que precisam provar valor.</p>
-        </div>
-        <div class="scanner-app reveal">
-          <div class="scanner-head"><span>LIGHTPATH / VALUE SCAN</span><span class="scanner-live"><i></i> READY</span></div>
-          <div class="scanner-options" role="group" aria-label="Escolha o principal sinal operacional">
-            <button type="button" class="scanner-option is-selected" data-signal="tempo"><small>01</small><strong>TEMPO</strong></button>
-            <button type="button" class="scanner-option" data-signal="custo"><small>02</small><strong>CUSTO</strong></button>
-            <button type="button" class="scanner-option" data-signal="risco"><small>03</small><strong>RISCO</strong></button>
-            <button type="button" class="scanner-option" data-signal="capacidade"><small>04</small><strong>CAPACIDADE</strong></button>
-            <button type="button" class="scanner-option" data-signal="decisao"><small>05</small><strong>DECISÃO</strong></button>
+    <section class="diagnostic section" id="diagnostic" data-path-state="decision" aria-labelledby="diagnostic-title">
+      <div class="shell diagnostic-grid">
+        <div class="diagnostic-copy"><div class="section-kicker"><span>08</span><b>OPPORTUNITY SCANNER</b></div><h2 id="diagnostic-title" data-i18n-html="diagnostic.title">ONDE ESTÁ O SEU<br><em>PRÓXIMO GANHO?</em></h2><p data-i18n="diagnostic.copy">Escolha o sinal que mais incomoda. A LightPath traduz o sintoma em um primeiro vetor de solução e nas métricas que precisam provar valor.</p></div>
+        <div class="scanner">
+          <div class="scanner-head"><span>LIGHTPATH / VALUE SCAN</span><i></i><b>READY</b></div>
+          <div class="scanner-options">
+            <button class="is-active" type="button" data-scan="tempo" data-i18n="diagnostic.o1">TEMPO</button>
+            <button type="button" data-scan="custo" data-i18n="diagnostic.o2">CUSTO</button>
+            <button type="button" data-scan="receita" data-i18n="diagnostic.o3">RECEITA</button>
+            <button type="button" data-scan="risco" data-i18n="diagnostic.o4">RISCO</button>
+            <button type="button" data-scan="decisao" data-i18n="diagnostic.o5">DECISÃO</button>
           </div>
-          <div class="scanner-result">
-            <div>
-              <div class="scanner-result-top"><small>PRIMEIRO VETOR</small><span>HYPOTHESIS / 01</span></div>
-              <h3 id="scanner-result-title">Automação de processo</h3>
-              <p id="scanner-result-copy">Mapeamos esperas, handoffs e tarefas repetitivas. O primeiro alvo é reduzir lead time sem criar uma nova camada de operação.</p>
-              <div class="scanner-kpis" id="scanner-result-kpis"><span>lead time</span><span>horas recuperadas</span><span>SLA</span></div>
-            </div>
-            <button type="button" class="scanner-action" id="scanner-to-contact"><span>Transformar em diagnóstico</span><i>↗</i></button>
-          </div>
+          <div class="scanner-result"><small data-i18n="diagnostic.hypothesis">PRIMEIRA HIPÓTESE</small><strong id="scan-title" data-i18n="diagnostic.defaultTitle">Automação de processo</strong><p id="scan-copy" data-i18n="diagnostic.defaultCopy">Mapeamos esperas, handoffs e tarefas repetitivas para reduzir lead time sem criar outra camada de operação.</p><div id="scan-kpis"><span>lead time</span><span data-i18n="diagnostic.kpiHours">horas recuperadas</span><span>SLA</span></div></div>
+          <a href="#contact" class="button button-primary"><span data-i18n="diagnostic.cta">Transformar em diagnóstico</span><i>↗</i></a>
         </div>
       </div>
     </section>
 
-    <section class="section contact-section" id="contato">
-      <div class="contact-beam" aria-hidden="true"></div>
-      <div class="shell contact-grid">
-        <div class="contact-copy reveal">
-          <span class="contact-kicker">LIGHTPATH / DISCOVERY</span>
-          <h2>Onde sua operação está deixando <em>resultado na mesa?</em></h2>
-          <p>Mostre o processo que consome tempo, atrasa decisão ou limita escala. Nós avaliamos o impacto potencial primeiro — e só então decidimos se vale construir.</p>
-          <a href="https://br.linkedin.com/in/vfalqueiroreis" target="_blank" rel="noopener noreferrer" class="linkedin-link magnetic">Falar direto pelo LinkedIn <span>↗</span></a>
-        </div>
-
-        <form class="contact-form reveal" id="lead-form" novalidate>
-          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-          <div class="field-row">
-            <label><span>Seu nome</span><input type="text" name="name" autocomplete="name" required placeholder="Como podemos chamar você?" /></label>
-            <label><span>Empresa</span><input type="text" name="company" autocomplete="organization" required placeholder="Nome da empresa" /></label>
-          </div>
-          <label><span>E-mail corporativo</span><input type="email" name="email" autocomplete="email" required placeholder="voce@empresa.com" /></label>
-          <label><span>Onde está o gargalo?</span><textarea name="challenge" rows="5" required placeholder="Ex.: temos 4 pessoas consolidando relatórios toda semana e a diretoria só recebe os números dois dias depois..."></textarea></label>
-          <label class="select-label"><span>Principal objetivo</span><select name="objective" required><option value="" selected disabled>Selecione uma opção</option><option>Automatizar processos</option><option>Estruturar dados / Data Platform</option><option>Aplicar IA em um processo</option><option>Analytics / Data Science</option><option>Desenvolver uma solução sob medida</option><option>Ainda não sei — quero diagnosticar</option></select></label>
-          <button class="button button-primary submit-button magnetic" type="submit"><span>Quero diagnosticar a oportunidade</span><i>↗</i></button>
-          <small class="form-note">Você traz o gargalo. Nós ajudamos a transformar em hipótese de impacto, arquitetura e próximos passos.</small>
-        </form>
+    <section class="final-story" id="contact" data-path-state="final" aria-labelledby="final-title">
+      <div class="shell final-inner">
+        <span class="final-kicker">LIGHTPATH / NEXT VECTOR</span>
+        <h2 id="final-title" data-i18n-html="final.title">QUAL GARGALO<br>MERECE SER <em>REMOVIDO PRIMEIRO?</em></h2>
+        <p data-i18n="final.copy">Você traz o gargalo. Nós ajudamos a transformar em hipótese de impacto, arquitetura e próximos passos.</p>
+        <div class="final-actions"><a href="mailto:vifalqueiro@gmail.com?subject=LightPath%20-%20Oportunidade" class="button button-primary"><span data-i18n="final.email">Falar com a LightPath</span><i>↗</i></a><a href="apresentacao/" class="button button-ghost"><span data-i18n="final.presentation">Abrir apresentação</span><i>→</i></a></div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="shell footer-main"><a href="#top" class="footer-brand magnetic"><span>LIGHT</span>PATH<i>↗</i></a><p>Engenharia de dados, IA aplicada e automação para operações mais inteligentes.</p></div>
-    <div class="shell footer-bottom"><span>© <span id="year"></span> LightPath Tecnologia</span><span>Lightpath Tecnologia Ltda · CNPJ 65.652.507/0001-75</span><span>Brazil · Building systems that create leverage.</span><a href="#top">Voltar ao topo ↑</a></div>
-  </footer>
+  <footer class="footer"><div class="shell"><div class="footer-brand">LIGHT<span>PATH</span></div><p data-i18n="footer.copy">Dados, IA, automação e growth systems para transformar atrito em alavancagem.</p><div class="footer-meta"><span>© <span id="year"></span> LightPath Tecnologia</span><span>Lightpath Tecnologia Ltda · CNPJ 65.652.507/0001-75</span><span>Brazil · Building systems that create leverage.</span></div></div></footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
-  <script src="script.js"></script>
-  <script src="storytelling.js"></script>
-  <script src="i18n.js"></script>
+  <script src="i18n-v2.js"></script>
+  <script src="app-v2.js"></script>
+  <script src="motion-director.js"></script>
 </body>
 </html>
