@@ -1,0 +1,23 @@
+name: Validate LightPath V2
+on:
+  push:
+    branches:
+      - agent/premium-scrolltelling-v2-20260910
+      - main
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate HTML and architecture
+        run: python scripts/validate_site.py
+      - name: Validate JavaScript syntax
+        run: |
+          node --check app-v2.js
+          node --check motion-director.js
+          node --check i18n-v2.js
+          node --check apresentacao/presentation.js
