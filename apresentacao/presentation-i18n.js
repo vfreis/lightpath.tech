@@ -27,6 +27,7 @@
       'final.kicker':'09 / DISCOVERY','final.a':'Which bottleneck should be','final.b':'removed first?','final.copy':'Bring the problem in business language. Architecture comes after.','final.opt1':'Manual process','final.opt2':'Scattered data','final.opt3':'Delayed decision','final.opt4':'AI without a use case','final.opt5':'Operation without scale','final.select':'SELECT A BOTTLENECK','final.result':'We found the first gain vector.','final.resultCopy':'We measure time, cost, risk and capacity before proposing architecture.','final.cta':'Open diagnosis'
     }
   };
+  const style=document.createElement('style');style.textContent='.lp-lang-track{position:relative!important;display:inline-block!important;width:28px!important;height:14px!important;border-radius:999px!important;background:rgba(255,255,255,.08)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)!important;flex:0 0 auto!important}.lp-lang-track i{position:absolute!important;left:3px!important;top:3px!important;width:8px!important;height:8px!important;border-radius:50%!important;background:#b7ff37!important;box-shadow:0 0 10px rgba(183,255,55,.58)!important;transition:transform .24s ease!important}.lp-language-toggle.is-en .lp-lang-track i{transform:translateX(14px)!important}.lp-lang-label{font:800 7px/1 Manrope,system-ui,sans-serif!important;letter-spacing:.06em!important}.lp-language-toggle:not(.is-en) .lp-lang-pt,.lp-language-toggle.is-en .lp-lang-en{color:#eaffc9!important}.lp-language-toggle.is-en .lp-lang-pt,.lp-language-toggle:not(.is-en) .lp-lang-en{color:#68736d!important}';document.head.appendChild(style);
   let current=localStorage.getItem(KEY)==='en'?'en':'pt';
   const t=k=>(D[current]&&D[current][k])||D.pt[k]||k;
   let toggle=document.querySelector('.lp-language-toggle');
@@ -36,15 +37,8 @@
     document.querySelectorAll('[data-i18n]').forEach(el=>{const value=D[current][el.dataset.i18n];if(value!=null)el.textContent=value});
     document.title=current==='en'?'Interactive Presentation — LightPath Tecnologia':'Apresentação Interativa — LightPath Tecnologia';
     const meta=document.querySelector('meta[name="description"]');if(meta)meta.content=current==='en'?'Interactive LightPath Tecnologia presentation: Data, AI, Automation and Growth Systems focused on business impact.':'Apresentação interativa da LightPath Tecnologia: dados, IA, automação e Growth Systems orientados a impacto.';
-    document.querySelector('.app-brand')?.setAttribute('aria-label',current==='en'?'Back to LightPath Tecnologia':'Voltar para LightPath Tecnologia');
-    document.querySelector('.app-status')?.setAttribute('aria-label',current==='en'?'Presentation progress':'Progresso da apresentação');
-    document.querySelector('.story-controls')?.setAttribute('aria-label',current==='en'?'Presentation navigation':'Navegação da apresentação');
-    document.querySelector('#prev-scene')?.setAttribute('aria-label',current==='en'?'Previous scene':'Cena anterior');
-    document.querySelector('#next-scene')?.setAttribute('aria-label',current==='en'?'Next scene':'Próxima cena');
-    toggle.classList.toggle('is-en',current==='en');toggle.setAttribute('aria-pressed',String(current==='en'));toggle.setAttribute('aria-label',current==='en'?'Mudar para português':'Switch to English');toggle.title=current==='en'?'Português':'English';
-    window.LIGHTPATH_LANGUAGE=current;window.dispatchEvent(new CustomEvent('lightpath:languagechange',{detail:{lang:current}}));
+    document.querySelector('.app-brand')?.setAttribute('aria-label',current==='en'?'Back to LightPath Tecnologia':'Voltar para LightPath Tecnologia');document.querySelector('.app-status')?.setAttribute('aria-label',current==='en'?'Presentation progress':'Progresso da apresentação');document.querySelector('.story-controls')?.setAttribute('aria-label',current==='en'?'Presentation navigation':'Navegação da apresentação');document.querySelector('#prev-scene')?.setAttribute('aria-label',current==='en'?'Previous scene':'Cena anterior');document.querySelector('#next-scene')?.setAttribute('aria-label',current==='en'?'Next scene':'Próxima cena');document.querySelectorAll('#scene-dots button').forEach((b,i)=>b.setAttribute('aria-label',current==='en'?`Scene ${i+1}`:`Cena ${i+1}`));
+    toggle.classList.toggle('is-en',current==='en');toggle.setAttribute('aria-pressed',String(current==='en'));toggle.setAttribute('aria-label',current==='en'?'Mudar para português':'Switch to English');toggle.title=current==='en'?'Português':'English';window.LIGHTPATH_LANGUAGE=current;window.dispatchEvent(new CustomEvent('lightpath:languagechange',{detail:{lang:current}}));
   };
-  toggle.addEventListener('click',()=>apply(current==='pt'?'en':'pt'));
-  window.LightPathPresentationI18n={t,apply,get lang(){return current}};
-  apply(current);
+  toggle.addEventListener('click',()=>apply(current==='pt'?'en':'pt'));window.LightPathPresentationI18n={t,apply,get lang(){return current}};apply(current);
 })();
