@@ -29,14 +29,17 @@ O objeto visual LightPath atravessa a narrativa completa e muda de comportamento
 
 ## Apresentação
 
-A rota `/apresentacao/` se comporta como um sales app:
+A rota `/apresentacao/` se comporta como um sales app adaptativo:
 
-- cenas compartimentadas no viewport;
-- wheel/trackpad vertical avança horizontalmente;
+- cada cena ocupa apenas o viewport disponível;
+- wheel ou trackpad vertical avança a narrativa horizontalmente;
 - swipe vertical ou horizontal navega entre cenas;
-- botões e teclado continuam disponíveis;
-- `visualViewport` acompanha a altura real do Safari/mobile;
-- cada frame é medido e recebe escala adaptativa quando necessário para que todos os elementos permaneçam visíveis;
+- setas, botões, PageUp/PageDown e teclado continuam disponíveis;
+- transições entre cenas ocorrem lateralmente, reforçando a sensação de aplicativo;
+- `visualViewport` acompanha a altura real do Safari/mobile e alterações da barra do navegador;
+- cada frame é medido depois de renderização, interação e troca PT/EN;
+- quando necessário, o conteúdo recebe escala adaptativa para manter todos os elementos dentro da tela;
+- não há necessidade de scroll interno para revelar o restante de uma cena;
 - a escolha PT/EN continua compartilhada com a home.
 
 ## Publicação
