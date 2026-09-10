@@ -11,31 +11,32 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="presentation.css?v=20260910-v3" />
+  <link rel="stylesheet" href="presentation-v4.css?v=20260910-v4" />
 </head>
 <body>
   <canvas class="vector-field" id="vector-field" aria-hidden="true"></canvas>
   <div class="noise" aria-hidden="true"></div>
 
   <header class="appbar">
-    <a href="../" class="app-brand" aria-label="Voltar para LightPath Tecnologia">
+    <a href="../" class="app-brand" data-i18n-aria="chrome.backHome">
       <svg viewBox="0 0 34 34" fill="none" aria-hidden="true"><path d="M3 27 10.5 16.8l4.5 5.2L21.5 11 31 27" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 26 12.2 20.2m0 0-.5 4.1m.5-4.1-4 .7M13.5 25 19 18.3m0 0-.6 4.2m.6-4.2-4.1.7M20.5 23.5 26.6 15m0 0-.6 4.3m.6-4.3-4.2.7" class="growth-vector" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 27h25" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" opacity=".62"/></svg>
-      <span><strong>LightPath</strong><small>interactive story</small></span>
+      <span><strong>LightPath</strong><small data-i18n="chrome.subtitle">apresentação interativa</small></span>
     </a>
-    <div class="app-status" aria-label="Progresso da apresentação"><span id="scene-number">01</span><i></i><span>10</span></div>
+    <div class="app-status" data-i18n-aria="chrome.progress"><span id="scene-number">01</span><i></i><span id="scene-total">11</span></div>
   </header>
 
   <main class="story" id="story" tabindex="0">
     <section class="scene is-active" data-scene="0" aria-labelledby="scene0-title">
       <div class="scene-inner hero-layout">
         <div class="scene-copy">
-          <span class="scene-kicker" data-i18n="hero.kicker">LIGHTPATH / INTERACTIVE STORY</span>
+          <span class="scene-kicker" data-i18n="hero.kicker">LIGHTPATH / HISTÓRIA INTERATIVA</span>
           <h1 id="scene0-title"><span data-i18n="hero.a">Seu próximo ganho está</span> <em data-i18n="hero.b">escondido no processo.</em></h1>
           <p data-i18n="hero.copy">Do clique ao caixa. Do dado à decisão. Da rotina ao sistema. Da IA ao produto.</p>
-          <button class="primary-action js-next" type="button"><span data-i18n="hero.cta">Começar</span> <b>→</b></button>
+          <button class="primary-action js-next" type="button"><span data-i18n="hero.cta">Começar</span><b>→</b></button>
         </div>
         <div class="hero-vector" aria-hidden="true">
           <svg viewBox="0 0 520 520"><defs><linearGradient id="heroGrad" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#70f4d0"/><stop offset="1" stop-color="#b7ff37"/></linearGradient></defs><path class="mountain" d="M40 408 164 244l76 88 106-178 134 254"/><path class="vector vector-a" d="M90 388 C150 348 181 295 219 240"/><path class="vector vector-b" d="M180 370 C258 318 300 258 336 191"/><path class="vector vector-c" d="M276 348 C340 295 385 231 420 168"/><circle cx="420" cy="168" r="7" class="pulse"/></svg>
-          <span class="hero-badge">DATA · AI · AUTOMATION · GROWTH</span>
+          <span class="hero-badge" data-i18n="hero.badge">DADOS · IA · AUTOMAÇÃO · GROWTH</span>
         </div>
       </div>
     </section>
@@ -48,11 +49,11 @@
           <p data-i18n="impact.copy">Escolha o resultado que precisa mover.</p>
         </div>
         <div class="impact-stage">
-          <div class="impact-core"><small>OUTPUT</small><strong id="impact-core-title" data-i18n="impact.core">IMPACTO</strong><span id="impact-core-sub" data-i18n="impact.sub">mensurável</span></div>
+          <div class="impact-core"><small data-i18n="impact.output">SAÍDA</small><strong id="impact-core-title" data-i18n="impact.core">IMPACTO</strong><span id="impact-core-sub" data-i18n="impact.sub">mensurável</span></div>
           <div class="impact-options">
-            <button class="impact-choice is-selected" type="button" data-impact="custo"><small>01</small><b data-i18n="impact.cost">REDUZIR CUSTO</b></button>
-            <button class="impact-choice" type="button" data-impact="decisao"><small>02</small><b data-i18n="impact.speed">ACELERAR DECISÃO</b></button>
-            <button class="impact-choice" type="button" data-impact="escala"><small>03</small><b data-i18n="impact.scale">CRIAR ESCALA</b></button>
+            <button class="impact-choice is-selected" type="button" data-impact="cost"><small>01</small><b data-i18n="impact.cost">REDUZIR CUSTO</b></button>
+            <button class="impact-choice" type="button" data-impact="speed"><small>02</small><b data-i18n="impact.speed">ACELERAR DECISÃO</b></button>
+            <button class="impact-choice" type="button" data-impact="scale"><small>03</small><b data-i18n="impact.scale">CRIAR ESCALA</b></button>
           </div>
         </div>
       </div>
@@ -60,19 +61,19 @@
 
     <section class="scene" data-scene="2" aria-labelledby="scene2-title">
       <div class="scene-inner diagnosis-layout">
-        <div class="scene-heading">
+        <div class="scene-heading compact-heading">
           <span class="scene-kicker" data-i18n="diagnosis.kicker">02 / DIAGNÓSTICO</span>
           <h2 id="scene2-title"><span data-i18n="diagnosis.a">Onde o valor</span> <em data-i18n="diagnosis.b">trava?</em></h2>
           <p data-i18n="diagnosis.copy">Escolha o gargalo. Nós mostramos o primeiro vetor.</p>
         </div>
         <div class="bottleneck-grid">
-          <button class="bottleneck is-selected" type="button" data-bottleneck="dados"><small>01</small><i>⌁</i><b data-i18n="diagnosis.data">DADOS DISPERSOS</b></button>
-          <button class="bottleneck" type="button" data-bottleneck="processo"><small>02</small><i>↯</i><b data-i18n="diagnosis.manual">PROCESSO MANUAL</b></button>
-          <button class="bottleneck" type="button" data-bottleneck="decisao"><small>03</small><i>◫</i><b data-i18n="diagnosis.delay">DECISÃO ATRASADA</b></button>
-          <button class="bottleneck" type="button" data-bottleneck="ia"><small>04</small><i>✦</i><b data-i18n="diagnosis.ai">IA SEM CONTEXTO</b></button>
+          <button class="bottleneck is-selected" type="button" data-bottleneck="data"><small>01</small><i>⌁</i><b data-i18n="diagnosis.data">DADOS DISPERSOS</b></button>
+          <button class="bottleneck" type="button" data-bottleneck="manual"><small>02</small><i>↯</i><b data-i18n="diagnosis.manual">PROCESSO MANUAL</b></button>
+          <button class="bottleneck" type="button" data-bottleneck="decision"><small>03</small><i>◫</i><b data-i18n="diagnosis.delay">DECISÃO ATRASADA</b></button>
+          <button class="bottleneck" type="button" data-bottleneck="ai"><small>04</small><i>✦</i><b data-i18n="diagnosis.ai">IA SEM CONTEXTO</b></button>
         </div>
         <div class="result-bar bottleneck-result">
-          <div><small data-i18n="common.firstVector">PRIMEIRO VETOR</small><strong id="bottleneck-solution">DATA FOUNDATION</strong></div>
+          <div><small data-i18n="common.firstVector">PRIMEIRO VETOR</small><strong id="bottleneck-solution">BASE DE DADOS</strong></div>
           <p id="bottleneck-copy">Integrar fontes, criar contratos e tornar o dado confiável antes de acelerar analytics ou IA.</p>
           <span id="bottleneck-metric">Métrica → latência + qualidade</span>
         </div>
@@ -87,13 +88,11 @@
           <p data-i18n="solutions.copy">A tecnologia muda conforme o gargalo — não o contrário.</p>
         </div>
         <div class="solution-console">
-          <div class="solution-core">
-            <span id="solution-code">DATA / 01</span><strong id="solution-title">Data Platform</strong><p id="solution-copy">Base confiável para decidir, automatizar e escalar.</p><small id="solution-stack">Pipelines · lakehouse · qualidade · observabilidade</small>
-          </div>
+          <div class="solution-core"><span id="solution-code">DADOS / 01</span><strong id="solution-title">Plataforma de Dados</strong><p id="solution-copy">Base confiável para decidir, automatizar e escalar.</p><small id="solution-stack">Pipelines · lakehouse · qualidade · observabilidade</small></div>
           <div class="solution-tabs">
-            <button class="solution-node is-selected" type="button" data-solution="data"><i>⌁</i><span>DATA</span></button>
-            <button class="solution-node" type="button" data-solution="ai"><i>✦</i><span>AI</span></button>
-            <button class="solution-node" type="button" data-solution="automation"><i>↯</i><span>AUTO</span></button>
+            <button class="solution-node is-selected" type="button" data-solution="data"><i>⌁</i><span data-i18n="solutions.tabData">DADOS</span></button>
+            <button class="solution-node" type="button" data-solution="ai"><i>✦</i><span data-i18n="solutions.tabAi">IA</span></button>
+            <button class="solution-node" type="button" data-solution="automation"><i>↯</i><span data-i18n="solutions.tabAuto">AUTOMAÇÃO</span></button>
             <button class="solution-node" type="button" data-solution="analytics"><i>◫</i><span>BI / DS</span></button>
           </div>
         </div>
@@ -108,18 +107,18 @@
           <p data-i18n="architecture.copy">A menor arquitetura que conecta origem, ação e ROI.</p>
         </div>
         <div class="architecture-flow">
-          <button class="arch-node" type="button" data-arch="0"><small>01</small><b>SOURCES</b><span>APIs · DB · files</span></button><i class="arch-link">→</i>
-          <button class="arch-node" type="button" data-arch="1"><small>02</small><b>DATA</b><span>quality · lakehouse</span></button><i class="arch-link">→</i>
-          <button class="arch-node" type="button" data-arch="2"><small>03</small><b>AUTOMATION</b><span>events · APIs</span></button><i class="arch-link">→</i>
-          <button class="arch-node" type="button" data-arch="3"><small>04</small><b>AI / MODELS</b><span>RAG · agents</span></button><i class="arch-link">→</i>
-          <button class="arch-node" type="button" data-arch="4"><small>05</small><b>DECISION</b><span>BI · alerts</span></button><i class="arch-link">→</i>
+          <button class="arch-node" type="button" data-arch="0"><small>01</small><b data-i18n="architecture.sources">FONTES</b><span data-i18n="architecture.sourcesSub">APIs · BD · arquivos</span></button><i class="arch-link">→</i>
+          <button class="arch-node" type="button" data-arch="1"><small>02</small><b data-i18n="architecture.data">DADOS</b><span data-i18n="architecture.dataSub">qualidade · lakehouse</span></button><i class="arch-link">→</i>
+          <button class="arch-node" type="button" data-arch="2"><small>03</small><b data-i18n="architecture.automation">AUTOMAÇÃO</b><span data-i18n="architecture.automationSub">eventos · APIs</span></button><i class="arch-link">→</i>
+          <button class="arch-node" type="button" data-arch="3"><small>04</small><b data-i18n="architecture.ai">IA / MODELOS</b><span data-i18n="architecture.aiSub">RAG · agentes</span></button><i class="arch-link">→</i>
+          <button class="arch-node" type="button" data-arch="4"><small>05</small><b data-i18n="architecture.decision">DECISÃO</b><span data-i18n="architecture.decisionSub">BI · alertas</span></button><i class="arch-link">→</i>
           <button class="arch-node arch-node--roi" type="button" data-arch="5"><small>06</small><b>ROI</b><span data-i18n="architecture.roi">tempo · custo · capacidade</span></button>
         </div>
-        <div class="control-layer"><span>CONTROL LAYER</span><b data-i18n="architecture.security">SEGURANÇA</b><b data-i18n="architecture.observe">OBSERVABILIDADE</b><b data-i18n="architecture.governance">GOVERNANÇA</b><b data-i18n="architecture.tests">TESTES</b><b>HUMAN-IN-THE-LOOP</b></div>
+        <div class="control-layer"><span data-i18n="architecture.control">CAMADA DE CONTROLE</span><b data-i18n="architecture.security">SEGURANÇA</b><b data-i18n="architecture.observe">OBSERVABILIDADE</b><b data-i18n="architecture.governance">GOVERNANÇA</b><b data-i18n="architecture.tests">TESTES</b><b data-i18n="architecture.human">SUPERVISÃO HUMANA</b></div>
       </div>
     </section>
 
-    <section class="scene" data-scene="growth" aria-labelledby="growth-title">
+    <section class="scene" data-scene="5" aria-labelledby="growth-title">
       <div class="scene-inner split-layout growth-layout">
         <div class="scene-copy">
           <span class="scene-kicker" data-i18n="growth.kicker">05 / GROWTH SYSTEMS</span>
@@ -128,23 +127,23 @@
         </div>
         <div class="growth-console">
           <div class="growth-flow">
-            <button class="growth-node is-selected" type="button" data-growth-step="media"><small>01</small><b>MEDIA</b><span>creative · traffic</span></button>
-            <button class="growth-node" type="button" data-growth-step="landing"><small>02</small><b>LANDING</b><span>quiz · message</span></button>
-            <button class="growth-node" type="button" data-growth-step="checkout"><small>03</small><b>CHECKOUT</b><span>offer · payment</span></button>
-            <button class="growth-node" type="button" data-growth-step="order"><small>04</small><b>ORDER</b><span>commercial truth</span></button>
-            <button class="growth-node" type="button" data-growth-step="lifecycle"><small>05</small><b>LIFECYCLE</b><span>members · CRM</span></button>
+            <button class="growth-node is-selected" type="button" data-growth-step="media"><small>01</small><b data-i18n="growth.media">MÍDIA</b><span data-i18n="growth.mediaSub">criativo · tráfego</span></button>
+            <button class="growth-node" type="button" data-growth-step="landing"><small>02</small><b>LANDING</b><span data-i18n="growth.landingSub">quiz · mensagem</span></button>
+            <button class="growth-node" type="button" data-growth-step="checkout"><small>03</small><b>CHECKOUT</b><span data-i18n="growth.checkoutSub">oferta · pagamento</span></button>
+            <button class="growth-node" type="button" data-growth-step="order"><small>04</small><b data-i18n="growth.order">PEDIDO</b><span data-i18n="growth.orderSub">verdade comercial</span></button>
+            <button class="growth-node" type="button" data-growth-step="lifecycle"><small>05</small><b data-i18n="growth.lifecycle">CICLO</b><span data-i18n="growth.lifecycleSub">members · CRM</span></button>
           </div>
-          <div class="growth-data"><span>ATTRIBUTION</span><b>UTM</b><b>event_id</b><b>Meta/CAPI</b><b>GA4</b><b>webhooks</b></div>
+          <div class="growth-data"><span data-i18n="growth.attribution">ATRIBUIÇÃO</span><b>UTM</b><b>event_id</b><b>Meta/CAPI</b><b>GA4</b><b>webhooks</b></div>
           <div class="growth-insight"><small data-i18n="growth.lens">LENTE ATIVA</small><strong id="growth-insight-title">Aquisição com feedback de negócio.</strong><p id="growth-insight-copy">Criativo e mídia precisam ser avaliados até o pedido real — não só pelo clique.</p><span id="growth-insight-kpi">Decisão → CAC · receita · qualidade do tráfego</span></div>
         </div>
       </div>
     </section>
 
-    <section class="scene" data-scene="5" aria-labelledby="scene5-title">
+    <section class="scene" data-scene="6" aria-labelledby="scene6-title">
       <div class="scene-inner split-layout method-layout">
         <div class="scene-copy">
           <span class="scene-kicker" data-i18n="method.kicker">06 / MÉTODO</span>
-          <h2 id="scene5-title"><span data-i18n="method.a">Primeiro o impacto.</span> <em data-i18n="method.b">Depois a tecnologia.</em></h2>
+          <h2 id="scene6-title"><span data-i18n="method.a">Primeiro o impacto.</span> <em data-i18n="method.b">Depois a tecnologia.</em></h2>
           <p data-i18n="method.copy">Quatro passos para sair do gargalo e chegar em produção.</p>
         </div>
         <div class="method-app">
@@ -154,16 +153,16 @@
             <button type="button" data-method="2"><span>03</span><b data-i18n="method.step3">Implementação</b></button>
             <button type="button" data-method="3"><span>04</span><b data-i18n="method.step4">Otimização</b></button>
           </div>
-          <div class="method-content"><small id="method-tag">DIAGNÓSTICO</small><strong id="method-title">Mapeamos onde o valor está travado.</strong><div class="method-output"><span>OUTPUT</span><b id="method-output">Mapa de oportunidades priorizado</b></div></div>
+          <div class="method-content"><small id="method-tag">DIAGNÓSTICO</small><strong id="method-title">Mapeamos onde o valor está travado.</strong><div class="method-output"><span data-i18n="common.output">SAÍDA</span><b id="method-output">Mapa de oportunidades priorizado</b></div></div>
         </div>
       </div>
     </section>
 
-    <section class="scene" data-scene="6" aria-labelledby="scene6-title">
+    <section class="scene" data-scene="7" aria-labelledby="scene7-title">
       <div class="scene-inner proof-layout">
         <div class="scene-heading compact-heading">
           <span class="scene-kicker" data-i18n="proof.kicker">07 / ENGENHARIA COM PROVA</span>
-          <h2 id="scene6-title"><span data-i18n="proof.a">Escala real.</span> <em data-i18n="proof.b">Menos esforço. Mais capacidade.</em></h2>
+          <h2 id="scene7-title"><span data-i18n="proof.a">Escala real.</span> <em data-i18n="proof.b">Menos esforço. Mais capacidade.</em></h2>
           <p data-i18n="proof.copy">Experiência técnica aplicada em produção.</p>
         </div>
         <div class="proof-grid">
@@ -176,54 +175,72 @@
       </div>
     </section>
 
-    <section class="scene" data-scene="7" aria-labelledby="scene7-title">
+    <section class="scene" data-scene="8" aria-labelledby="scene8-title">
       <div class="scene-inner split-layout ai-layout">
         <div class="scene-copy">
-          <span class="scene-kicker" data-i18n="ai.kicker">08 / APPLIED AI</span>
-          <h2 id="scene7-title"><span data-i18n="ai.a">IA do dado</span> <em data-i18n="ai.b">ao deploy.</em></h2>
+          <span class="scene-kicker" data-i18n="ai.kicker">08 / IA APLICADA</span>
+          <h2 id="scene8-title"><span data-i18n="ai.a">IA do dado</span> <em data-i18n="ai.b">ao deploy.</em></h2>
           <p data-i18n="ai.copy">Modelo é só uma peça. Valor nasce do sistema.</p>
         </div>
         <div class="ai-product">
-          <div class="ai-product-head"><span>SELECTED PROJECT</span><strong>Dermaly AI</strong><small>AI-assisted multimodal application</small></div>
+          <div class="ai-product-head"><span data-i18n="ai.selected">PROJETO EM DESTAQUE</span><strong>Dermaly AI</strong><small data-i18n="ai.productSub">aplicação multimodal assistida por IA</small></div>
           <div class="ai-pipeline">
-            <button type="button" class="is-active" data-ai-step="0"><span>INPUT</span><b>image + profile</b><i>READY</i></button>
-            <button type="button" data-ai-step="1"><span>MODEL</span><b>multimodal analysis</b><i>RUN</i></button>
-            <button type="button" data-ai-step="2"><span>OUTPUT</span><b>structured JSON</b><i>VALID</i></button>
-            <button type="button" data-ai-step="3"><span>TRACKING</span><b>events + outcomes</b><i>ON</i></button>
+            <button type="button" class="is-active" data-ai-step="0"><span data-i18n="ai.input">ENTRADA</span><b data-i18n="ai.inputSub">imagem + perfil</b><i data-i18n="ai.ready">PRONTO</i></button>
+            <button type="button" data-ai-step="1"><span data-i18n="ai.model">MODELO</span><b data-i18n="ai.modelSub">análise multimodal</b><i data-i18n="ai.run">EXECUTAR</i></button>
+            <button type="button" data-ai-step="2"><span data-i18n="ai.output">SAÍDA</span><b>JSON estruturado</b><i data-i18n="ai.valid">VÁLIDO</i></button>
+            <button type="button" data-ai-step="3"><span>TRACKING</span><b data-i18n="ai.trackingSub">eventos + resultados</b><i data-i18n="ai.on">ATIVO</i></button>
           </div>
           <div class="ai-signal"><span></span><b id="ai-message">Contexto entra. A análise começa com dados estruturados.</b></div>
         </div>
       </div>
     </section>
 
-    <section class="scene" data-scene="8" aria-labelledby="scene8-title">
-      <div class="scene-inner split-layout final-layout">
+    <section class="scene" data-scene="9" aria-labelledby="scene9-title">
+      <div class="scene-inner split-layout discovery-layout">
         <div class="scene-copy">
-          <span class="scene-kicker" data-i18n="final.kicker">09 / DISCOVERY</span>
-          <h2 id="scene8-title"><span data-i18n="final.a">Qual gargalo merece ser</span> <em data-i18n="final.b">removido primeiro?</em></h2>
-          <p data-i18n="final.copy">Traga o problema em linguagem de negócio. A arquitetura vem depois.</p>
+          <span class="scene-kicker" data-i18n="discovery.kicker">09 / DISCOVERY</span>
+          <h2 id="scene9-title"><span data-i18n="discovery.a">Qual gargalo merece ser</span> <em data-i18n="discovery.b">removido primeiro?</em></h2>
+          <p data-i18n="discovery.copy">Traga o problema em linguagem de negócio. A arquitetura vem depois.</p>
         </div>
         <div class="diagnostic-app">
           <div class="diagnostic-options">
-            <button type="button" data-diagnostic="manual" data-i18n="final.opt1">Processo manual</button>
-            <button type="button" data-diagnostic="data" data-i18n="final.opt2">Dados dispersos</button>
-            <button type="button" data-diagnostic="decision" data-i18n="final.opt3">Decisão atrasada</button>
-            <button type="button" data-diagnostic="ai" data-i18n="final.opt4">IA sem caso de uso</button>
-            <button type="button" data-diagnostic="scale" data-i18n="final.opt5">Operação sem escala</button>
+            <button type="button" data-diagnostic="manual" data-i18n="discovery.opt1">Processo manual</button>
+            <button type="button" data-diagnostic="data" data-i18n="discovery.opt2">Dados dispersos</button>
+            <button type="button" data-diagnostic="decision" data-i18n="discovery.opt3">Decisão atrasada</button>
+            <button type="button" data-diagnostic="ai" data-i18n="discovery.opt4">IA sem caso de uso</button>
+            <button type="button" data-diagnostic="scale" data-i18n="discovery.opt5">Operação sem escala</button>
           </div>
-          <div class="diagnostic-result" id="diagnostic-result"><small data-i18n="final.select">SELECIONE UM GARGALO</small><strong data-i18n="final.result">Encontramos o primeiro vetor de ganho.</strong><p data-i18n="final.resultCopy">Vamos medir tempo, custo, risco e capacidade antes de propor arquitetura.</p></div>
-          <a href="../#contato" class="primary-action diagnostic-cta"><span data-i18n="final.cta">Abrir diagnóstico</span> <b>↗</b></a>
+          <div class="diagnostic-result" id="diagnostic-result"><small data-i18n="discovery.select">SELECIONE UM GARGALO</small><strong data-i18n="discovery.result">Encontramos o primeiro vetor de ganho.</strong><p data-i18n="discovery.resultCopy">Vamos medir tempo, custo, risco e capacidade antes de propor arquitetura.</p></div>
+          <button class="primary-action diagnostic-cta js-next" type="button"><span data-i18n="discovery.cta">Continuar</span><b>→</b></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene scene--cta" data-scene="10" aria-labelledby="scene10-title">
+      <div class="scene-inner cta-layout">
+        <div class="cta-copy">
+          <span class="scene-kicker" data-i18n="cta.kicker">10 / PRÓXIMO PASSO</span>
+          <h2 id="scene10-title"><span data-i18n="cta.a">Vamos encontrar seu</span> <em data-i18n="cta.b">próximo ganho?</em></h2>
+          <p data-i18n="cta.copy">Se existe um gargalo de receita, operação, dados ou decisão, nós podemos mapear o caminho e transformar em sistema.</p>
+          <div class="cta-actions">
+            <a href="mailto:vifalqueiro@gmail.com?subject=LightPath%20-%20Oportunidade" class="primary-action"><span data-i18n="cta.primary">Entre em contato</span><b>↗</b></a>
+            <a href="https://br.linkedin.com/in/vfalqueiroreis" target="_blank" rel="noopener noreferrer" class="secondary-action"><span data-i18n="cta.secondary">Falar pelo LinkedIn</span><b>↗</b></a>
+          </div>
           <small class="legal-line">Lightpath Tecnologia Ltda · CNPJ 65.652.507/0001-75</small>
+        </div>
+        <div class="cta-visual" aria-hidden="true">
+          <svg viewBox="0 0 520 520"><defs><linearGradient id="ctaGrad" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#70f4d0"/><stop offset="1" stop-color="#b7ff37"/></linearGradient></defs><path class="mountain" d="M40 408 164 244l76 88 106-178 134 254"/><path class="vector vector-a" d="M90 388 C150 348 181 295 219 240"/><path class="vector vector-b" d="M180 370 C258 318 300 258 336 191"/><path class="vector vector-c" d="M276 348 C340 295 385 231 420 168"/><circle cx="420" cy="168" r="7" class="pulse"/></svg>
+          <span data-i18n="cta.badge">DADOS · IA · AUTOMAÇÃO · GROWTH</span>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="scene-dots" id="scene-dots" aria-label="Ir para cena"></div>
-  <nav class="story-controls" aria-label="Navegação da apresentação"><button id="prev-scene" type="button" aria-label="Cena anterior">←</button><div class="story-progress"><span id="story-progress-bar"></span></div><button id="next-scene" type="button" aria-label="Próxima cena">→</button></nav>
+  <div class="scene-dots" id="scene-dots" data-i18n-aria="chrome.dots"></div>
+  <nav class="story-controls" data-i18n-aria="chrome.nav"><button id="prev-scene" type="button" data-i18n-aria="chrome.prev">←</button><div class="story-progress"><span id="story-progress-bar"></span></div><button id="next-scene" type="button" data-i18n-aria="chrome.next">→</button></nav>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-  <script src="presentation.js?v=20260910-v3"></script>
-  <script src="../i18n.js?v=20260910-v3"></script>
+  <script src="presentation-i18n-v4.js?v=20260910-v4"></script>
+  <script src="presentation-v4.js?v=20260910-v4"></script>
 </body>
 </html>
