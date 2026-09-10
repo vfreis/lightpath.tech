@@ -10,13 +10,76 @@
   const dotsRoot = document.getElementById('scene-dots');
   const wipe = document.querySelector('.scene-wipe span');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mobile = window.matchMedia('(max-width: 759px)').matches;
+  const mobileQuery = window.matchMedia('(max-width: 759px)');
+  const isMobile = () => mobileQuery.matches;
   let current = 0;
   let transitioning = false;
   let touchStartX = 0;
   let touchStartY = 0;
+  let wheelAccumulator = 0;
+  let wheelResetTimer = null;
+  let viewportFitTimer = null;
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  /* ------------------------------------------------------------------
+     REAL VIEWPORT + ADAPTIVE FIT
+     Every scene must visually fit inside the user's actual viewport.
+     visualViewport matters on iOS/Safari because browser chrome changes
+     the usable height while the page is open.
+  ------------------------------------------------------------------ */
+  const syncViewport = () => {
+    const viewport = window.visualViewport;
+    const height = viewport ? viewport.height : window.innerHeight;
+    const width = viewport ? viewport.width : window.innerWidth;
+    document.documentElement.style.setProperty('--presentation-vh', `${Math.round(height)}px`);
+    document.documentElement.style.setProperty('--presentation-vw', `${Math.round(width)}px`);
+  };
+
+  const fitScene = scene => {
+    if (!scene) return;
+    const inner = scene.querySelector('.scene-inner');
+    if (!inner) return;
+
+    inner.style.setProperty('--scene-fit', '1');
+    inner.classList.remove('is-fit-tight', 'is-fit-ultra');
+
+    const styles = getComputedStyle(scene);
+    const padX = parseFloat(styles.paddingLeft || 0) + parseFloat(styles.paddingRight || 0);
+    const padY = parseFloat(styles.paddingTop || 0) + parseFloat(styles.paddingBottom || 0);
+    const availableW = Math.max(1, scene.clientWidth - padX - 4);
+    const availableH = Math.max(1, scene.clientHeight - padY - 4);
+
+    /* scrollHeight/scrollWidth represent the natural, unscaled content. */
+    const naturalW = Math.max(inner.scrollWidth, inner.offsetWidth, 1);
+    const naturalH = Math.max(inner.scrollHeight, inner.offsetHeight, 1);
+    const scale = clamp(Math.min(1, availableW / naturalW, availableH / naturalH), .58, 1);
+
+    inner.style.setProperty('--scene-fit', scale.toFixed(4));
+    if (scale < .88) inner.classList.add('is-fit-tight');
+    if (scale < .73) inner.classList.add('is-fit-ultra');
+    scene.dataset.fitScale = scale.toFixed(3);
+  };
+
+  const fitAllScenes = () => {
+    syncViewport();
+    scenes.forEach(fitScene);
+  };
+
+  const scheduleFit = () => {
+    clearTimeout(viewportFitTimer);
+    viewportFitTimer = setTimeout(() => requestAnimationFrame(fitAllScenes), 50);
+  };
+
+  syncViewport();
+  window.addEventListener('resize', scheduleFit, { passive: true });
+  window.addEventListener('orientationchange', scheduleFit, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', scheduleFit, { passive: true });
+    window.visualViewport.addEventListener('scroll', scheduleFit, { passive: true });
+  }
+  window.addEventListener('lightpath:languagechange', scheduleFit);
+  if (document.fonts?.ready) document.fonts.ready.then(fitAllScenes).catch(() => {});
 
   const dots = scenes.map((_, index) => {
     const button = document.createElement('button');
@@ -29,7 +92,7 @@
 
   const updateChrome = () => {
     if (sceneNumber) sceneNumber.textContent = String(current + 1).padStart(2, '0');
-    if (progressBar) progressBar.style.width = `${((current + 1) / scenes.length) * 100}%`;
+    if (progressBar) progressBar.style.transform = `scaleX(${(current + 1) / scenes.length})`;
     if (prevButton) prevButton.disabled = current === 0;
     if (nextButton) {
       nextButton.disabled = current === scenes.length - 1;
@@ -43,8 +106,8 @@
     if (!items.length || reduced || !window.gsap) return;
     gsap.killTweensOf(items);
     gsap.fromTo(items,
-      { opacity: 0, y: mobile ? 18 : 28, scale: .992 },
-      { opacity: 1, y: 0, scale: 1, duration: mobile ? .52 : .72, stagger: mobile ? .055 : .075, ease: 'power3.out', clearProps: 'transform' }
+      { opacity: 0, y: isMobile() ? 12 : 22, scale: .994 },
+      { opacity: 1, y: 0, scale: 1, duration: isMobile() ? .46 : .64, stagger: isMobile() ? .045 : .06, ease: 'power3.out', clearProps: 'transform' }
     );
   };
 
@@ -52,7 +115,7 @@
     if (!scene.matches('[data-scene="0"]') || reduced || !window.gsap) return;
     const vectors = scene.querySelectorAll('.hero-vector .vector');
     gsap.set(vectors, { strokeDashoffset: 500 });
-    gsap.to(vectors, { strokeDashoffset: 0, duration: 1.45, stagger: .16, delay: .25, ease: 'power2.inOut' });
+    gsap.to(vectors, { strokeDashoffset: 0, duration: 1.35, stagger: .14, delay: .16, ease: 'power2.inOut' });
     const pulse = scene.querySelector('.pulse');
     if (pulse) gsap.fromTo(pulse, { scale: .55, opacity: .2, transformOrigin: 'center' }, { scale: 1.25, opacity: 1, duration: .9, repeat: -1, yoyo: true, ease: 'sine.inOut' });
   };
@@ -68,10 +131,9 @@
         return;
       }
       const state = { value: 0 };
-      gsap.killTweensOf(state);
       gsap.to(state, {
         value: target,
-        duration: mobile ? 1 : 1.45,
+        duration: isMobile() ? .85 : 1.25,
         ease: 'power3.out',
         onUpdate: () => { el.textContent = `${prefix}${Math.round(state.value)}${suffix}`; },
         onComplete: () => { el.textContent = `${prefix}${target}${suffix}`; }
@@ -80,14 +142,21 @@
   };
 
   const runSceneEntry = scene => {
-    scene.scrollTop = 0;
+    fitScene(scene);
     animateScene(scene);
     animateHeroVectors(scene);
     animateProofCounters(scene);
+    requestAnimationFrame(() => fitScene(scene));
   };
 
   const swapScene = target => {
-    scenes.forEach((scene, index) => scene.classList.toggle('is-active', index === target));
+    scenes.forEach((scene, index) => {
+      scene.classList.toggle('is-active', index === target);
+      scene.style.removeProperty('transform');
+      scene.style.removeProperty('opacity');
+      scene.style.removeProperty('visibility');
+      scene.setAttribute('aria-hidden', index === target ? 'false' : 'true');
+    });
     current = target;
     updateChrome();
     runSceneEntry(scenes[current]);
@@ -98,19 +167,54 @@
     if (target === current || transitioning) return;
     transitioning = true;
 
-    if (reduced || !window.gsap || !wipe) {
+    const fromIndex = current;
+    const outgoing = scenes[fromIndex];
+    const incoming = scenes[target];
+    const direction = target > fromIndex ? 1 : -1;
+
+    if (reduced || !window.gsap) {
       swapScene(target);
       transitioning = false;
       return;
     }
 
-    const direction = target > current ? 1 : -1;
-    gsap.killTweensOf(wipe);
-    gsap.set(wipe, { xPercent: direction > 0 ? -130 : 130, opacity: 0 });
-    const tl = gsap.timeline({ onComplete: () => { transitioning = false; } });
-    tl.to(wipe, { xPercent: direction > 0 ? 0 : 0, opacity: .95, duration: .32, ease: 'power3.in' })
-      .add(() => swapScene(target))
-      .to(wipe, { xPercent: direction > 0 ? 130 : -130, opacity: 0, duration: .48, ease: 'power3.out' });
+    /* Keep both scenes visible during the horizontal hand-off. */
+    incoming.classList.add('is-active');
+    incoming.setAttribute('aria-hidden', 'false');
+    fitScene(incoming);
+    current = target;
+    updateChrome();
+    runSceneEntry(incoming);
+
+    gsap.killTweensOf([outgoing, incoming, wipe].filter(Boolean));
+    gsap.set(incoming, { xPercent: direction * 104, opacity: .35, visibility: 'visible' });
+    gsap.set(outgoing, { xPercent: 0, opacity: 1, visibility: 'visible' });
+    if (wipe) gsap.set(wipe, { xPercent: direction > 0 ? -135 : 135, opacity: 0 });
+
+    const tl = gsap.timeline({
+      defaults: { overwrite: true },
+      onComplete: () => {
+        outgoing.classList.remove('is-active');
+        outgoing.setAttribute('aria-hidden', 'true');
+        incoming.classList.add('is-active');
+        scenes.forEach((scene, index) => {
+          if (index !== current) scene.classList.remove('is-active');
+        });
+        gsap.set([outgoing, incoming], { clearProps: 'transform,opacity,visibility' });
+        if (wipe) gsap.set(wipe, { clearProps: 'transform,opacity' });
+        fitScene(incoming);
+        transitioning = false;
+      }
+    });
+
+    tl.to(outgoing, { xPercent: -direction * 34, opacity: 0, duration: .48, ease: 'power3.inOut' }, 0)
+      .to(incoming, { xPercent: 0, opacity: 1, duration: .62, ease: 'power4.out' }, .04);
+
+    /* A thin luminous sweep reinforces the direction without hiding content. */
+    if (wipe) {
+      tl.to(wipe, { xPercent: 0, opacity: .34, duration: .24, ease: 'power2.in' }, .02)
+        .to(wipe, { xPercent: direction > 0 ? 135 : -135, opacity: 0, duration: .36, ease: 'power2.out' }, .24);
+    }
   }
 
   const next = () => goTo(current + 1);
@@ -119,11 +223,29 @@
   if (prevButton) prevButton.addEventListener('click', prev);
   document.querySelectorAll('.js-next').forEach(button => button.addEventListener('click', next));
 
+  /* Vertical mouse-wheel / trackpad input advances the horizontal story. */
+  root.addEventListener('wheel', event => {
+    if (event.ctrlKey) return; // preserve browser zoom gestures
+    event.preventDefault();
+    if (transitioning) return;
+    const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+    if (Math.abs(delta) < 1) return;
+    wheelAccumulator += delta;
+    clearTimeout(wheelResetTimer);
+    wheelResetTimer = setTimeout(() => { wheelAccumulator = 0; }, 150);
+    const threshold = event.deltaMode === 1 ? 3 : 44;
+    if (Math.abs(wheelAccumulator) >= threshold) {
+      const direction = wheelAccumulator > 0 ? 1 : -1;
+      wheelAccumulator = 0;
+      if (direction > 0) next(); else prev();
+    }
+  }, { passive: false });
+
   window.addEventListener('keydown', event => {
     const tag = event.target && event.target.tagName ? event.target.tagName.toLowerCase() : '';
-    if (['input','textarea','select','button'].includes(tag)) return;
-    if (['ArrowRight','PageDown',' '].includes(event.key)) { event.preventDefault(); next(); }
-    if (['ArrowLeft','PageUp'].includes(event.key)) { event.preventDefault(); prev(); }
+    if (['input','textarea','select'].includes(tag)) return;
+    if (['ArrowRight','ArrowDown','PageDown',' '].includes(event.key)) { event.preventDefault(); next(); }
+    if (['ArrowLeft','ArrowUp','PageUp'].includes(event.key)) { event.preventDefault(); prev(); }
     if (event.key === 'Home') goTo(0);
     if (event.key === 'End') goTo(scenes.length - 1);
   });
@@ -134,11 +256,20 @@
     touchStartY = touch.clientY;
   }, { passive: true });
   root.addEventListener('touchend', event => {
+    if (transitioning) return;
     const touch = event.changedTouches[0];
     const dx = touch.clientX - touchStartX;
     const dy = touch.clientY - touchStartY;
-    if (Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-    if (dx < 0) next(); else prev();
+    const ax = Math.abs(dx);
+    const ay = Math.abs(dy);
+    if (Math.max(ax, ay) < 44) return;
+
+    /* Horizontal swipe and vertical 'scroll' gesture both move horizontally. */
+    if (ax >= ay) {
+      if (dx < 0) next(); else prev();
+    } else {
+      if (dy < 0) next(); else prev();
+    }
   }, { passive: true });
 
   const impactData = {
@@ -155,6 +286,7 @@
       if (titleEl) titleEl.textContent = title;
       if (subEl) subEl.textContent = sub;
       if (window.gsap && !reduced) gsap.fromTo('.impact-core', { scale: .9 }, { scale: 1, duration: .42, ease: 'back.out(1.8)' });
+      scheduleFit();
     });
   });
 
@@ -172,6 +304,7 @@
       document.getElementById('bottleneck-copy').textContent = copy;
       document.getElementById('bottleneck-metric').textContent = metric;
       if (window.gsap && !reduced) gsap.fromTo('.bottleneck-result', { x: -10, opacity: .6 }, { x: 0, opacity: 1, duration: .38, ease: 'power2.out' });
+      scheduleFit();
     });
   });
 
@@ -190,6 +323,7 @@
       document.getElementById('solution-copy').textContent = copy;
       document.getElementById('solution-stack').textContent = stack;
       if (window.gsap && !reduced) gsap.fromTo('.solution-core', { scale: .93, rotate: -1 }, { scale: 1, rotate: 0, duration: .45, ease: 'back.out(1.6)' });
+      scheduleFit();
     });
   });
 
@@ -199,13 +333,13 @@
     const links = [...document.querySelectorAll('.arch-link span')];
     if (flowTimer) clearTimeout(flowTimer);
     nodes.forEach(node => node.classList.remove('is-live'));
-    if (window.gsap) links.forEach(link => gsap.set(link, mobile ? { yPercent: -100 } : { xPercent: -100 }));
+    if (window.gsap) links.forEach(link => gsap.set(link, isMobile() ? { yPercent: -100 } : { xPercent: -100 }));
 
     let step = 0;
     const run = () => {
       nodes.forEach((node, index) => node.classList.toggle('is-live', index === step));
       if (step > 0 && links[step - 1] && window.gsap && !reduced) {
-        gsap.to(links[step - 1], mobile ? { yPercent: 0, duration: .32 } : { xPercent: 0, duration: .32, ease: 'power2.out' });
+        gsap.to(links[step - 1], isMobile() ? { yPercent: 0, duration: .32 } : { xPercent: 0, duration: .32, ease: 'power2.out' });
       }
       step += 1;
       if (step < nodes.length) flowTimer = setTimeout(run, 360);
@@ -233,6 +367,7 @@
       document.getElementById('method-title').textContent = data[1];
       document.getElementById('method-output').textContent = data[2];
       if (window.gsap && !reduced) gsap.fromTo('.method-content', { opacity: .65, y: 8 }, { opacity: 1, y: 0, duration: .34 });
+      scheduleFit();
     });
   });
 
@@ -249,6 +384,7 @@
       document.getElementById('proof-title').textContent = title;
       document.getElementById('proof-copy').textContent = copy;
       if (window.gsap && !reduced) gsap.fromTo('.proof-meaning', { opacity: .5, x: -8 }, { opacity: 1, x: 0, duration: .35 });
+      scheduleFit();
     });
   });
 
@@ -264,6 +400,7 @@
       document.querySelectorAll('[data-ai-step]').forEach((b, i) => b.classList.toggle('is-active', i <= index));
       document.getElementById('ai-message').textContent = aiMessages[index];
       if (window.gsap && !reduced) gsap.fromTo('.ai-signal span', { scale: .4 }, { scale: 1, duration: .5, ease: 'back.out(2)' });
+      scheduleFit();
     });
   });
 
@@ -281,6 +418,7 @@
       const result = document.getElementById('diagnostic-result');
       result.innerHTML = `<span>${label}</span><strong>${title}</strong><p>${metric}</p>`;
       if (window.gsap && !reduced) gsap.fromTo(result, { scale: .985, opacity: .65 }, { scale: 1, opacity: 1, duration: .42, ease: 'power2.out' });
+      scheduleFit();
     });
   });
 
@@ -290,9 +428,9 @@
     const ctx = canvas && canvas.getContext('2d', { alpha: true });
     if (!canvas || !ctx) return;
     let width = 0, height = 0, dpr = 1, last = 0, time = 0;
-    let pointerX = .75, pointerY = .25;
-    const count = mobile ? 14 : 32;
-    const fps = mobile ? 24 : 60;
+    let pointerX = .75;
+    const count = isMobile() ? 12 : 30;
+    const fps = isMobile() ? 22 : 50;
     const minFrame = 1000 / fps;
     const traces = [];
 
@@ -306,8 +444,10 @@
       t.seed = Math.random() * Math.PI * 2;
     };
     const resize = () => {
-      width = window.innerWidth; height = window.innerHeight;
-      dpr = Math.min(mobile ? 1 : 1.35, window.devicePixelRatio || 1);
+      const viewport = window.visualViewport;
+      width = viewport ? viewport.width : window.innerWidth;
+      height = viewport ? viewport.height : window.innerHeight;
+      dpr = Math.min(isMobile() ? 1 : 1.25, window.devicePixelRatio || 1);
       canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
       ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -323,12 +463,12 @@
       traces.forEach((t,index) => {
         t.px=t.x; t.py=t.y;
         const nx=t.x/Math.max(width,1), ny=t.y/Math.max(height,1);
-        const pointer = mobile ? 0 : (pointerX-nx)*.12;
+        const pointer = isMobile() ? 0 : (pointerX-nx)*.1;
         const angle=-1.12 + Math.sin(nx*5.7+time*.00045+t.seed)*.2 + Math.cos(ny*4-time*.0003+t.seed)*.09 + pointer;
-        const step=t.speed*(mobile?1.05:1.5);
+        const step=t.speed*(isMobile()?.98:1.4);
         t.x+=Math.cos(angle)*step; t.y+=Math.sin(angle)*step; t.life-=1;
         const fade=Math.max(0,t.life/t.max);
-        const alpha=Math.min(mobile?.09:.15,fade*(mobile?.08:.13));
+        const alpha=Math.min(isMobile()?.075:.13,fade*(isMobile()?.07:.115));
         const grad=ctx.createLinearGradient(t.px,t.py,t.x,t.y);
         grad.addColorStop(0,`rgba(112,244,208,${alpha*.25})`); grad.addColorStop(1,`rgba(183,255,55,${alpha})`);
         ctx.beginPath(); ctx.moveTo(t.px,t.py); ctx.lineTo(t.x,t.y); ctx.strokeStyle=grad; ctx.lineWidth=index%5===0?1:.6; ctx.stroke();
@@ -337,12 +477,15 @@
       ctx.globalCompositeOperation='source-over';
     };
     window.addEventListener('resize',resize,{passive:true});
-    if(!mobile) window.addEventListener('pointermove',e=>{pointerX=e.clientX/Math.max(width,1);pointerY=e.clientY/Math.max(height,1);},{passive:true});
+    window.visualViewport?.addEventListener('resize',resize,{passive:true});
+    if(!isMobile()) window.addEventListener('pointermove',e=>{pointerX=e.clientX/Math.max(width,1);},{passive:true});
     resize(); requestAnimationFrame(render);
   };
 
+  scenes.forEach((scene, index) => scene.setAttribute('aria-hidden', index === 0 ? 'false' : 'true'));
   setupVectorField();
   updateChrome();
+  fitAllScenes();
   runSceneEntry(scenes[0]);
   root.focus({ preventScroll: true });
 })();
