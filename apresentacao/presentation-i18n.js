@@ -29,10 +29,22 @@
   };
   let current=localStorage.getItem(KEY)==='en'?'en':'pt';
   const t=k=>(D[current]&&D[current][k])||D.pt[k]||k;
-  const apply=next=>{current=next==='en'?'en':'pt';localStorage.setItem(KEY,current);document.documentElement.lang=current==='en'?'en':'pt-BR';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(D[current][k])el.textContent=D[current][k]});document.title=current==='en'?'Interactive Presentation — LightPath Tecnologia':'Apresentação Interativa — LightPath Tecnologia';const meta=document.querySelector('meta[name="description"]');if(meta)meta.content=current==='en'?'Interactive LightPath Tecnologia presentation: Data, AI, Automation and Growth Systems focused on business impact.':'Apresentação interativa da LightPath Tecnologia: dados, IA, automação e Growth Systems orientados a impacto.';window.LIGHTPATH_LANGUAGE=current;toggle?.classList.toggle('is-en',current==='en');toggle?.setAttribute('aria-pressed',String(current==='en'));toggle?.setAttribute('aria-label',current==='en'?'Mudar para português':'Switch to English');window.dispatchEvent(new CustomEvent('lightpath:languagechange',{detail:{lang:current}}))};
   let toggle=document.querySelector('.lp-language-toggle');
   if(!toggle){toggle=document.createElement('button');toggle.type='button';toggle.className='lp-language-toggle';toggle.innerHTML='<span class="lp-lang-label lp-lang-pt">PT</span><span class="lp-lang-track" aria-hidden="true"><i></i></span><span class="lp-lang-label lp-lang-en">EN</span>';document.querySelector('.appbar')?.appendChild(toggle)}
+  const apply=next=>{
+    current=next==='en'?'en':'pt';localStorage.setItem(KEY,current);document.documentElement.lang=current==='en'?'en':'pt-BR';
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const value=D[current][el.dataset.i18n];if(value!=null)el.textContent=value});
+    document.title=current==='en'?'Interactive Presentation — LightPath Tecnologia':'Apresentação Interativa — LightPath Tecnologia';
+    const meta=document.querySelector('meta[name="description"]');if(meta)meta.content=current==='en'?'Interactive LightPath Tecnologia presentation: Data, AI, Automation and Growth Systems focused on business impact.':'Apresentação interativa da LightPath Tecnologia: dados, IA, automação e Growth Systems orientados a impacto.';
+    document.querySelector('.app-brand')?.setAttribute('aria-label',current==='en'?'Back to LightPath Tecnologia':'Voltar para LightPath Tecnologia');
+    document.querySelector('.app-status')?.setAttribute('aria-label',current==='en'?'Presentation progress':'Progresso da apresentação');
+    document.querySelector('.story-controls')?.setAttribute('aria-label',current==='en'?'Presentation navigation':'Navegação da apresentação');
+    document.querySelector('#prev-scene')?.setAttribute('aria-label',current==='en'?'Previous scene':'Cena anterior');
+    document.querySelector('#next-scene')?.setAttribute('aria-label',current==='en'?'Next scene':'Próxima cena');
+    toggle.classList.toggle('is-en',current==='en');toggle.setAttribute('aria-pressed',String(current==='en'));toggle.setAttribute('aria-label',current==='en'?'Mudar para português':'Switch to English');toggle.title=current==='en'?'Português':'English';
+    window.LIGHTPATH_LANGUAGE=current;window.dispatchEvent(new CustomEvent('lightpath:languagechange',{detail:{lang:current}}));
+  };
   toggle.addEventListener('click',()=>apply(current==='pt'?'en':'pt'));
-  window.LightPathPresentationI18n={t:()=>t,apply,get lang(){return current}};
+  window.LightPathPresentationI18n={t,apply,get lang(){return current}};
   apply(current);
 })();
