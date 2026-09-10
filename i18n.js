@@ -4,7 +4,7 @@
 
   if (inPresentation) {
     const presentationI18n = document.createElement('script');
-    presentationI18n.src = 'presentation-i18n.js?v=20260910-v3';
+    presentationI18n.src = 'presentation-i18n.js?v=20260910-v4';
     presentationI18n.defer = true;
     document.head.appendChild(presentationI18n);
     return;
