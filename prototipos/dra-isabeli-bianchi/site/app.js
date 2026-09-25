@@ -10,13 +10,13 @@ $$("[data-go]").forEach(btn=>btn.addEventListener("click",()=>go(btn.dataset.go)
 
 requestAnimationFrame(()=>document.body.classList.add("ready"));
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
-$("[data-stagger]").forEach(group=>$(".motion",group).forEach((el,i)=>el.style.setProperty("--motion-delay",Math.min(i*75,300)+"ms")));
+Array.from(document.querySelectorAll("[data-stagger]")).forEach(group=>Array.from(group.querySelectorAll(".motion")).forEach((el,i)=>el.style.setProperty("--motion-delay",Math.min(i*75,300)+"ms")));
 if(!reduced){
  const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible")}),{threshold:.12,rootMargin:"0px 0px -4% 0px"});
  $$(".motion").forEach(el=>io.observe(el));
 }else $$(".motion").forEach(el=>el.classList.add("visible"));
 
-const chapters=$("[data-chapter]"), anatomySection=$(".anatomy-section"), journeySection=$(".deep"), closingSection=$(".closing");
+const chapters=Array.from(document.querySelectorAll("[data-chapter]")), anatomySection=$(".anatomy-section"), journeySection=$(".deep"), closingSection=$(".closing");
 const anatomyKeys=["frontal","glabela","periocular","inferior"];
 let activeAnatomy="frontal";
 function clamp(v,min=0,max=1){return Math.max(min,Math.min(max,v))}
@@ -63,7 +63,7 @@ function updateScroll(){
  if(!reduced&&innerWidth>980&&journeySection){
    const jp=sectionProgress(journeySection);
    const idx=Math.min(3,Math.floor(jp*4));
-   const steps=$(".journey-step");
+   const steps=Array.from(document.querySelectorAll(".journey-step"));
    steps.forEach((step,i)=>step.classList.toggle("active",i===idx));
  }
 }
