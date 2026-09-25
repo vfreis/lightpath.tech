@@ -17,6 +17,18 @@
 @media(max-width:560px){.appbar{height:54px}.scene{inset:54px 0 0}.kicker{font-size:8px}.three{gap:4px}.three article{padding:7px}.flow{transform:scale(.94);transform-origin:center}.owned{grid-template-columns:repeat(2,1fr)}.owned .wide{grid-column:1/-1}.surface-grid{gap:4px}.brand-panel{grid-template-columns:110px 1fr}.logo-img{max-height:165px;object-fit:contain}.preview article{min-width:0}.controls{bottom:max(5px,env(safe-area-inset-bottom));grid-template-columns:38px minmax(120px,1fr) 38px}.controls button{width:36px;height:36px}}
 @media(max-height:650px){.scene{padding-top:8px;padding-bottom:62px}h1{font-size:38px}h2{font-size:29px}.copy p,.heading p{font-size:9px}.hero-orbit{height:32vh}.bench{min-height:78px}.bench p{font-size:7px}.three article{min-height:82px}.preview .mock{height:72px}.final-art{height:24vh}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* 2026-09-25 refinement pass */
+.scene{padding-bottom:calc(102px + env(safe-area-inset-bottom))}
+h1:focus,h2:focus{outline:none}h1:focus-visible,h2:focus-visible{box-shadow:0 0 0 1px rgba(112,244,208,.55),0 0 0 7px rgba(112,244,208,.05);border-radius:3px}
+.scene[data-scene="0"] h1{max-width:12ch;font-size:clamp(40px,6.2vw,82px)}
+.bench-summary{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;border:1px solid rgba(183,255,55,.22);background:linear-gradient(90deg,rgba(183,255,55,.06),rgba(112,244,208,.025));padding:11px 14px}.bench-summary span{color:var(--lime);font:700 8px "Space Grotesk";letter-spacing:.13em}.bench-summary b{font:600 11px/1.35 "Space Grotesk";color:#dce8df}.bench-grid--featured{grid-template-columns:repeat(4,1fr)}.bench-grid--featured .bench{min-height:128px}.bench-extra{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.bench-extra article{border:1px solid rgba(255,255,255,.08);background:#080b10;padding:8px;display:grid;gap:3px}.bench-extra b{font:700 8px "Space Grotesk";color:#cfd8dd}.bench-extra span{font-size:7px;color:#75818a}.bench-extra div{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}.bench-extra a{font-size:7px;color:#9fb5aa;text-decoration:none;border-bottom:1px solid rgba(112,244,208,.2)}.bench-extra a:hover{color:var(--mint)}
+.surface--visual{padding:8px;display:grid;grid-template-rows:24px minmax(92px,1fr) auto;gap:8px}.surface--visual .browser{margin:0}.surface-shot{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:#0b1015;min-height:120px}.surface-shot iframe{position:absolute;inset:0;width:320%;height:320%;transform:scale(.3125);transform-origin:0 0;border:0;pointer-events:none}.surface-shield{position:absolute;inset:0;background:linear-gradient(180deg,transparent 64%,rgba(5,7,11,.34));pointer-events:none}.surface-meta strong{font-size:14px;margin:5px 0}.surface-meta p{margin:0 0 6px}.proof-bridge{background:radial-gradient(circle at 94% 58%,rgba(127,148,137,.12),transparent 30%),radial-gradient(circle at 75% 25%,rgba(112,244,208,.04),transparent 28%),#05070b}.bridge-to-clinical{background:linear-gradient(90deg,#05070b 0 72%,rgba(127,148,137,.10) 100%)}.bridge-to-clinical:after{content:"";position:absolute;right:5vw;top:12%;bottom:15%;width:1px;background:linear-gradient(transparent,rgba(243,241,235,.28),transparent)}.system small{width:100%;text-align:center;color:#63726b;font-size:7px;letter-spacing:.08em;margin-top:3px}
+.preview--live article{padding:7px}.live-preview{height:145px;position:relative;overflow:hidden;border:1px solid rgba(23,33,30,.16);background:#e9ece6}.live-preview iframe{position:absolute;inset:0;width:333.333%;height:333.333%;transform:scale(.3);transform-origin:0 0;border:0;pointer-events:none;background:white}.live-preview>span{position:absolute;left:6px;right:6px;bottom:6px;background:rgba(5,7,11,.86);color:#c7d6cf;font:700 6px "Space Grotesk";letter-spacing:.08em;padding:6px 7px;backdrop-filter:blur(8px)}
+.cta-expectation{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"time route" "time note";gap:2px 12px;align-items:center;border-left:2px solid var(--lime);padding:8px 10px;margin:14px 0 17px;background:rgba(183,255,55,.035)}.cta-expectation b{grid-area:time;color:var(--lime);font:700 14px "Space Grotesk"}.cta-expectation span{grid-area:route;color:#d6e2dc;font-size:9px}.cta-expectation small{grid-area:note;color:#75817b;font-size:7px}.final-art--product{padding:34px 16px 14px;display:block}.final-art--product:before,.final-art--product:after{display:none}.final-art--product>.browser{position:absolute;left:12px;right:12px;top:8px}.final-art--product .live-preview{height:100%;border-color:rgba(183,255,55,.16)}.final-art--product>strong{pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(5,7,11,.82));align-content:end;padding-bottom:22px;font-size:14px;letter-spacing:.04em}.live-preview--final iframe{width:250%;height:250%;transform:scale(.4)}
+@media(max-width:900px){.scene{padding-bottom:calc(82px + env(safe-area-inset-bottom))}.bench-summary{grid-template-columns:1fr;gap:3px;padding:7px}.bench-summary b{font-size:8px}.bench-grid--featured{grid-template-columns:repeat(2,1fr);gap:4px}.bench-grid--featured .bench{min-height:82px}.bench-extra{grid-template-columns:repeat(2,1fr);gap:3px}.bench-extra article{padding:5px}.bench-extra b{font-size:7px}.bench-extra span{font-size:6.5px}.bench-extra a{font-size:7px;min-height:30px;display:inline-flex;align-items:center}.surface--visual{grid-template-columns:1fr;grid-template-rows:16px 72px auto}.surface-shot{min-height:72px}.surface-shot iframe{width:400%;height:400%;transform:scale(.25)}.surface-meta strong{font-size:11px}.preview--live{grid-template-columns:1fr;gap:4px}.preview--live article{display:grid;grid-template-columns:95px 1fr;grid-template-areas:"tag preview" "title preview";align-items:center;gap:2px 6px}.preview--live article small{grid-area:tag}.preview--live article strong{grid-area:title;margin:0}.preview--live .live-preview{grid-area:preview;height:105px}.final-art--product{height:27vh}.cta-expectation{margin:10px 0 12px}}
+@media(max-width:560px){.scene[data-scene="0"] h1{font-size:clamp(36px,9vw,52px)}.bench-grid--featured .bench p{display:none}.bench-grid--featured .bench{min-height:72px}.bench-links a{min-height:34px}.bench-extra span{display:none}.surface--visual{grid-template-rows:15px 64px auto}.surface-meta p{display:none}.live-preview>span{font-size:5.5px}.final-art--product{height:24vh}}
+@media(max-height:720px) and (min-width:901px){.scene{padding-top:12px;padding-bottom:90px}.benchmark-layout{gap:8px}.heading h2{font-size:clamp(30px,4.7vw,54px)}.bench-grid--featured .bench{min-height:112px;padding:8px}.bench-extra article{padding:6px}.surface-shot{min-height:96px}.surface-meta p{font-size:8px}.live-preview{height:120px}}
 </style>
 </head>
 <body>
@@ -28,7 +40,7 @@
 </header>
 <main class="story" id="story" tabindex="0">
 <section class="scene is-active" data-scene="0"><div class="inner split">
-<div class="copy"><span class="kicker">LIGHTPATH × DRA. ISABELI BIANCHI</span><h1 tabindex="-1">Do conhecimento à sua própria <em>plataforma de educação.</em></h1><p>Uma apresentação curta sobre mercado, posicionamento e infraestrutura — antes de abrir a cortesia de protótipo preparada para esta conversa.</p><button class="primary next" type="button">COMEÇAR <b>→</b></button></div>
+<div class="copy"><span class="kicker">LIGHTPATH × DRA. ISABELI BIANCHI</span><h1 tabindex="-1">Seu conhecimento pode virar uma <em>plataforma própria.</em></h1><p>Mercado, posicionamento e infraestrutura em uma conversa curta — antes de abrir a cortesia preparada para a Dra. Isabeli.</p><button class="primary next" type="button">COMEÇAR <b>→</b></button></div>
 <div class="hero-orbit" aria-hidden="true"><span class="orb"></span><span class="orb b"></span><div class="hero-core"><small>LIGHTPATH / OWNED EDUCATION</small><strong>Conhecimento <span>→</span> Sistema <span>→</span> Experiência</strong></div></div>
 </div></section>
 
@@ -38,18 +50,21 @@
 </div></section>
 
 <section class="scene" data-scene="2"><div class="inner benchmark-layout">
-<div class="heading"><span class="kicker">02 / BENCHMARK COMPETITIVO</span><h2 tabindex="-1">Referências para conhecer — e <em>aprender com elas.</em></h2><p>Links públicos rechecados em 25/09/2026. Os números citados por concorrentes são comunicação própria, não auditoria LightPath.</p></div>
-<div class="bench-grid">
-<article class="bench"><small>LETÍCIA ALMEIDA / MISSÃO BIOMÉDICA</small><b>Escala + produto gravado</b><p>Autoridade docente, certificado e acesso multiplataforma.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://hotmart.com/pt-br/marketplace/produtos/treinamento-consulta-estetica-de-sucesso/C84704177Q">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/biomedicaleticia/">@biomedicaleticia ↗</a></div></article>
-<article class="bench"><small>MONIQUE CAMARGOS / PLATAFORMA ELITE</small><b>Funil direto + oferta concreta</b><p>Anatomia, prática, FAQ e guardrail de habilitação.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://treinamentobotoxexpress.elitebeluti.com.br/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/prof.moniquecamargos/">INSTAGRAM ↗</a></div></article>
-<article class="bench"><small>NEPUGA / ANA CAROLINA PUGA</small><b>Autoridade institucional</b><p>Ciência, ecossistema, método e forte prova institucional.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://nepuga.edu.br/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/nepugaoficial/">@nepugaoficial ↗</a></div></article>
-<article class="bench"><small>MARIANA MILANO</small><b>Prática + segurança</b><p>Intercorrências e paciente modelo reduzem incerteza.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://marianamilano.com.br/services/curso-de-toxina-botulinica-e-intercorrencias-do-basico-ao-avancado/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.marianamilano/">@dra.marianamilano ↗</a></div></article>
-<article class="bench"><small>KARINE MEZZAROBA</small><b>Prática → curso → mentoria</b><p>Escada de valor com conteúdo e mentoria VIP.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://hotmart.com/pt-br/marketplace/produtos/hagsxd-toxina-botulinica-da-teoria-a-pratica-wyu0f/M102135816A">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.karinemezzaroba/">@dra.karinemezzaroba ↗</a></div></article>
-<article class="bench"><small>JULIANA BOAVENTURA</small><b>Currículo específico</b><p>Diluição, musculatura e aplicações tornam profundidade visível.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://hotmart.com/pt-br/marketplace/produtos/curso-de-toxina-botulinica-e-microtox/K67513597N">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.julianaboaventura/">@dra.julianaboaventura ↗</a></div></article>
-<article class="bench"><small>INSTITUTO TAIANE LIMAS</small><b>Técnica + carreira</b><p>Cursos, mentoria e gestão ampliam a relação pós-formação.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://drataianelimas.com.br/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.taianelimas/">INSTAGRAM ↗</a></div></article>
-<article class="bench"><small>VELOSO ACADEMY</small><b>Transparência da oferta</b><p>Calendário, turma reduzida, prática e investimento explícitos.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://www.velosoacademy.com/curso-de-toxina-botulinica">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/velosoacademy/">@velosoacademy ↗</a></div></article>
+<div class="heading"><span class="kicker">02 / BENCHMARK COMPETITIVO</span><h2 tabindex="-1">O mercado repete alguns <em>padrões vencedores.</em></h2><p>Pesquisa pública rechecada em 25/09/2026. A leitura LightPath é o protagonista; os links abaixo deixam as referências abertas para exploração.</p></div>
+<div class="bench-summary"><span>PADRÃO OBSERVADO</span><b>Autoridade → currículo concreto → anatomia & segurança → prática → suporte → prova real → CTA direto</b></div>
+<div class="bench-grid bench-grid--featured">
+<article class="bench"><small>LETÍCIA ALMEIDA / MISSÃO BIOMÉDICA</small><b>Escala + produto gravado</b><p>Autoridade docente, certificado e acesso multiplataforma.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://hotmart.com/pt-br/marketplace/produtos/treinamento-consulta-estetica-de-sucesso/C84704177Q">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/biomedicaleticia/">INSTAGRAM ↗</a></div></article>
+<article class="bench"><small>MONIQUE CAMARGOS / PLATAFORMA ELITE</small><b>Oferta concreta</b><p>Anatomia, prática, FAQ e guardrail de habilitação.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://treinamentobotoxexpress.elitebeluti.com.br/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/prof.moniquecamargos/">INSTAGRAM ↗</a></div></article>
+<article class="bench"><small>NEPUGA / ANA CAROLINA PUGA</small><b>Autoridade institucional</b><p>Ciência, ecossistema, método e forte prova institucional.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://nepuga.edu.br/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/nepugaoficial/">INSTAGRAM ↗</a></div></article>
+<article class="bench"><small>MARIANA MILANO</small><b>Prática + segurança</b><p>Intercorrências e paciente modelo reduzem incerteza.</p><div class="bench-links"><a target="_blank" rel="noopener" href="https://marianamilano.com.br/services/curso-de-toxina-botulinica-e-intercorrencias-do-basico-ao-avancado/">SITE ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.marianamilano/">INSTAGRAM ↗</a></div></article>
 </div>
-<p class="note">Leitura LightPath: autoridade + currículo concreto + anatomia/segurança + prática real quando aplicável + suporte + prova verificável + CTA simples.</p>
+<div class="bench-extra" aria-label="Outras referências pesquisadas">
+<article><b>KARINE MEZZAROBA</b><span>prática → curso → mentoria</span><div><a target="_blank" rel="noopener" href="https://hotmart.com/pt-br/marketplace/produtos/hagsxd-toxina-botulinica-da-teoria-a-pratica-wyu0f/M102135816A">site ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.karinemezzaroba/">Instagram ↗</a></div></article>
+<article><b>JULIANA BOAVENTURA</b><span>currículo técnico específico</span><div><a target="_blank" rel="noopener" href="https://hotmart.com/pt-br/marketplace/produtos/curso-de-toxina-botulinica-e-microtox/K67513597N">site ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.julianaboaventura/">Instagram ↗</a></div></article>
+<article><b>TAIANE LIMAS</b><span>técnica + carreira + gestão</span><div><a target="_blank" rel="noopener" href="https://drataianelimas.com.br/">site ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/dra.taianelimas/">Instagram ↗</a></div></article>
+<article><b>VELOSO ACADEMY</b><span>transparência da oferta</span><div><a target="_blank" rel="noopener" href="https://www.velosoacademy.com/curso-de-toxina-botulinica">site ↗</a><a target="_blank" rel="noopener" href="https://www.instagram.com/velosoacademy/">Instagram ↗</a></div></article>
+</div>
+<p class="note">Os números e claims de concorrentes permanecem declarações públicas das próprias operações, não auditoria LightPath.</p>
 </div></section>
 
 <section class="scene" data-scene="3"><div class="inner split">
@@ -58,23 +73,42 @@
 </div></section>
 
 <section class="scene" data-scene="4"><div class="inner">
-<div class="heading"><span class="kicker">04 / INFRAESTRUTURA PRÓPRIA</span><h2 tabindex="-1">Uma jornada coerente cria <em>controle para evoluir.</em></h2><p>Não é sobre construir tudo do zero. É controlar a experiência e os contratos que ligam as partes mais importantes.</p></div>
-<div class="owned"><article><small>MARCA</small><strong>Uma experiência reconhecível.</strong><p>Do primeiro clique até a aula.</p></article><article><small>CHECKOUT</small><strong>Conversão sob medida.</strong><p>Oferta, pagamento e recuperação podem evoluir.</p></article><article><small>DADOS</small><strong>Sinais first-party.</strong><p>Eventos respondem perguntas do negócio.</p></article><article><small>MEMBERS</small><strong>Entrega com contexto.</strong><p>Conteúdo, progresso e continuidade.</p></article><article class="wide"><small>EVOLUÇÃO</small><strong>CRM · analytics · automações · mentoria · novos cursos</strong><p>A arquitetura deixa espaço para crescer sem refazer a jornada inteira.</p></article></div>
+<div class="heading"><span class="kicker">04 / INFRAESTRUTURA PRÓPRIA</span><h2 tabindex="-1">Controle técnico só importa quando vira <em>vantagem de negócio.</em></h2><p>Uma jornada própria conecta marca, venda e pós-compra — e cria dados suficientes para melhorar a operação sem depender de uma experiência genérica.</p></div>
+<div class="owned">
+<article><small>MARCA</small><strong>Parecer sua do primeiro clique à aula.</strong><p>Experiência coerente, não um mosaico de plataformas.</p></article>
+<article><small>CONVERSÃO</small><strong>Checkout alinhado à oferta.</strong><p>Menos handoff e mais espaço para testar mensagem e produto.</p></article>
+<article><small>VISIBILIDADE</small><strong>Saber de onde veio a venda.</strong><p>Eventos e sinais first-party ajudam a responder o que funciona.</p></article>
+<article><small>PÓS-COMPRA</small><strong>Entregar com contexto.</strong><p>Acesso, conteúdo, progresso e continuidade na mesma jornada.</p></article>
+<article class="wide"><small>EVOLUÇÃO</small><strong>CRM · analytics · automações · mentoria · novos cursos</strong><p>A arquitetura cresce por etapas — sem obrigar a reconstruir toda a experiência quando o negócio evoluir.</p></article>
+</div>
 </div></section>
 
-<section class="scene" data-scene="5"><div class="inner">
-<div class="heading"><span class="kicker">05 / PROVA DE CAPACIDADE LIGHTPATH</span><h2 tabindex="-1">Um ecossistema real já conecta <em>site, pagamento e members.</em></h2><p>Case Dra. Lari Reis. Superfícies públicas revalidadas em 25/09/2026.</p></div>
+<section class="scene proof-bridge" data-scene="5"><div class="inner">
+<div class="heading"><span class="kicker">05 / PROVA DE CAPACIDADE LIGHTPATH</span><h2 tabindex="-1">Não é só arquitetura. <em>Essas três superfícies estão online.</em></h2><p>Case Dra. Lari Reis · superfícies públicas revalidadas em 25/09/2026. Os frames abaixo são somente visualização pública, sem áreas internas.</p></div>
 <div class="surface-grid">
-<a class="surface" href="https://dralarireis.com/" target="_blank" rel="noopener"><div class="browser"><i></i><i></i><i></i><span>dralarireis.com</span></div><small>SITE / CONVERSÃO</small><strong>dralarireis.com</strong><p>Aquisição, narrativa e entrada para a jornada.</p><b>ABRIR ↗</b></a>
-<a class="surface" href="https://pay.dralarireis.com/" target="_blank" rel="noopener"><div class="browser"><i></i><i></i><i></i><span>pay.dralarireis.com</span></div><small>CHECKOUT / PAGAMENTO</small><strong>pay.dralarireis.com</strong><p>Experiência de compra em superfície própria.</p><b>ABRIR ↗</b></a>
-<a class="surface" href="https://app.dralarireis.com/" target="_blank" rel="noopener"><div class="browser"><i></i><i></i><i></i><span>app.dralarireis.com</span></div><small>MEMBERS / PÓS-COMPRA</small><strong>app.dralarireis.com</strong><p>Entrada da área de membros e continuidade.</p><b>ABRIR ↗</b></a>
-</div><p class="note">Mostramos somente superfícies públicas e arquitetura em alto nível. Nenhuma PII, admin, secret ou dado financeiro privado é exposto.</p>
+<a class="surface surface--visual" href="https://dralarireis.com/" target="_blank" rel="noopener">
+<div class="browser"><i></i><i></i><i></i><span>dralarireis.com</span></div>
+<div class="surface-shot"><iframe loading="lazy" tabindex="-1" aria-hidden="true" src="https://dralarireis.com/" title=""></iframe><span class="surface-shield"></span></div>
+<div class="surface-meta"><small>SITE / CONVERSÃO</small><strong>dralarireis.com</strong><p>Aquisição, narrativa e entrada da jornada.</p><b>ABRIR ↗</b></div>
+</a>
+<a class="surface surface--visual" href="https://pay.dralarireis.com/" target="_blank" rel="noopener">
+<div class="browser"><i></i><i></i><i></i><span>pay.dralarireis.com</span></div>
+<div class="surface-shot"><iframe loading="lazy" tabindex="-1" aria-hidden="true" src="https://pay.dralarireis.com/" title=""></iframe><span class="surface-shield"></span></div>
+<div class="surface-meta"><small>CHECKOUT / PAGAMENTO</small><strong>pay.dralarireis.com</strong><p>Compra em superfície própria.</p><b>ABRIR ↗</b></div>
+</a>
+<a class="surface surface--visual" href="https://app.dralarireis.com/" target="_blank" rel="noopener">
+<div class="browser"><i></i><i></i><i></i><span>app.dralarireis.com</span></div>
+<div class="surface-shot"><iframe loading="lazy" tabindex="-1" aria-hidden="true" src="https://app.dralarireis.com/" title=""></iframe><span class="surface-shield"></span></div>
+<div class="surface-meta"><small>MEMBERS / PÓS-COMPRA</small><strong>app.dralarireis.com</strong><p>Entrada da área de membros e continuidade.</p><b>ABRIR ↗</b></div>
+</a>
+</div>
+<p class="note">Somente páginas públicas. Nenhuma PII, admin, secret, endpoint interno ou dado financeiro privado é exposto.</p>
 </div></section>
 
-<section class="scene" data-scene="6"><div class="inner">
-<div class="heading"><span class="kicker">06 / ARQUITETURA</span><h2 tabindex="-1">O usuário vê simplicidade. <em>O sistema precisa ser confiável.</em></h2><p>Na operação real, pedidos, pagamentos e entrega precisam continuar coerentes mesmo com replays, falhas ou integrações assíncronas.</p></div>
+<section class="scene bridge-to-clinical" data-scene="6"><div class="inner">
+<div class="heading"><span class="kicker">06 / ARQUITETURA</span><h2 tabindex="-1">O usuário vê simplicidade. <em>O sistema precisa ser confiável.</em></h2><p>Para a aluna, a jornada parece simples. Por baixo, o sistema precisa liberar acesso corretamente, reconciliar pagamentos e manter a experiência observável.</p></div>
 <div class="chain"><article><small>01</small><b>AQUISIÇÃO</b></article><i>→</i><article><small>02</small><b>SITE</b></article><i>→</i><article><small>03</small><b>CHECKOUT</b></article><i>→</i><article><small>04</small><b>PAGAMENTO</b></article><i>→</i><article><small>05</small><b>ACESSO</b></article><i>→</i><article><small>06</small><b>MEMBERS</b></article></div>
-<div class="system"><span>CAMADA DE SISTEMA</span><b>pedidos</b><b>pagamentos</b><b>eventos</b><b>idempotência</b><b>entitlement</b><b>analytics</b><b>observabilidade</b></div>
+<div class="system"><span>CAMADA DE SISTEMA</span><b>pedido certo</b><b>pagamento reconciliado</b><b>acesso automático</b><b>sem duplicidade</b><b>dados de jornada</b><b>observabilidade</b><small>pedidos · eventos · idempotência · entitlement · analytics</small></div>
 </div></section>
 
 <section class="scene clinical" data-scene="7"><div class="inner split">
@@ -86,13 +120,19 @@
 </div></section>
 
 <section class="scene clinical" data-scene="8"><div class="inner">
-<div class="heading"><span class="kicker">08 / PREVIEW DA CORTESIA</span><h2 tabindex="-1">Landing, checkout e members em <em>uma única experiência.</em></h2><p>O protótipo é demonstrativo: sem pagamento real, backend, autenticação real ou persistência.</p></div>
-<div class="preview"><article><small>01 / LANDING</small><strong>Confiança antes da oferta.</strong><div class="mock"><i></i><i></i><i></i></div></article><article><small>02 / CHECKOUT DEMO</small><strong>Compra com a mesma marca.</strong><div class="mock"><i></i><i></i><i></i></div></article><article><small>03 / MEMBERS DEMO</small><strong>O valor continua na aula.</strong><div class="mock"><i></i><i></i><i></i></div></article></div>
+<div class="heading"><span class="kicker">08 / PREVIEW DA CORTESIA</span><h2 tabindex="-1">Agora já dá para ver <em>a experiência real do protótipo.</em></h2><p>Três recortes vivos do mesmo sistema: landing, checkout demonstrativo e members. Sem pagamento real, backend, autenticação real ou persistência.</p></div>
+<div class="preview preview--live">
+<article><small>01 / LANDING</small><strong>Confiança antes da oferta.</strong><div class="live-preview"><iframe data-preview="landing" src="./site/" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · marca + narrativa + elegibilidade</span></div></article>
+<article><small>02 / CHECKOUT DEMO</small><strong>Compra com a mesma marca.</strong><div class="live-preview"><iframe data-preview="checkout" src="./site/" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · continuidade + clareza + sem transação real</span></div></article>
+<article><small>03 / MEMBERS DEMO</small><strong>O valor continua na aula.</strong><div class="live-preview"><iframe data-preview="members" src="./site/" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · progresso + conteúdo + retomada</span></div></article>
+</div>
 </div></section>
 
 <section class="scene clinical" data-scene="9"><div class="inner final">
-<div class="copy"><span class="kicker">09 / CORTESIA LIGHTPATH</span><h2 tabindex="-1">Agora, explore como isso pode existir <em>com a sua marca.</em></h2><p>Preparamos uma demonstração navegável para tornar a conversa concreta — antes de qualquer decisão de produto final.</p><a class="primary" id="prototype-cta" href="./site/"><span>EXPLORAR PROTÓTIPO</span><b>→</b></a><small class="cta-note" id="prototype-note">Verificando disponibilidade do protótipo…</small></div>
-<div class="final-art" aria-hidden="true"><strong>CORTESIA<br><span>LIGHTPATH</span></strong></div>
+<div class="copy"><span class="kicker">09 / CORTESIA LIGHTPATH</span><h2 tabindex="-1">Sua expertise pode virar um <em>ativo digital próprio.</em></h2><p>Conhecimento próprio → marca própria → plataforma própria → dados próprios → capacidade de crescer.</p>
+<div class="cta-expectation"><b>~3 MIN</b><span>Landing → checkout demo → members</span><small>Nenhuma compra real · protótipo navegável</small></div>
+<a class="primary" id="prototype-cta" href="./site/"><span>EXPLORAR PROTÓTIPO</span><b>→</b></a><small class="cta-note" id="prototype-note">Verificando disponibilidade da cortesia…</small></div>
+<div class="final-art final-art--product" aria-hidden="true"><div class="browser"><i></i><i></i><i></i><span>cortesia · dra. Isabeli</span></div><div class="live-preview live-preview--final"><iframe data-preview="landing" src="./site/" tabindex="-1" title=""></iframe></div><strong>ABRA E EXPLORE<br><span>A EXPERIÊNCIA</span></strong></div>
 </div></section>
 </main>
 <div class="dots" id="dots" aria-label="Cenas"></div>
@@ -114,8 +154,11 @@ addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes((e.targ
 story.addEventListener('wheel',e=>{if(e.ctrlKey)return;e.preventDefault();if(locked)return;const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;if(Math.abs(d)<1)return;wheelSum+=d;clearTimeout(wheelTimer);wheelTimer=setTimeout(()=>wheelSum=0,130);if(Math.abs(wheelSum)>34){const dir=Math.sign(wheelSum);wheelSum=0;go(current+dir)}},{passive:false});
 story.addEventListener('touchstart',e=>{const t=e.changedTouches[0];touchX=t.clientX;touchY=t.clientY},{passive:true});story.addEventListener('touchend',e=>{if(locked)return;const t=e.changedTouches[0],dx=t.clientX-touchX,dy=t.clientY-touchY;if(Math.max(Math.abs(dx),Math.abs(dy))<45)return;go(current+((Math.abs(dx)>Math.abs(dy)?dx:dy)<0?1:-1))},{passive:true});
 scenes.forEach((s,i)=>s.setAttribute('aria-hidden',i?'true':'false'));chrome();story.focus({preventScroll:true});
+
+const setupPreviewFrame=(frame)=>{frame.addEventListener('load',()=>{try{const doc=frame.contentDocument;if(!doc)return;const mode=frame.dataset.preview;if(mode==='checkout'){doc.querySelector('[data-go="checkout"]')?.click()}else if(mode==='members'){const trigger=doc.querySelector('[data-go="members"]')||doc.querySelector('[data-member="home"]');trigger?.click()}}catch(_){}})};
+document.querySelectorAll('iframe[data-preview]').forEach(setupPreviewFrame);
 const cta=document.getElementById('prototype-cta'),note=document.getElementById('prototype-note'),toast=document.getElementById('toast');
-fetch('./site/',{method:'HEAD',cache:'no-store'}).then(r=>{if(r.ok){note.textContent='Cortesia disponível — clique para explorar.';cta.dataset.ready='true'}else throw 0}).catch(()=>{note.textContent='Protótipo em integração — o destino final já está preparado.';cta.dataset.ready='false'});
+fetch('./site/',{method:'HEAD',cache:'no-store'}).then(r=>{if(r.ok){note.textContent='Cortesia disponível · ~3 minutos · landing → checkout demo → members.';cta.dataset.ready='true'}else throw 0}).catch(()=>{note.textContent='Protótipo em integração — o destino final já está preparado.';cta.dataset.ready='false'});
 cta.addEventListener('click',e=>{if(cta.dataset.ready!=='true'){e.preventDefault();toast.hidden=false;clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.hidden=true,4200)}});
 })();
 </script>
