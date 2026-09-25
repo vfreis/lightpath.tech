@@ -7,17 +7,21 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="Protótipo comercial demonstrativo da futura experiência educacional da Dra. Isabeli Bianchi.">
   <title>Dra. Isabeli Bianchi — Educação em Estética</title>
-  <link rel="icon" type="image/png" href="assets/isabeli-simbolo-ib-conceito-v1.png">
-  <link rel="stylesheet" href="styles.css?v=20260925-v2">
+  <link rel="icon" type="image/png" href="assets/isabeli-symbol-transparent.png">
+  <link rel="stylesheet" href="styles.css?v=20260925-v3">
 </head>
 <body>
 <div class="prototype-bar">PROTÓTIPO COMERCIAL · EXPERIÊNCIA DEMONSTRATIVA · SEM PAGAMENTO REAL</div>
 <div class="scroll-line" aria-hidden="true"><i></i></div>
+<aside class="story-rail" aria-hidden="true">
+  <div class="story-progress"><i id="storyFill"></i></div>
+  <div class="story-chapter"><b id="storyNo">00</b><span id="storyLabel">INTRO</span></div>
+</aside>
 
 <header class="site-header" id="siteHeader">
-  <a class="brand-lock" href="#inicio" aria-label="Dra. Isabeli Bianchi">
-    <img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt="">
-    <span><b>Dra. Isabeli Bianchi</b><small>Educação em Estética</small></span>
+  <a class="brand-lock" href="#inicio" aria-label="Dra. Isabeli Bianchi — Educação em Estética">
+    <img class="brand-symbol" src="assets/isabeli-symbol-transparent.png" alt="">
+    <img class="brand-wordmark" src="assets/isabeli-wordmark-transparent.png" alt="Dra. Isabeli Bianchi — Educação em Estética">
   </a>
   <nav aria-label="Navegação principal">
     <a href="#raciocinio">Raciocínio</a>
@@ -31,7 +35,7 @@
 <main>
 <section class="screen active" data-screen="landing">
 
-  <section class="hero" id="inicio">
+  <section class="hero" id="inicio" data-chapter="00" data-label="INTRO">
     <div class="hero-media" aria-hidden="true">
       <picture>
         <source media="(max-width: 720px)" srcset="assets/isabeli-editorial-ai-01.webp">
@@ -49,7 +53,7 @@
           <a class="btn btn-ghost btn-lg" href="#raciocinio">Entender a proposta</a>
         </div>
         <div class="hero-proof">
-          <img src="assets/isabeli-logo-conceito-v1.png" alt="Dra. Isabeli Bianchi">
+          <img src="assets/isabeli-lockup-transparent.png" alt="Dra. Isabeli Bianchi">
           <span>Conteúdo educacional. O curso, isoladamente, não concede habilitação profissional.</span>
         </div>
       </div>
@@ -58,7 +62,7 @@
     <small class="ai-note">Composição editorial derivada da fotografia fornecida pelo owner.</small>
   </section>
 
-  <section class="statement section">
+  <section class="statement section" data-chapter="01" data-label="LEITURA">
     <div class="shell statement-grid motion">
       <span class="section-no">01</span>
       <h2>Toxina botulínica não começa na seringa.<br><em>Começa na leitura.</em></h2>
@@ -66,7 +70,7 @@
     </div>
   </section>
 
-  <section class="section anatomy-section" id="raciocinio">
+  <section class="section anatomy-section" id="raciocinio" data-chapter="02" data-label="RACIOCÍNIO">
     <div class="shell">
       <header class="section-head motion">
         <div><span class="eyebrow">02 · RACIOCÍNIO VISUAL</span><h2>Antes de aplicar,<br>é preciso <em>entender o que se vê.</em></h2></div>
@@ -103,7 +107,7 @@
     </div>
   </section>
 
-  <section class="section deep" id="jornada">
+  <section class="section deep" id="jornada" data-chapter="03" data-label="JORNADA">
     <div class="shell journey">
       <div class="journey-intro motion">
         <span class="eyebrow light">03 · JORNADA EDUCACIONAL</span>
@@ -119,13 +123,13 @@
     </div>
   </section>
 
-  <section class="section modules-section">
+  <section class="section modules-section" data-chapter="04" data-label="CONTEÚDO">
     <div class="shell">
       <header class="section-head motion">
         <div><span class="eyebrow">04 · CONTEÚDO</span><h2>Uma trilha que conecta<br><em>conceito e decisão.</em></h2></div>
         <p>Nomes e quantidade de aulas são demonstrativos e serão refinados com a Dra. Isabeli antes de qualquer versão comercial.</p>
       </header>
-      <div class="modules-grid">
+      <div class="modules-grid" data-stagger>
         <article class="module-card motion"><span>01</span><small>BASE</small><h3>Fundamentos e visão geral</h3><p>Contexto, organização do raciocínio e preparação para a jornada.</p><footer>4 aulas · demo <i>→</i></footer></article>
         <article class="module-card motion"><span>02</span><small>LEITURA</small><h3>Anatomia facial aplicada</h3><p>Estruturas e referências visuais conectadas ao processo de avaliação.</p><footer>5 aulas · demo <i>→</i></footer></article>
         <article class="module-card featured motion"><span>03</span><small>DECISÃO</small><h3>Avaliação e planejamento</h3><p>Como organizar observação, intenção e construção de um plano coerente.</p><footer>4 aulas · demo <i>→</i></footer></article>
@@ -135,7 +139,7 @@
     </div>
   </section>
 
-  <section class="section members-story" id="members">
+  <section class="section members-story" id="members" data-chapter="05" data-label="MEMBERS">
     <div class="shell members-story-grid">
       <div class="members-copy motion">
         <span class="eyebrow">05 · EXPERIÊNCIA PÓS-COMPRA</span>
@@ -144,7 +148,7 @@
         <button class="btn btn-dark btn-lg" type="button" data-go="members">Explorar Members demo <span>→</span></button>
       </div>
       <div class="members-device motion delay">
-        <div class="device-sidebar"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><i></i><i></i><i></i><i></i></div>
+        <div class="device-sidebar"><img src="assets/isabeli-symbol-transparent.png" alt=""><i></i><i></i><i></i><i></i></div>
         <div class="device-main">
           <header><span>Boa noite, Marina</span><small>38% concluído</small></header>
           <div class="continue-card">
@@ -157,7 +161,7 @@
     </div>
   </section>
 
-  <section class="section about-section" id="isabeli">
+  <section class="section about-section" id="isabeli" data-chapter="06" data-label="ISABELI">
     <div class="shell about-grid">
       <figure class="real-photo motion">
         <img src="assets/isabeli-portrait-web.webp" alt="Fotografia original fornecida da Dra. Isabeli Bianchi">
@@ -172,19 +176,19 @@
           <p>Formação, trajetória, registros e credenciais serão inseridos somente após validação documental. Este protótipo não completa lacunas com suposições.</p>
         </div>
         <div class="brand-application">
-          <img src="assets/isabeli-logo-conceito-v1.png" alt="Dra. Isabeli Bianchi — Educação em Estética">
+          <img src="assets/isabeli-lockup-transparent.png" alt="Dra. Isabeli Bianchi — Educação em Estética">
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section proof-section">
+  <section class="section proof-section" data-chapter="07" data-label="PROVA">
     <div class="shell">
       <header class="section-head motion">
         <div><span class="eyebrow">07 · PROVA SOCIAL</span><h2>Quando houver prova,<br><em>ela entra com origem.</em></h2></div>
         <p>Até existirem depoimentos e indicadores reais, o protótipo mostra apenas o espaço e a hierarquia que esses elementos ocuparão.</p>
       </header>
-      <div class="proof-grid">
+      <div class="proof-grid" data-stagger>
         <article class="proof-card motion"><span>DEPOIMENTO FUTURO</span><blockquote>“Aqui entra uma experiência real de aluna, com autorização e contexto.”</blockquote><small>PLACEHOLDER · NÃO É PROVA REAL</small></article>
         <article class="proof-card motion"><span>APRENDIZADO</span><blockquote>“A prova ideal fala de clareza, organização e experiência de aprendizagem.”</blockquote><small>PLACEHOLDER · NÃO É PROVA REAL</small></article>
         <article class="proof-metric motion"><span>INDICADOR</span><b>—</b><p>Número de alunas, conclusão ou satisfação somente com fonte verificável.</p></article>
@@ -192,7 +196,7 @@
     </div>
   </section>
 
-  <section class="section offer-section">
+  <section class="section offer-section" data-chapter="08" data-label="OFERTA">
     <div class="shell offer-grid">
       <div class="offer-copy motion">
         <span class="eyebrow light">08 · EXPERIÊNCIA COMPLETA</span>
@@ -201,7 +205,7 @@
         <ul><li>Landing editorial e responsiva</li><li>Checkout branded demonstrativo</li><li>Members com progresso e retomada</li><li>Materiais e player conceitual</li></ul>
       </div>
       <aside class="price-card motion delay">
-        <img src="assets/isabeli-logo-conceito-v1.png" alt="Dra. Isabeli Bianchi">
+        <img src="assets/isabeli-lockup-transparent.png" alt="Dra. Isabeli Bianchi">
         <small>CURSO DE TOXINA BOTULÍNICA · CONCEITO</small>
         <h3>Experiência educacional</h3>
         <div><span>Investimento</span><b>A definir</b></div>
@@ -211,7 +215,7 @@
     </div>
   </section>
 
-  <section class="section faq-section">
+  <section class="section faq-section" data-chapter="09" data-label="FAQ">
     <div class="shell faq-grid">
       <div class="faq-title motion"><span class="eyebrow">09 · FAQ</span><h2>Clareza antes<br>da decisão.</h2></div>
       <div class="faq-list">
@@ -223,10 +227,10 @@
     </div>
   </section>
 
-  <section class="closing">
+  <section class="closing" data-chapter="10" data-label="PRÓXIMO PASSO">
     <div class="closing-photo"><img src="assets/isabeli-editorial-ai-01.webp" alt=""></div>
     <div class="shell closing-copy motion">
-      <img class="closing-mark" src="assets/isabeli-simbolo-ib-conceito-v1.png" alt="">
+      <img class="closing-mark" src="assets/isabeli-symbol-transparent.png" alt="">
       <span class="eyebrow light">10 · PRÓXIMO PASSO</span>
       <h2>Veja como a experiência<br><em>continua depois do clique.</em></h2>
       <p>Entre no checkout demonstrativo e percorra a jornada completa até o Members e a aula.</p>
@@ -239,7 +243,7 @@
   <div class="flow-page">
     <header class="flow-header">
       <button type="button" data-go="landing">← Voltar</button>
-      <div class="flow-brand"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><span><b>Dra. Isabeli Bianchi</b><small>Checkout demonstrativo</small></span></div>
+      <div class="flow-brand"><img src="assets/isabeli-symbol-transparent.png" alt=""><span><b>Dra. Isabeli Bianchi</b><small>Checkout demonstrativo</small></span></div>
       <span class="demo-tag">SEM PAGAMENTO</span>
     </header>
     <div class="checkout-grid">
@@ -255,7 +259,7 @@
           <header><span>02</span><div><b>Forma de pagamento</b><small>seleção somente visual</small></div></header>
           <div class="payment-tabs"><button class="payment active" type="button" data-payment="card"><span>▭</span><b>Cartão</b><small>demo</small></button><button class="payment" type="button" data-payment="pix"><span>◇</span><b>Pix</b><small>demo</small></button></div>
           <div class="payment-demo" id="paymentDemo">
-            <div class="fake-card"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><small>CARTÃO DEMONSTRATIVO</small><b>•••• •••• •••• 4242</b><footer><span>MARINA DEMO</span><span>12/30</span></footer></div>
+            <div class="fake-card"><img src="assets/isabeli-symbol-transparent.png" alt=""><small>CARTÃO DEMONSTRATIVO</small><b>•••• •••• •••• 4242</b><footer><span>MARINA DEMO</span><span>12/30</span></footer></div>
             <p>Nenhum número real de cartão é coletado.</p>
           </div>
         </section>
@@ -263,7 +267,7 @@
       <aside class="checkout-summary">
         <img class="summary-photo" src="assets/isabeli-editorial-ai-01.webp" alt="Composição editorial da Dra. Isabeli Bianchi">
         <div class="summary-content">
-          <img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt="">
+          <img src="assets/isabeli-symbol-transparent.png" alt="">
           <small>RESUMO DA EXPERIÊNCIA</small>
           <h2>Curso de Toxina Botulínica</h2>
           <p>Protótipo educacional demonstrativo.</p>
@@ -274,13 +278,13 @@
       </aside>
     </div>
   </div>
-  <div class="processing" id="processing" aria-hidden="true"><div><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><span class="loader"></span><b>Preparando seu acesso demo...</b><small>Nenhuma transação está sendo processada.</small></div></div>
+  <div class="processing" id="processing" aria-hidden="true"><div><img src="assets/isabeli-symbol-transparent.png" alt=""><span class="loader"></span><b>Preparando seu acesso demo...</b><small>Nenhuma transação está sendo processada.</small></div></div>
 </section>
 
 <section class="screen" data-screen="success">
   <div class="success-page">
     <article>
-      <div class="success-symbol"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><i>✓</i></div>
+      <div class="success-symbol"><img src="assets/isabeli-symbol-transparent.png" alt=""><i>✓</i></div>
       <span class="eyebrow">COMPRA APROVADA · SIMULAÇÃO</span>
       <h1>Acesso <em>liberado.</em></h1>
       <p>Na operação real, este seria o momento de entrada no produto educacional. Aqui, tudo acontece apenas no navegador.</p>
@@ -293,7 +297,7 @@
 <section class="screen" data-screen="members">
   <div class="members-app">
     <aside class="members-nav">
-      <div class="members-brand"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><span><b>ISABELI</b><small>MEMBERS</small></span></div>
+      <div class="members-brand"><img src="assets/isabeli-symbol-transparent.png" alt=""><span><b>ISABELI</b><small>MEMBERS</small></span></div>
       <nav>
         <button class="member-tab active" type="button" data-panel="home"><i>⌂</i><span>Início</span></button>
         <button class="member-tab" type="button" data-panel="trail"><i>▤</i><span>Minha trilha</span></button>
@@ -336,7 +340,7 @@
 
 <section class="screen" data-screen="lesson">
   <div class="lesson-page">
-    <header class="lesson-header"><button type="button" data-go="members">← Voltar ao Members</button><div><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><span>M03 · AULA 02</span></div></header>
+    <header class="lesson-header"><button type="button" data-go="members">← Voltar ao Members</button><div><img src="assets/isabeli-symbol-transparent.png" alt=""><span>M03 · AULA 02</span></div></header>
     <div class="lesson-grid">
       <main>
         <div class="lesson-player">
@@ -349,19 +353,19 @@
         <article class="lesson-description"><span>MÓDULO 03 · AULA 02</span><h1>Avaliação: leitura antes do planejamento</h1><p>Conteúdo demonstrativo. A aula final será construída somente a partir do material aprovado pela Dra. Isabeli.</p></article>
         <div class="lesson-insights"><article><span>01</span><div><b>Observar antes de decidir</b><p>Organizar critérios de leitura antes de qualquer escolha técnica.</p></div></article><article><span>02</span><div><b>Conectar anatomia e intenção</b><p>Planejamento responde ao contexto avaliado, não a um mapa isolado.</p></div></article></div>
       </main>
-      <aside class="lesson-trail"><span>TRILHA</span><button class="done">01 <b>Fundamentos</b><i>✓</i></button><button class="done">02 <b>Anatomia aplicada</b><i>✓</i></button><button class="current">03 <b>Avaliação e planejamento</b><i>▶</i></button><button>04 <b>Diluição e aplicação</b><i>○</i></button><button>05 <b>Segurança</b><i>○</i></button><div class="note"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><p>Progresso demonstrativo. Nada é persistido.</p></div></aside>
+      <aside class="lesson-trail"><span>TRILHA</span><button class="done">01 <b>Fundamentos</b><i>✓</i></button><button class="done">02 <b>Anatomia aplicada</b><i>✓</i></button><button class="current">03 <b>Avaliação e planejamento</b><i>▶</i></button><button>04 <b>Diluição e aplicação</b><i>○</i></button><button>05 <b>Segurança</b><i>○</i></button><div class="note"><img src="assets/isabeli-symbol-transparent.png" alt=""><p>Progresso demonstrativo. Nada é persistido.</p></div></aside>
     </div>
   </div>
 </section>
 </main>
 
 <footer class="site-footer">
-  <div class="footer-brand"><img src="assets/isabeli-logo-conceito-v1.png" alt="Dra. Isabeli Bianchi — Educação em Estética"></div>
+  <div class="footer-brand"><img src="assets/isabeli-wordmark-transparent.png" alt="Dra. Isabeli Bianchi — Educação em Estética"></div>
   <div class="footer-credit"><b>Protótipo comercial por LightPath Tecnologia</b><span>LIGHTPATH TECNOLOGIA LTDA · CNPJ 65.652.507/0001-75</span></div>
   <div class="footer-note">Sem backend · sem pagamento real · sem persistência de PII</div>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="app.js?v=20260925-v2"></script>
+<script src="app.js?v=20260925-v3"></script>
 </body>
 </html>

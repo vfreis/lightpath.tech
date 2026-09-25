@@ -1,7 +1,7 @@
 (()=>{"use strict";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const screens=new Map($$("[data-screen]").map(el=>[el.dataset.screen,el]));
-const header=$("#siteHeader"), toast=$("#toast"), processing=$("#processing");
+const header=$("#siteHeader"), toast=$("#toast"), processing=$("#processing"), storyNo=$("#storyNo"), storyLabel=$("#storyLabel"), storyFill=$("#storyFill");
 let current="landing", playTimer=null, playing=false;
 
 function showToast(msg){toast.textContent=msg;toast.classList.add("on");clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove("on"),1800)}
@@ -15,15 +15,60 @@ if(!reduced){
  $$(".motion").forEach(el=>io.observe(el));
 }else $$(".motion").forEach(el=>el.classList.add("visible"));
 
+const chapters=$("[data-chapter]"), anatomySection=$(".anatomy-section"), journeySection=$(".deep"), closingSection=$(".closing");
+const anatomyKeys=["frontal","glabela","periocular","inferior"];
+let activeAnatomy="frontal";
+function clamp(v,min=0,max=1){return Math.max(min,Math.min(max,v))}
+function sectionProgress(section){
+ if(!section)return 0;
+ const span=Math.max(1,section.offsetHeight-innerHeight);
+ return clamp((scrollY-section.offsetTop+110)/span);
+}
 function updateScroll(){
  if(current!=="landing")return;
  const max=document.documentElement.scrollHeight-innerHeight;
- document.documentElement.style.setProperty("--progress",max>0?Math.min(1,scrollY/max):0);
+ const pageProgress=max>0?clamp(scrollY/max):0;
+ document.documentElement.style.setProperty("--progress",pageProgress);
  header.classList.toggle("stuck",scrollY>76);
- const steps=$$(".journey-step");
- steps.forEach((step,i)=>{const r=step.getBoundingClientRect();if(r.top<innerHeight*.63&&r.bottom>innerHeight*.25){steps.forEach(x=>x.classList.remove("active"));step.classList.add("active")}});
+
+ const heroProgress=clamp(scrollY/Math.max(1,$(".hero").offsetHeight));
+ document.documentElement.style.setProperty("--hero-shift",(heroProgress*28)+"px");
+ document.documentElement.style.setProperty("--hero-scale",(1.02+heroProgress*.025).toFixed(3));
+ if(closingSection){
+   const r=closingSection.getBoundingClientRect();
+   const cp=clamp((innerHeight-r.top)/(innerHeight+r.height));
+   document.documentElement.style.setProperty("--closing-shift",((cp-.5)*28)+"px");
+ }
+
+ let nearest=chapters[0],best=Infinity,activeIndex=0;
+ chapters.forEach((section,i)=>{
+   const r=section.getBoundingClientRect();
+   const d=Math.abs((r.top+r.height*.32)-innerHeight*.38);
+   if(d<best){best=d;nearest=section;activeIndex=i}
+ });
+ if(nearest){
+   storyNo.textContent=nearest.dataset.chapter||"00";
+   storyLabel.textContent=nearest.dataset.label||"INTRO";
+   const pct=chapters.length>1?(activeIndex/(chapters.length-1))*100:0;
+   document.documentElement.style.setProperty("--story-progress",pct+"%");
+ }
+
+ if(!reduced&&innerWidth>980&&anatomySection){
+   const ap=sectionProgress(anatomySection);
+   const idx=Math.min(3,Math.floor(ap*4));
+   const key=anatomyKeys[idx];
+   if(key&&key!==activeAnatomy){activeAnatomy=key;setAnatomy(key)}
+ }
+ if(!reduced&&innerWidth>980&&journeySection){
+   const jp=sectionProgress(journeySection);
+   const idx=Math.min(3,Math.floor(jp*4));
+   const steps=$(".journey-step");
+   steps.forEach((step,i)=>step.classList.toggle("active",i===idx));
+ }
 }
-addEventListener("scroll",updateScroll,{passive:true}); updateScroll();
+let scrollTick=false;
+addEventListener("scroll",()=>{if(!scrollTick){scrollTick=true;requestAnimationFrame(()=>{updateScroll();scrollTick=false})}},{passive:true});
+addEventListener("resize",updateScroll,{passive:true}); updateScroll();
 
 const anatomy={
  frontal:["01 / FRONTAL","Estrutura antes de escolha.","O ponto de partida é compreender relações anatômicas, movimento e objetivo de avaliação. A experiência final pode transformar cada região em uma camada visual de revisão."],
