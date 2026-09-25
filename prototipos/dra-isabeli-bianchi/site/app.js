@@ -10,6 +10,7 @@ $$("[data-go]").forEach(btn=>btn.addEventListener("click",()=>go(btn.dataset.go)
 
 requestAnimationFrame(()=>document.body.classList.add("ready"));
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+$("[data-stagger]").forEach(group=>$(".motion",group).forEach((el,i)=>el.style.setProperty("--motion-delay",Math.min(i*75,300)+"ms")));
 if(!reduced){
  const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible")}),{threshold:.12,rootMargin:"0px 0px -4% 0px"});
  $$(".motion").forEach(el=>io.observe(el));
@@ -77,7 +78,7 @@ const anatomy={
  inferior:["04 / TERÇO INFERIOR","Planejamento é relação.","O estudo ganha consistência quando diferentes regiões são entendidas dentro do equilíbrio da face e do objetivo de avaliação."]
 };
 function setAnatomy(key){
- const c=anatomy[key]; if(!c)return;
+ const c=anatomy[key]; if(!c)return; activeAnatomy=key;
  $("#anatomyContent").innerHTML="<small>"+c[0]+"</small><h3>"+c[1]+"</h3><p>"+c[2]+"</p>";
  $$("[data-anatomy]").forEach(b=>b.classList.toggle("active",b.dataset.anatomy===key));
 }
@@ -87,9 +88,9 @@ $$(".payment").forEach(btn=>btn.addEventListener("click",()=>{
  $$(".payment").forEach(b=>b.classList.toggle("active",b===btn));
  const box=$("#paymentDemo");
  if(btn.dataset.payment==="pix"){
-   box.innerHTML='<div class="fake-card" style="aspect-ratio:auto;min-height:175px;text-align:center"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><small>PIX DEMONSTRATIVO</small><b>QR visual não gerado</b><footer><span>Nenhuma chave Pix</span><span>R$ 0,00</span></footer></div><p>Não existe QR Code, chave ou transação real.</p>';
+   box.innerHTML='<div class="fake-card" style="aspect-ratio:auto;min-height:175px;text-align:center"><img src="assets/isabeli-symbol-transparent.png" alt=""><small>PIX DEMONSTRATIVO</small><b>QR visual não gerado</b><footer><span>Nenhuma chave Pix</span><span>R$ 0,00</span></footer></div><p>Não existe QR Code, chave ou transação real.</p>';
  }else{
-   box.innerHTML='<div class="fake-card"><img src="assets/isabeli-simbolo-ib-conceito-v1.png" alt=""><small>CARTÃO DEMONSTRATIVO</small><b>•••• •••• •••• 4242</b><footer><span>MARINA DEMO</span><span>12/30</span></footer></div><p>Nenhum número real de cartão é coletado.</p>';
+   box.innerHTML='<div class="fake-card"><img src="assets/isabeli-symbol-transparent.png" alt=""><small>CARTÃO DEMONSTRATIVO</small><b>•••• •••• •••• 4242</b><footer><span>MARINA DEMO</span><span>12/30</span></footer></div><p>Nenhum número real de cartão é coletado.</p>';
  }
 }));
 
