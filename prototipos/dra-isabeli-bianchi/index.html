@@ -29,6 +29,12 @@ h1:focus,h2:focus{outline:none}h1:focus-visible,h2:focus-visible{box-shadow:0 0 
 @media(max-width:900px){.scene{padding-bottom:calc(82px + env(safe-area-inset-bottom))}.bench-summary{grid-template-columns:1fr;gap:3px;padding:7px}.bench-summary b{font-size:8px}.bench-grid--featured{grid-template-columns:repeat(2,1fr);gap:4px}.bench-grid--featured .bench{min-height:82px}.bench-extra{grid-template-columns:repeat(2,1fr);gap:3px}.bench-extra article{padding:5px}.bench-extra b{font-size:7px}.bench-extra span{font-size:6.5px}.bench-extra a{font-size:7px;min-height:30px;display:inline-flex;align-items:center}.surface--visual{grid-template-columns:1fr;grid-template-rows:16px 72px auto}.surface-shot{min-height:72px}.surface-shot iframe{width:400%;height:400%;transform:scale(.25)}.surface-meta strong{font-size:11px}.preview--live{grid-template-columns:1fr;gap:4px}.preview--live article{display:grid;grid-template-columns:95px 1fr;grid-template-areas:"tag preview" "title preview";align-items:center;gap:2px 6px}.preview--live article small{grid-area:tag}.preview--live article strong{grid-area:title;margin:0}.preview--live .live-preview{grid-area:preview;height:105px}.final-art--product{height:27vh}.cta-expectation{margin:10px 0 12px}}
 @media(max-width:560px){.scene[data-scene="0"] h1{font-size:clamp(36px,9vw,52px)}.bench-grid--featured .bench p{display:none}.bench-grid--featured .bench{min-height:72px}.bench-links a{min-height:34px}.bench-extra span{display:none}.surface--visual{grid-template-rows:15px 64px auto}.surface-meta p{display:none}.live-preview>span{font-size:5.5px}.final-art--product{height:24vh}}
 @media(max-height:720px) and (min-width:901px){.scene{padding-top:12px;padding-bottom:90px}.benchmark-layout{gap:8px}.heading h2{font-size:clamp(30px,4.7vw,54px)}.bench-grid--featured .bench{min-height:112px;padding:8px}.bench-extra article{padding:6px}.surface-shot{min-height:96px}.surface-meta p{font-size:8px}.live-preview{height:120px}}
+
+/* QA hardening */
+a:focus-visible,button:focus-visible{outline:1px solid var(--mint);outline-offset:3px;box-shadow:0 0 0 5px rgba(112,244,208,.08)}
+.checkout-public-proof{position:absolute;inset:0;background:linear-gradient(145deg,#f5efe6,#fffaf3);color:#3d342e;display:flex;flex-direction:column;justify-content:center;padding:14px}.checkout-public-proof span{font:700 7px "Space Grotesk";letter-spacing:.13em;color:#947a68}.checkout-public-proof b{font:700 18px "Space Grotesk";margin:5px 0 2px}.checkout-public-proof small{font-size:8px;color:#76665c}.checkout-public-proof i{font-style:normal;margin-top:10px;padding-top:8px;border-top:1px solid rgba(61,52,46,.13);font-size:7px;color:#8a776a}.surface-shot--static{background:#f5efe6}
+@media(max-width:900px){.bench-extra b{font-size:8px}.bench-extra span{font-size:7.5px}.bench-extra a{font-size:8px}.note{font-size:7.5px}.system b,.system span{font-size:7.5px}.system small{font-size:7px}.checkout-public-proof{padding:8px}.checkout-public-proof b{font-size:12px}.checkout-public-proof small{font-size:7px}.checkout-public-proof i{display:none}}
+@media(max-width:560px){.bench-extra b{font-size:8.5px}.bench-extra a{font-size:8px}.note{font-size:8px}}
 </style>
 </head>
 <body>
@@ -93,7 +99,7 @@ h1:focus,h2:focus{outline:none}h1:focus-visible,h2:focus-visible{box-shadow:0 0 
 </a>
 <a class="surface surface--visual" href="https://pay.dralarireis.com/" target="_blank" rel="noopener">
 <div class="browser"><i></i><i></i><i></i><span>pay.dralarireis.com</span></div>
-<div class="surface-shot"><iframe loading="lazy" tabindex="-1" aria-hidden="true" src="https://pay.dralarireis.com/" title=""></iframe><span class="surface-shield"></span></div>
+<div class="surface-shot surface-shot--static"><div class="checkout-public-proof"><span>CHECKOUT PÚBLICO</span><b>Finalizar compra</b><small>Método Essencial · Dra. Lari Reis</small><i>pagamento em superfície própria</i></div></div>
 <div class="surface-meta"><small>CHECKOUT / PAGAMENTO</small><strong>pay.dralarireis.com</strong><p>Compra em superfície própria.</p><b>ABRIR ↗</b></div>
 </a>
 <a class="surface surface--visual" href="https://app.dralarireis.com/" target="_blank" rel="noopener">
