@@ -35,6 +35,10 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--mint);outline-offse
 .checkout-public-proof{position:absolute;inset:0;background:linear-gradient(145deg,#f5efe6,#fffaf3);color:#3d342e;display:flex;flex-direction:column;justify-content:center;padding:14px}.checkout-public-proof span{font:700 7px "Space Grotesk";letter-spacing:.13em;color:#947a68}.checkout-public-proof b{font:700 18px "Space Grotesk";margin:5px 0 2px}.checkout-public-proof small{font-size:8px;color:#76665c}.checkout-public-proof i{font-style:normal;margin-top:10px;padding-top:8px;border-top:1px solid rgba(61,52,46,.13);font-size:7px;color:#8a776a}.surface-shot--static{background:#f5efe6}
 @media(max-width:900px){.bench-extra b{font-size:8px}.bench-extra span{font-size:7.5px}.bench-extra a{font-size:8px}.note{font-size:7.5px}.system b,.system span{font-size:7.5px}.system small{font-size:7px}.checkout-public-proof{padding:8px}.checkout-public-proof b{font-size:12px}.checkout-public-proof small{font-size:7px}.checkout-public-proof i{display:none}}
 @media(max-width:560px){.bench-extra b{font-size:8.5px}.bench-extra a{font-size:8px}.note{font-size:8px}}
+
+/* accessibility + mobile readability final pass */
+a:focus-visible,button:focus-visible,.primary:focus-visible,.controls button:focus-visible,.bench-links a:focus-visible,.bench-extra a:focus-visible{outline:2px solid #70f4d0!important;outline-offset:3px!important;box-shadow:0 0 0 5px rgba(112,244,208,.12)!important;border-radius:3px}
+@media(max-width:560px){.bench-extra span{display:block!important;font-size:7.5px!important;line-height:1.25}.bench-extra article{min-height:64px}}
 </style>
 </head>
 <body>
