@@ -5,7 +5,7 @@ const header=$("#siteHeader"), toast=$("#toast"), processing=$("#processing");
 let current="landing", playTimer=null, playing=false;
 
 function showToast(msg){toast.textContent=msg;toast.classList.add("on");clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove("on"),1800)}
-function go(name){if(!screens.has(name))return;current=name;screens.forEach((el,key)=>el.classList.toggle("active",key===name));header.style.display=name==="landing"?"":"none";document.querySelector(".site-footer").style.display=name==="landing"?"":"none";window.scrollTo({top:0,behavior:"instant"});if(name==="members")openPanel("home")}
+function go(name){if(!screens.has(name))return;current=name;screens.forEach((el,key)=>el.classList.toggle("active",key===name));header.style.display=name==="landing"?"":"none";document.querySelector(".site-footer").style.display=name==="landing"?"":"none";if(name==="landing")header.classList.remove("stuck");window.scrollTo({top:0,behavior:"auto"});requestAnimationFrame(updateScroll);if(name==="members")openPanel("home")}
 $$("[data-go]").forEach(btn=>btn.addEventListener("click",()=>go(btn.dataset.go)));
 
 requestAnimationFrame(()=>document.body.classList.add("ready"));
