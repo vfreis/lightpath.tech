@@ -72,6 +72,20 @@ body[data-story-mode="clinical"] .status-label{color:#95a99f}
 @media(max-width:560px){.isabeli-lockup{grid-template-columns:70px 1fr}.isabeli-wordmark small{font-size:8px}.isabeli-wordmark strong{font-size:22px}.isabeli-symbol--solo{width:110px;right:-4%;top:9%}}
 @media(prefers-reduced-motion:reduce){.scene,.scene .inner>*,.scene.is-active .inner>*,.scene.is-active .bench,.scene.is-active .surface,.scene.is-active .owned article,.scene.is-active .three article,.scene.is-active .node,.scene.is-active .chain article{animation:none!important;transform:none!important;transition:none!important}.scene .inner>*{opacity:1!important}.gesture-hint{transition:none!important}}
 
+
+/* 2026-09-25 — browser QA corrections */
+.scene[data-scene="7"] .brand-panel{grid-template-columns:1fr;align-content:center;gap:14px;min-width:0}
+.scene[data-scene="7"] .isabeli-lockup{grid-template-columns:108px minmax(0,1fr);min-width:0}
+.scene[data-scene="7"] .isabeli-wordmark{overflow:hidden}
+.scene[data-scene="7"] .isabeli-wordmark strong{font-size:clamp(25px,2.25vw,34px);white-space:normal}
+.scene[data-scene="7"] .brand-panel>div:last-child{max-width:48ch}
+.live-preview.is-pending{display:grid;place-content:center;text-align:center;background:linear-gradient(145deg,#101712,#0a0e0c);border-color:rgba(127,148,137,.18)}
+.live-preview.is-pending iframe{display:none}
+.live-preview.is-pending:before{content:"CORTESIA EM INTEGRAÇÃO";color:#d6e3dc;font:700 9px "Space Grotesk";letter-spacing:.16em}
+.live-preview.is-pending:after{content:"O preview entra aqui automaticamente quando ./site/ estiver disponível.";color:#7f9188;font-size:7px;line-height:1.45;max-width:28ch;margin:7px auto 0}
+.live-preview.is-pending>span{display:none}
+@media(max-width:900px){.scene[data-scene="7"] .brand-panel{gap:8px}.scene[data-scene="7"] .isabeli-lockup{grid-template-columns:78px minmax(0,1fr)}.scene[data-scene="7"] .isabeli-wordmark strong{font-size:22px}}
+
 </style>
 </head>
 <body>
@@ -173,9 +187,9 @@ body[data-story-mode="clinical"] .status-label{color:#95a99f}
 <section class="scene clinical" data-scene="8"><div class="inner">
 <div class="heading"><span class="kicker">08 / PREVIEW DA CORTESIA</span><h2 tabindex="-1">Agora já dá para ver <em>a experiência real do protótipo.</em></h2><p>Três recortes vivos do mesmo sistema: landing, checkout demonstrativo e members. Sem pagamento real, backend, autenticação real ou persistência.</p></div>
 <div class="preview preview--live">
-<article><small>01 / LANDING</small><strong>Confiança antes da oferta.</strong><div class="live-preview"><iframe data-preview="landing" src="./site/" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · marca + narrativa + elegibilidade</span></div></article>
-<article><small>02 / CHECKOUT DEMO</small><strong>Compra com a mesma marca.</strong><div class="live-preview"><iframe data-preview="checkout" src="./site/" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · continuidade + clareza + sem transação real</span></div></article>
-<article><small>03 / MEMBERS DEMO</small><strong>O valor continua na aula.</strong><div class="live-preview"><iframe data-preview="members" src="./site/" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · progresso + conteúdo + retomada</span></div></article>
+<article><small>01 / LANDING</small><strong>Confiança antes da oferta.</strong><div class="live-preview"><iframe data-preview="landing" data-src="./site/" src="about:blank" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · marca + narrativa + elegibilidade</span></div></article>
+<article><small>02 / CHECKOUT DEMO</small><strong>Compra com a mesma marca.</strong><div class="live-preview"><iframe data-preview="checkout" data-src="./site/" src="about:blank" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · continuidade + clareza + sem transação real</span></div></article>
+<article><small>03 / MEMBERS DEMO</small><strong>O valor continua na aula.</strong><div class="live-preview"><iframe data-preview="members" data-src="./site/" src="about:blank" tabindex="-1" aria-hidden="true" title=""></iframe><span>O QUE NOTAR · progresso + conteúdo + retomada</span></div></article>
 </div>
 </div></section>
 
@@ -183,7 +197,7 @@ body[data-story-mode="clinical"] .status-label{color:#95a99f}
 <div class="copy"><span class="kicker">09 / CORTESIA LIGHTPATH</span><h2 tabindex="-1">Sua expertise pode virar um <em>ativo digital próprio.</em></h2><p>Conhecimento próprio → marca própria → plataforma própria → dados próprios → capacidade de crescer.</p>
 <div class="cta-expectation"><b>~3 MIN</b><span>Landing → checkout demo → members</span><small>Nenhuma compra real · protótipo navegável</small></div>
 <a class="primary" id="prototype-cta" href="./site/"><span>EXPLORAR PROTÓTIPO</span><b>→</b></a><small class="cta-note" id="prototype-note">Verificando disponibilidade da cortesia…</small></div>
-<div class="final-art final-art--product" aria-hidden="true"><span class="isabeli-symbol isabeli-symbol--solo"></span><div class="browser"><i></i><i></i><i></i><span>cortesia · dra. Isabeli</span></div><div class="live-preview live-preview--final"><iframe data-preview="landing" src="./site/" tabindex="-1" title=""></iframe></div><strong>ABRA E EXPLORE<br><span>A EXPERIÊNCIA</span></strong></div>
+<div class="final-art final-art--product" aria-hidden="true"><span class="isabeli-symbol isabeli-symbol--solo"></span><div class="browser"><i></i><i></i><i></i><span>cortesia · dra. Isabeli</span></div><div class="live-preview live-preview--final"><iframe data-preview="landing" data-src="./site/" src="about:blank" tabindex="-1" title=""></iframe></div><strong>ABRA E EXPLORE<br><span>A EXPERIÊNCIA</span></strong></div>
 </div></section>
 </main>
 <div class="dots" id="dots" aria-label="Cenas"></div>
@@ -210,7 +224,7 @@ scenes.forEach((s,i)=>s.setAttribute('aria-hidden',i?'true':'false'));chrome();s
 const setupPreviewFrame=(frame)=>{frame.addEventListener('load',()=>{try{const doc=frame.contentDocument;if(!doc)return;const mode=frame.dataset.preview;if(mode==='checkout'){doc.querySelector('[data-go="checkout"]')?.click()}else if(mode==='members'){const trigger=doc.querySelector('[data-go="members"]')||doc.querySelector('[data-member="home"]');trigger?.click()}}catch(_){}})};
 document.querySelectorAll('iframe[data-preview]').forEach(setupPreviewFrame);
 const cta=document.getElementById('prototype-cta'),note=document.getElementById('prototype-note'),toast=document.getElementById('toast');
-fetch('./site/',{method:'HEAD',cache:'no-store'}).then(r=>{if(r.ok){note.textContent='Cortesia disponível · ~3 minutos · landing → checkout demo → members.';cta.dataset.ready='true'}else throw 0}).catch(()=>{note.textContent='Protótipo em integração — o destino final já está preparado.';cta.dataset.ready='false'});
+const previewFrames=[...document.querySelectorAll('iframe[data-preview]')];fetch('./site/',{method:'HEAD',cache:'no-store'}).then(r=>{if(!r.ok)throw 0;previewFrames.forEach(frame=>{frame.src=frame.dataset.src||'./site/'});document.querySelectorAll('.live-preview').forEach(p=>p.classList.remove('is-pending'));note.textContent='Cortesia disponível · ~3 minutos · landing → checkout demo → members.';cta.dataset.ready='true'}).catch(()=>{previewFrames.forEach(frame=>frame.src='about:blank');document.querySelectorAll('.live-preview').forEach(p=>p.classList.add('is-pending'));note.textContent='Protótipo em integração — o destino final já está preparado.';cta.dataset.ready='false'});
 cta.addEventListener('click',e=>{if(cta.dataset.ready!=='true'){e.preventDefault();toast.hidden=false;clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.hidden=true,4200)}});
 })();
 </script>
